@@ -26,8 +26,18 @@ set showmatch
 set smartcase
 set smartindent
 set visualbell
+set splitright
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set nocompatible
+set pastetoggle=<leader>p
 
-" set the runtime path to include Vundle and initialize
+" for find-complete
+set path=$PWD/**
+
+set omnifunc=csscomplete#CompleteCSS
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
