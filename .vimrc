@@ -62,7 +62,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
-Plugin 'wincent/Command-T'
 Plugin 'docunext/closetag.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
@@ -82,6 +81,8 @@ Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'burnettk/vim-angular'
 Plugin 'matthewsimo/angular-vim-snippets'
 Plugin 'claco/jasmine.vim'
+Plugin 'stegtmeyer/find-complete'
+Plugin 'Yggdroot/indentLine'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
