@@ -15,6 +15,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set nolist
+set foldmethod=syntax
 set noswapfile
 set laststatus=2
 set background=dark
