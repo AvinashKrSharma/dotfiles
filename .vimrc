@@ -1,11 +1,12 @@
 " Basic settings
 set nocompatible              " be iMproved, required
+set modifiable
 filetype off                  " required
 let mapleader = ','
 syntax enable
 set autoindent
 set backspace=indent,eol,start
-set colorcolumn=80
+" set colorcolumn=80
 set cursorline
 set encoding=utf-8
 set fileencoding=utf-8
