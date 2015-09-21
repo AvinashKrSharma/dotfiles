@@ -33,15 +33,9 @@ let mapleader = ','
 filetype on                  " required
 " set shell = ~/.bashrc
 
-" automatically enable html, css and js  auto-completion
-:set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-
-set omnifunc=csscomplete#CompleteCSS
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
-:set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" enable auto-completion
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 
 " set runtimepaths for vundle and snippets
 set rtp+=~/.vim/bundle/Vundle.vim
