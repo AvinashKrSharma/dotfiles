@@ -1,6 +1,7 @@
 " Basic settings
 set nocompatible              " be iMproved, required
 set modifiable
+let mapleader = ','
 set t_Co=256
 set autoindent
 set backspace=indent,eol,start
@@ -29,7 +30,6 @@ set softtabstop=4
 set pastetoggle=<leader>p
 syntax enable
 colorscheme default
-let mapleader = ','
 filetype on                  " required
 " set shell = ~/.bashrc
 
