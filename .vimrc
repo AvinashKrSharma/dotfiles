@@ -33,6 +33,9 @@ colorscheme default
 filetype on                  " required
 " set shell = ~/.bashrc
 
+command FI set foldmethod=indent
+command FS set foldmethod=syntax
+
 " enable auto-completion
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
