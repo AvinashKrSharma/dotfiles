@@ -14,7 +14,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set list lcs=tab:\|\ 
-set foldmethod=syntax
+set foldmethod=indent
 set noswapfile
 set laststatus=2
 set background=dark
@@ -33,12 +33,12 @@ colorscheme default
 filetype on                  " required
 " set shell = ~/.bashrc
 
-command FI set foldmethod=indent
-command FS set foldmethod=syntax
-
 " enable auto-completion
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
+
+" map TComment command to Ctrl+c 
+nmap <c-c> <c-_><c-_>
 
 " set runtimepaths for vundle and snippets
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -86,6 +86,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'matthewsimo/angular-vim-snippets'
+Plugin 'vim-scripts/prefixer.vim'
 " Plugin 'marijnh/tern_for_vim'
 
 " All of your Plugins must be added before the following line
