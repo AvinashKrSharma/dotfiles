@@ -16,6 +16,8 @@ set nohidden
 set fillchars+=stl:\ ,stlnc:\
 set path=$PWD/**
 set showcmd
+set scrolloff=3
+set undofile
 set wildmenu
 set wildmode=list:longest,full
 colorscheme darcula
@@ -26,15 +28,17 @@ set shiftwidth=4
 set expandtab
 set softtabstop=4
 set pastetoggle=<F4>
-set list lcs=tab:\|\ 
+set list lcs=tab:\|\
 set backspace=indent,eol,start
 set showmatch
 set autoindent
 set smartindent
 set foldmethod=indent
 set colorcolumn=80
+set linebreak
 syntax enable
 filetype on
+filetype plugin indent on
 
 " search related settings
 set gdefault
@@ -42,11 +46,14 @@ set smartcase
 set hlsearch
 set ignorecase
 set incsearch
+nnoremap <leader>/ /\v
+vnoremap <leader>/ /\v
 runtime macros/matchit.vim              " enable matchit
 
 " enable auto-completion
-filetype plugin on
 set omnifunc=syntaxcomplete#Complete
+
+nnoremap <silent><leader>n :set relativenumber!<cr>
 
 " custom mappings
 let g:ctrlp_map = '<c-p>'               " map CtrlP to <c-p>
@@ -55,6 +62,7 @@ nmap <c-c> <c-_><c-_>                   " map TComment command to Ctrl+c
 nnoremap <space> za                     " toggle fold
 noremap <leader>a ggVG                  " select all in normal mode
 
+autocmd BufRead,BufWritePre *.html normal gg=G
 
 " some settings for installed plugins
 " set runtimepaths for vundle and snippets
@@ -74,15 +82,25 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" to change ycm keymaps
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+
 " for airline plugin
 set laststatus=2 " always show airline status bar
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '>'
+function! AirLineInit()
+    let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
+    let g:airline_section_b = airline#section#create_left(['ffenc', 'hunks', '%f'])
+    let g:airline_section_c = airline#section#create(['filetype'])
+    let g:airline_section_x = airline#section#create(['%P'])
+    let g:airline_section_y = airline#section#create(['%B'])
+    let g:airline_section_z = airline#section#create_right(['%l/%L', '%c'])
+endfunction
+autocmd VimEnter * call AirLineInit()
 
 " open NerdTree by default
 autocmd VimEnter * NERDTreeMirror
-
 
 " for Vundle plugin management
 call vundle#begin()
@@ -93,24 +111,22 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'bling/vim-airline'
 Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'Raimondi/delimitMate'
-Plugin 'ervandew/supertab'
 Plugin 'powerline/fonts'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'godlygeek/tabular'
 " web dev related plugins
 Plugin 'docunext/closetag.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'mattn/emmet-vim'
-Plugin 'garbas/vim-snipmate'
+Plugin 'msanders/snipmate.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'matthewsimo/angular-vim-snippets'
-Plugin 'marijnh/tern_for_vim'
 Plugin 'prefixer.vim'
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()
