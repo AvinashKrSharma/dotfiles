@@ -2,8 +2,6 @@
 set nocompatible
 set pastetoggle=<F4>
 set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=~/.vim/bundle/angular-vim-snippets/snippets/javascript/angular_js.snippets
-set rtp+=~/.vim/bundle/angular-vim-snippets/snippets/html/angular_html.snippets
 runtime macros/matchit.vim      " enable matchit
 
 " ----moving around,searching and patterns
@@ -28,9 +26,6 @@ set cursorline
 
 " ----multiple windows
 set laststatus=2        " always show airline status bar
-set statusline+=%#warningmsg#       " for syntastic"
-set statusline+=%{SyntasticStatuslineFlag()} "
-set statusline+=%* "
 set hidden
 set splitright
 
@@ -60,11 +55,11 @@ set smartindent
 set foldmethod=indent
 
 " ----reading and writing files
-set backup
+" set backup
 set autoread
 
 " ----the swap file
-set swapfile
+" set swapfile
 
 " ----command line editing
 set wildmode=list:longest,full
@@ -79,23 +74,22 @@ set fileencoding=utf-8
 set gdefault
 
 " ----others
-let mapleader = ','
+let mapleader = "\<Space>"
 set t_Co=256
 colorscheme darcula
 filetype plugin indent on
 
 " ----mappings
-nnoremap <leader>ev :tabe $MYVIMRC<cr>      " open .vimrc to edit
-nnoremap <leader>so :so $MYVIMRC<cr>        " source .vimrc file
 nnoremap <silent><leader>n :set relativenumber!<cr>     " toggle relativenumber
 nnoremap <leader><leader> <c-^>     " toggle between buffers
 nnoremap Y y$       " make Y copy whole line from the current cursor position
-nnoremap <c-c> <c-_><c-_>       " map TComment command to Ctrl+c 
-nnoremap <space> za     " toggle fold
+nnoremap <silent><leader>c <c-_><c-_>       " map TComment command to Ctrl+c
+nnoremap f za     " toggle fold
 noremap <leader>a ggVG      " select all in normal mode
-
-let g:ctrlp_map = '<c-p>'       " map CtrlP to <c-p>
-let g:ctrlp_cmd = 'CtrlP'
+nnoremap <leader><leader><leader> gg=G      " indent whole file
+" ----for vim expand region plugin
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " ----abbreviations for common mistyped commands
 cnoreabbrev W w
@@ -105,24 +99,28 @@ cnoreabbrev wQ wq
 cnoreabbrev Q q
 
 " ----autocommands
-autocmd BufRead,BufWritePre *.html normal gg=G      " for indenting files on opening and saving
-autocmd BufRead,BufWritePre *.css normal gg=G
-autocmd BufRead,BufWritePre *.js normal gg=G
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
-autocmd VimEnter * NERDTreeMirror       " open nerdtree by default 
+autocmd BufWritePre *.html normal gg=G      " for indenting files on opening and saving
+autocmd BufWritePre *.css normal gg=G
+autocmd BufWritePre *.js normal gg=G
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
+autocmd VimEnter * NERDTreeMirror       " open nerdtree by default
 
 " ----plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
-let g:syntastic_always_populate_loc_list = 1        " for syntastic
+" ----for syntastic
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
-let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']        " to change ycm keymaps
+" ----for ycm
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 
-let g:airline#extensions#tabline#enabled = 1        " for airline plugin
+" ----for airline
+let g:airline#extensions#tabline#enabled = 1
 function! AirLineInit()
     let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
     let g:airline_section_b = airline#section#create_left(['ffenc', 'hunks', '%f'])
@@ -132,6 +130,21 @@ function! AirLineInit()
     let g:airline_section_z = airline#section#create_right(['%l/%L', '%c'])
 endfunction
 autocmd VimEnter * call AirLineInit()
+
+" ----this configures CtrlP to use git or silver searcher for autocompletion
+let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+    let g:ctrlp_prompt_mappings = {
+                \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+                \ }
+endif
+let g:ctrlp_map = '<c-p>'       " map CtrlP to <c-p>
+let g:ctrlp_cmd = 'CtrlP'
 
 " ----for Vundle plugin management
 call vundle#begin()
@@ -149,6 +162,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'Raimondi/delimitMate'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
+Plugin 'terryma/vim-expand-region'
 " web dev related plugins
 Plugin 'docunext/closetag.vim'
 Plugin 'tpope/vim-surround'
