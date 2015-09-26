@@ -102,7 +102,6 @@ cnoreabbrev Q q
 autocmd BufWritePre *.html normal gg=G      " for indenting files on opening and saving
 autocmd BufWritePre *.css normal gg=G
 autocmd BufWritePre *.js normal gg=G
-" autocmd BufWritePost $MYVIMRC source $MYVIMRC
 autocmd VimEnter * NERDTreeMirror       " open nerdtree by default
 
 " ----plugin specific settings
