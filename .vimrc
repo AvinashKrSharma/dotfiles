@@ -83,10 +83,10 @@ filetype plugin indent on
 nnoremap <silent><leader>n :set relativenumber!<cr>     " toggle relativenumber
 nnoremap <leader><leader> <c-^>     " toggle between buffers
 nnoremap Y y$       " make Y copy whole line from the current cursor position
-nnoremap <silent><leader>c <c-_><c-_>       " map TComment command to Ctrl+c
+map <leader>m <c-_><c-_>       " map TComment command to Ctrl+c
 nnoremap f za     " toggle fold
 noremap <leader>a ggVG      " select all in normal mode
-nnoremap <leader><leader><leader> gg=G      " indent whole file
+nnoremap <leader>n gg=G      " indent whole file
 " ----for vim expand region plugin
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
