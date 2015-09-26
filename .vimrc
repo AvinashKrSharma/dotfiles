@@ -1,94 +1,128 @@
-" Basic settings
+" ----important
 set nocompatible
-set modifiable
-let mapleader = ','
-set autoread
-set t_Co=256
-set mouse=a
-set number
-set noswapfile
-set background=dark
-set splitright
-set cursorline
-set encoding=utf-8
-set fileencoding=utf-8
-set nohidden
-set fillchars+=stl:\ ,stlnc:\
-set path=$PWD/**
-set showcmd
-set scrolloff=3
-set undofile
-set wildmenu
-set wildmode=list:longest,full
-colorscheme darcula
-
-" indentation, paste & other syntax related settings
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set softtabstop=4
 set pastetoggle=<F4>
-set list lcs=tab:\|\
-set backspace=indent,eol,start
-set showmatch
-set autoindent
-set smartindent
-set foldmethod=indent
-set colorcolumn=80
-set linebreak
-syntax enable
-filetype on
-filetype plugin indent on
-
-" search related settings
-set gdefault
-set smartcase
-set hlsearch
-set ignorecase
-set incsearch
-nnoremap <leader>/ /\v
-vnoremap <leader>/ /\v
-runtime macros/matchit.vim              " enable matchit
-
-" enable auto-completion
-set omnifunc=syntaxcomplete#Complete
-
-nnoremap <silent><leader>n :set relativenumber!<cr>
-
-" custom mappings
-let g:ctrlp_map = '<c-p>'               " map CtrlP to <c-p>
-let g:ctrlp_cmd = 'CtrlP'
-nmap <c-c> <c-_><c-_>                   " map TComment command to Ctrl+c 
-nnoremap <space> za                     " toggle fold
-noremap <leader>a ggVG                  " select all in normal mode
-
-autocmd BufRead,BufWritePre *.html normal gg=G
-
-" some settings for installed plugins
-" set runtimepaths for vundle and snippets
 set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/.vim/bundle/angular-vim-snippets/snippets/javascript/angular_js.snippets
 set rtp+=~/.vim/bundle/angular-vim-snippets/snippets/html/angular_html.snippets
+runtime macros/matchit.vim      " enable matchit
 
-" for javascript-libraries-syntax, set libraries being used
+" ----moving around,searching and patterns
+set path=$PWD/**
+set incsearch
+set ignorecase
+set smartcase
+
+" ----displayig text ----
+set scrolloff=3
+set linebreak
+set fillchars+=stl:\ ,stlnc:\
+set list lcs=tab:\|\
+set number
+
+" ----syntax, highlighting and spelling
+set background=dark
+filetype on
+syntax enable
+set hlsearch
+set cursorline
+
+" ----multiple windows
+set laststatus=2        " always show airline status bar
+set statusline+=%#warningmsg#       " for syntastic"
+set statusline+=%{SyntasticStatuslineFlag()} "
+set statusline+=%* "
+set hidden
+set splitright
+
+" ----using the mouse
+set mouse=a
+
+" ----messages and info
+set showcmd
+
+" ----editing text
+set modifiable
+set backspace=indent,eol,start
+set omnifunc=syntaxcomplete#Complete
+set showmatch
+
+" ----tabs and indenting
+set tabstop=4
+set shiftwidth=4
+set smarttab
+set softtabstop=4
+set shiftround
+set expandtab
+set autoindent
+set smartindent
+
+" ----folding
+set foldmethod=indent
+
+" ----reading and writing files
+set backup
+set autoread
+
+" ----the swap file
+set swapfile
+
+" ----command line editing
+set wildmode=list:longest,full
+set wildmenu
+set undofile
+
+" ----multi-byte characters
+set encoding=utf-8
+set fileencoding=utf-8
+
+" ----various
+set gdefault
+
+" ----others
+let mapleader = ','
+set t_Co=256
+colorscheme darcula
+filetype plugin indent on
+
+" ----mappings
+nnoremap <leader>ev :tabe $MYVIMRC<cr>      " open .vimrc to edit
+nnoremap <leader>so :so $MYVIMRC<cr>        " source .vimrc file
+nnoremap <silent><leader>n :set relativenumber!<cr>     " toggle relativenumber
+nnoremap <leader><leader> <c-^>     " toggle between buffers
+nnoremap Y y$       " make Y copy whole line from the current cursor position
+nnoremap <c-c> <c-_><c-_>       " map TComment command to Ctrl+c 
+nnoremap <space> za     " toggle fold
+noremap <leader>a ggVG      " select all in normal mode
+
+let g:ctrlp_map = '<c-p>'       " map CtrlP to <c-p>
+let g:ctrlp_cmd = 'CtrlP'
+
+" ----abbreviations for common mistyped commands
+cnoreabbrev W w
+cnoreabbrev Wq wq
+cnoreabbrev WQ wq
+cnoreabbrev wQ wq
+cnoreabbrev Q q
+
+" ----autocommands
+autocmd BufRead,BufWritePre *.html normal gg=G      " for indenting files on opening and saving
+autocmd BufRead,BufWritePre *.css normal gg=G
+autocmd BufRead,BufWritePre *.js normal gg=G
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+autocmd VimEnter * NERDTreeMirror       " open nerdtree by default 
+
+" ----plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
-" settings for syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 1        " for syntastic
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" to change ycm keymaps
-let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']        " to change ycm keymaps
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 
-" for airline plugin
-set laststatus=2 " always show airline status bar
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1        " for airline plugin
 function! AirLineInit()
     let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
     let g:airline_section_b = airline#section#create_left(['ffenc', 'hunks', '%f'])
@@ -99,10 +133,7 @@ function! AirLineInit()
 endfunction
 autocmd VimEnter * call AirLineInit()
 
-" open NerdTree by default
-autocmd VimEnter * NERDTreeMirror
-
-" for Vundle plugin management
+" ----for Vundle plugin management
 call vundle#begin()
 " general plugins
 Plugin 'gmarik/Vundle.vim'
@@ -116,7 +147,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'Raimondi/delimitMate'
-Plugin 'powerline/fonts'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 " web dev related plugins
@@ -128,5 +158,4 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'matthewsimo/angular-vim-snippets'
-Plugin 'prefixer.vim'
 call vundle#end()
