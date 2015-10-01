@@ -81,12 +81,16 @@ filetype plugin indent on
 
 " ----mappings
 nnoremap <silent><leader>n :set relativenumber!<cr>     " toggle relativenumber
-nnoremap <leader><leader> <c-^>     " toggle between buffers
+nnoremap <leader>b <c-^>     " toggle between buffers
 nnoremap Y y$       " make Y copy whole line from the current cursor position
 map <leader>m <c-_><c-_>       " map TComment command to Ctrl+c
 nnoremap f za     " toggle fold
 noremap <leader>a ggVG      " select all in normal mode
 nnoremap <leader>n gg=G      " indent whole file
+nnoremap <silent><c-s> <esc>:w<cr>
+inoremap <silent><c-s> <esc>:w<cr>
+nnoremap <leader>\ :echo &mod<cr>
+nnoremap <leader>s <esc>:SyntasticToggleMode<cr>
 " ----for vim expand region plugin
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
@@ -99,9 +103,9 @@ cnoreabbrev wQ wq
 cnoreabbrev Q q
 
 " ----autocommands
-autocmd BufWritePre *.html normal gg=G      " for indenting files on opening and saving
-autocmd BufWritePre *.css normal gg=G
-autocmd BufWritePre *.js normal gg=G
+autocmd BufWritePre *.html normal gg=G''      " for indenting files on opening and saving
+autocmd BufWritePre *.css normal gg=G''
+autocmd BufWritePre *.js normal gg=G''
 autocmd VimEnter * NERDTreeMirror       " open nerdtree by default
 
 " ----plugin specific settings
@@ -159,7 +163,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'Raimondi/delimitMate'
-Plugin 'airblade/vim-gitgutter'
+" Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'terryma/vim-expand-region'
 " web dev related plugins
