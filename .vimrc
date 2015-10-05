@@ -107,6 +107,7 @@ cnoreabbrev Q q
 
 " ----autocommands
 autocmd BufWritePre *.html normal gg=G''      " for indenting files on opening and saving
+autocmd BufWritePre *.html normal :FixWhiteSpace      " for removing trailing whitespace
 autocmd BufWritePre *.css normal gg=G''
 autocmd BufWritePre *.js normal gg=G''
 autocmd VimEnter * NERDTreeMirror       " open nerdtree by default
