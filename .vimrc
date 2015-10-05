@@ -27,6 +27,7 @@ set cursorline
 " ----multiple windows
 set laststatus=2        " always show airline status bar
 set hidden
+set splitbelow
 set splitright
 
 " ----using the mouse
@@ -56,6 +57,7 @@ set foldmethod=indent
 
 " ----reading and writing files
 " set backup
+set autowrite
 set autoread
 
 " ----the swap file
@@ -91,6 +93,7 @@ nnoremap <silent><c-s> <esc>:w<cr>
 inoremap <silent><c-s> <esc>:w<cr>
 nnoremap <leader>\ :echo &mod<cr>
 nnoremap <leader>s <esc>:SyntasticToggleMode<cr>
+nnoremap \ :w<cr>
 " ----for vim expand region plugin
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
@@ -107,6 +110,14 @@ autocmd BufWritePre *.html normal gg=G''      " for indenting files on opening a
 autocmd BufWritePre *.css normal gg=G''
 autocmd BufWritePre *.js normal gg=G''
 autocmd VimEnter * NERDTreeMirror       " open nerdtree by default
+au FocusLost * silent! wa
+" When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
 
 " ----plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
@@ -117,7 +128,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
-
+let g:syntastic_csslint_options="--warnings=none"
 " ----for ycm
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
@@ -133,6 +144,12 @@ function! AirLineInit()
     let g:airline_section_z = airline#section#create_right(['%l/%L', '%c'])
 endfunction
 autocmd VimEnter * call AirLineInit()
+
+" Always on - rainbow paranthesis
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 " ----this configures CtrlP to use git or silver searcher for autocompletion
 let g:ctrlp_use_caching = 0
@@ -166,6 +183,10 @@ Plugin 'Raimondi/delimitMate'
 " Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'terryma/vim-expand-region'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'kien/rainbow_parentheses.vim'
+" Plugin 'YankRing.vim'
+Bundle 'ntpeters/vim-airline-colornum'
 " web dev related plugins
 Plugin 'docunext/closetag.vim'
 Plugin 'tpope/vim-surround'
