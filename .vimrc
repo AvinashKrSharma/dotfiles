@@ -106,10 +106,9 @@ cnoreabbrev wQ wq
 cnoreabbrev Q q
 
 " ----autocommands
-autocmd BufWritePre *.html normal gg=G''      " for indenting files on opening and saving
-autocmd BufWritePre *.html normal :FixWhiteSpace      " for removing trailing whitespace
-autocmd BufWritePre *.css normal gg=G''
-autocmd BufWritePre *.js normal gg=G''
+autocmd BufReadPost *.html normal gg=G''      " for indenting files on opening and saving
+autocmd BufReadPost *.css normal gg=G''
+autocmd BufReadPost *.js normal gg=G''
 autocmd VimEnter * NERDTreeMirror       " open nerdtree by default
 au FocusLost * silent! wa
 " When editing a file, always jump to the last known cursor position.
