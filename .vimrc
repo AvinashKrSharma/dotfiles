@@ -10,7 +10,7 @@ set incsearch
 set ignorecase
 set smartcase
 
-" ----displayig text ----
+" ----displaying text ----
 set scrolloff=3
 set linebreak
 set fillchars+=stl:\ ,stlnc:\
@@ -82,18 +82,36 @@ colorscheme darcula
 filetype plugin indent on
 
 " ----mappings
-nnoremap <silent><leader>n :set relativenumber!<cr>     " toggle relativenumber
-nnoremap <leader>b <c-^>     " toggle between buffers
 nnoremap Y y$       " make Y copy whole line from the current cursor position
-map <leader>m <c-_><c-_>       " map TComment command to Ctrl+c
+nnoremap \ :w<cr>
 nnoremap f za     " toggle fold
+nnoremap gV `[v`]   " highlight last inserted text
+
+" ----leader key mappings
+nnoremap <leader>n gg=G''      " indent whole file
 noremap <leader>a ggVG      " select all in normal mode
-nnoremap <leader>n gg=G      " indent whole file
-nnoremap <silent><c-s> <esc>:w<cr>
-inoremap <silent><c-s> <esc>:w<cr>
+nnoremap <silent><leader>l :set relativenumber!<cr>     " toggle relativenumber
+nnoremap <leader>b <c-^>     " toggle between buffers
+
+" toggle between terminal and vim mouse
+map <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
+imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
+function ShowMouseMode()
+    if (&mouse == 'a')
+        set number
+        echo "mouse-vim"
+    else
+        set nonumber
+        echo "mouse-xterm"
+    endif
+endfunction
+
+" ----mappings for plugins using leader key
+map <leader>m <c-_><c-_>       " map TComment command to Ctrl+c
 nnoremap <leader>\ :echo &mod<cr>
 nnoremap <leader>s <esc>:SyntasticToggleMode<cr>
-nnoremap \ :w<cr>
+nnoremap <leader>g <esc>:GundoToggle<CR>
+
 " ----for vim expand region plugin
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
@@ -106,18 +124,19 @@ cnoreabbrev wQ wq
 cnoreabbrev Q q
 
 " ----autocommands
+au FocusLost * silent! wa
 autocmd BufReadPost *.html normal gg=G''      " for indenting files on opening and saving
 autocmd BufReadPost *.css normal gg=G''
 autocmd BufReadPost *.js normal gg=G''
 autocmd VimEnter * NERDTreeMirror       " open nerdtree by default
 au FocusLost * silent! wa
 " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+" Don't do it for commit messages, when the position is invalid, or when
+" inside an event handler (happens when dropping a file on gvim).
+autocmd BufReadPost *
+            \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal g`\"" |
+            \ endif
 
 " ----plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
@@ -129,6 +148,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 let g:syntastic_csslint_options="--warnings=none"
+let g:syntastic_javascript_jshint_args = '--config /home/avinash/.jshintrc'
+
 " ----for ycm
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
@@ -185,6 +206,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'terryma/vim-expand-region'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'sjl/gundo.vim'
 " Plugin 'YankRing.vim'
 Bundle 'ntpeters/vim-airline-colornum'
 " web dev related plugins
