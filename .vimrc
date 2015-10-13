@@ -83,7 +83,8 @@ filetype plugin indent on
 
 " ----mappings
 nnoremap Y y$       " make Y copy whole line from the current cursor position
-nnoremap \ :w<cr>
+nnoremap \ :echo &mod<cr>
+nnoremap \\ :w<cr>
 nnoremap f za     " toggle fold
 nnoremap gV `[v`]   " highlight last inserted text
 
@@ -108,7 +109,6 @@ endfunction
 
 " ----mappings for plugins using leader key
 map <leader>m <c-_><c-_>       " map TComment command to Ctrl+c
-nnoremap <leader>\ :echo &mod<cr>
 nnoremap <leader>s <esc>:SyntasticToggleMode<cr>
 nnoremap <leader>g <esc>:GundoToggle<CR>
 
