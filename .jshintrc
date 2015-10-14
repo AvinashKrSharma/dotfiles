@@ -4,6 +4,7 @@
             "jQuery": true,
             "endPoints": true,
             "appHelper": true,
-            "$": true
+            "$": true,
+	    "console": true
     }
 }
