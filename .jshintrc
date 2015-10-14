@@ -1,0 +1,9 @@
+{
+    "globals": {
+        "angular": true,
+            "jQuery": true,
+            "endPoints": true,
+            "appHelper": true,
+            "$": true
+    }
+}
