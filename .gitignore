@@ -3,3 +3,4 @@
 !.gitignore
 !.aliases
 !.jshintrc
+!.zshrc
