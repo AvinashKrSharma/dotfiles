@@ -153,6 +153,7 @@ let g:syntastic_javascript_jshint_args = '--config /home/avinash/.jshintrc'
 " ----for ycm
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+let g:ycm_filetype_specific_completion_to_disable = { 'javascript': 1 }
 
 " ----for airline
 let g:airline#extensions#tabline#enabled = 1
@@ -207,6 +208,8 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'sjl/gundo.vim'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'gorkunov/smartpairs.vim'
 " Plugin 'YankRing.vim'
 Bundle 'ntpeters/vim-airline-colornum'
 " web dev related plugins
