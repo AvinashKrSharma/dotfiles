@@ -26,3 +26,6 @@ parse_git_branch() {
 }
 
 PS1="\n\[\e[32;1m\](\[\e[37;1m\]\u\[\e[32;1m\])-(\[\e[37;1m\]\w\[\e[32;1m\])\$(parse_git_branch)\n (\!\[\e[32;1m\])-> \[\e[0m\]"
+
+export SHELL=/bin/zsh
+exec /bin/zsh -l
