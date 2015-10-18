@@ -57,7 +57,7 @@ set foldmethod=indent
 
 " ----reading and writing files
 " set backup
-set autowrite
+" set autowrite
 set autoread
 
 " ----the swap file
@@ -82,22 +82,24 @@ colorscheme darcula
 filetype plugin indent on
 
 " ----mappings
-nnoremap Y y$       " make Y copy whole line from the current cursor position
 nnoremap \ :echo &mod<cr>
-nnoremap \\ :w<cr>
-nnoremap f za     " toggle fold
-nnoremap gV `[v`]   " highlight last inserted text
 
 " ----leader key mappings
 nnoremap <leader>n gg=G''      " indent whole file
 noremap <leader>a ggVG      " select all in normal mode
 nnoremap <silent><leader>l :set relativenumber!<cr>     " toggle relativenumber
 nnoremap <leader>b <c-^>     " toggle between buffers
+nnoremap <leader><leader> <esc>:w<cr>
 
-" toggle between terminal and vim mouse
+" ----mappings for plugins using leader key
+map <leader>m <c-_><c-_>       " map TComment command to Ctrl+c
+nnoremap <leader>s <esc>:SyntasticToggleMode<cr>
+nnoremap <leader>g <esc>:GundoToggle<CR>
+
+" ----toggle between terminal and vim mouse
 map <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
-function ShowMouseMode()
+function! ShowMouseMode()
     if (&mouse == 'a')
         set number
         echo "mouse-vim"
@@ -107,15 +109,6 @@ function ShowMouseMode()
     endif
 endfunction
 
-" ----mappings for plugins using leader key
-map <leader>m <c-_><c-_>       " map TComment command to Ctrl+c
-nnoremap <leader>s <esc>:SyntasticToggleMode<cr>
-nnoremap <leader>g <esc>:GundoToggle<CR>
-
-" ----for vim expand region plugin
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-
 " ----abbreviations for common mistyped commands
 cnoreabbrev W w
 cnoreabbrev Wq wq
@@ -124,15 +117,11 @@ cnoreabbrev wQ wq
 cnoreabbrev Q q
 
 " ----autocommands
-au FocusLost * silent! wa
-autocmd BufReadPost *.html normal gg=G''      " for indenting files on opening and saving
-autocmd BufReadPost *.css normal gg=G''
-autocmd BufReadPost *.js normal gg=G''
-autocmd VimEnter * NERDTreeMirror       " open nerdtree by default
-au FocusLost * silent! wa
-" When editing a file, always jump to the last known cursor position.
-" Don't do it for commit messages, when the position is invalid, or when
-" inside an event handler (happens when dropping a file on gvim).
+autocmd BufReadPost * normal gg=G''      " for indenting files on opening and saving
+
+" ----When editing a file, always jump to the last known cursor position.
+" -----Don't do it for commit messages, when the position is invalid, or when
+" ------inside an event handler (happens when dropping a file on gvim).
 autocmd BufReadPost *
             \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
             \   exe "normal g`\"" |
@@ -140,6 +129,12 @@ autocmd BufReadPost *
 
 " ----plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
+
+" ----for netrw
+let g:netrw_liststyle=3
+let g:netrw_browse_split = 4
+let g:netrw_banner=0
+let g:netrw_preview=1
 
 " ----for syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -167,7 +162,7 @@ function! AirLineInit()
 endfunction
 autocmd VimEnter * call AirLineInit()
 
-" Always on - rainbow paranthesis
+" ----Always on - rainbow paranthesis
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
@@ -192,7 +187,6 @@ let g:ctrlp_cmd = 'CtrlP'
 call vundle#begin()
 " general plugins
 Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'bling/vim-airline'
@@ -202,24 +196,22 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'Raimondi/delimitMate'
-" Plugin 'airblade/vim-gitgutter'
-Plugin 'godlygeek/tabular'
-Plugin 'terryma/vim-expand-region'
-Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'gorkunov/smartpairs.vim'
-" Plugin 'YankRing.vim'
+Plugin 'YankRing.vim'
 Bundle 'ntpeters/vim-airline-colornum'
+
 " web dev related plugins
-Plugin 'docunext/closetag.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'mattn/emmet-vim'
-Plugin 'msanders/snipmate.vim'
-Plugin 'pangloss/vim-javascript'
+Plugin 'marijnh/tern_for_vim'
 Plugin 'othree/html5.vim'
+Plugin 'docunext/closetag.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'msanders/snipmate.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'matthewsimo/angular-vim-snippets'
 call vundle#end()
