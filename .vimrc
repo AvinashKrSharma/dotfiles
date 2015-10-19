@@ -117,11 +117,14 @@ cnoreabbrev wQ wq
 cnoreabbrev Q q
 
 " ----autocommands
-autocmd BufReadPost * normal gg=G''      " for indenting files on opening and saving
+" autocmd BufReadPost * normal gg=G''      " for indenting files on opening and saving
 
 " ----When editing a file, always jump to the last known cursor position.
 " -----Don't do it for commit messages, when the position is invalid, or when
 " ------inside an event handler (happens when dropping a file on gvim).
+
+autocmd VimEnter * NERDTreeMirror       " open nerdtree by default"
+
 autocmd BufReadPost *
             \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
             \   exe "normal g`\"" |
@@ -129,12 +132,6 @@ autocmd BufReadPost *
 
 " ----plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
-
-" ----for netrw
-let g:netrw_liststyle=3
-let g:netrw_browse_split = 4
-let g:netrw_banner=0
-let g:netrw_preview=1
 
 " ----for syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -187,6 +184,7 @@ let g:ctrlp_cmd = 'CtrlP'
 call vundle#begin()
 " general plugins
 Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'bling/vim-airline'
@@ -201,7 +199,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'gorkunov/smartpairs.vim'
-Plugin 'YankRing.vim'
+Plugin 'maxbrunsfeld/vim-yankstack'
 Bundle 'ntpeters/vim-airline-colornum'
 
 " web dev related plugins
