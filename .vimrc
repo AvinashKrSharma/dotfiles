@@ -95,6 +95,9 @@ nnoremap <leader><leader> <esc>:w<cr>
 map <leader>m <c-_><c-_>       " map TComment command to Ctrl+c
 nnoremap <leader>s <esc>:SyntasticToggleMode<cr>
 nnoremap <leader>g <esc>:GundoToggle<CR>
+nnoremap <leader>t <esc>:NERDTreeToggle<CR>
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
 " ----toggle between terminal and vim mouse
 map <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
@@ -123,7 +126,8 @@ cnoreabbrev Q q
 " -----Don't do it for commit messages, when the position is invalid, or when
 " ------inside an event handler (happens when dropping a file on gvim).
 
-autocmd VimEnter * NERDTreeMirror       " open nerdtree by default"
+" ----Write file on losing focus
+au FocusLost * :wa
 
 autocmd BufReadPost *
             \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
@@ -186,6 +190,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'mileszs/ack.vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'bling/vim-airline'
 Plugin 'MarcWeber/vim-addon-mw-utils'
