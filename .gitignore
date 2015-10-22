@@ -1,7 +1,11 @@
 *
-!.vimrc
-!.gitignore
 !.aliases
 !.bash_profile
+!.emacs
+!.emacs.d/init.el
+!.emacs.d/my-loadpackages.el
+!.emacs.d/my-packages.el
+!.gitignore
 !.jshintrc
+!.vimrc
 !.zshrc
