@@ -1,6 +1,5 @@
 " ----important
 set nocompatible
-set pastetoggle=<F4>
 set rtp+=~/.vim/bundle/Vundle.vim
 runtime macros/matchit.vim      " enable matchit
 
@@ -68,6 +67,9 @@ set wildmode=list:longest,full
 set wildmenu
 set undofile
 
+" ----executing external commands
+set formatprg=par\ -w50
+
 " ----multi-byte characters
 set encoding=utf-8
 set fileencoding=utf-8
@@ -85,6 +87,7 @@ filetype plugin indent on
 nnoremap \ :echo &mod<cr>
 
 " ----leader key mappings
+nmap <leader>v :tabedit $MYVIMRC<cr>
 nnoremap <leader>n gg=G''      " indent whole file
 noremap <leader>a ggVG      " select all in normal mode
 nnoremap <silent><leader>l :set relativenumber!<cr>     " toggle relativenumber
@@ -98,6 +101,7 @@ nnoremap <leader>g <esc>:GundoToggle<CR>
 nnoremap <leader>t <esc>:NERDTreeToggle<CR>
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
+nnoremap <leader>f <esc>:Autoformat<CR>
 
 " ----toggle between terminal and vim mouse
 map <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
@@ -120,19 +124,26 @@ cnoreabbrev wQ wq
 cnoreabbrev Q q
 
 " ----autocommands
-" autocmd BufReadPost * normal gg=G''      " for indenting files on opening and saving
-
 " ----When editing a file, always jump to the last known cursor position.
 " -----Don't do it for commit messages, when the position is invalid, or when
-" ------inside an event handler (happens when dropping a file on gvim).
-
-" ----Write file on losing focus
-au FocusLost * :wa
-
+" ------inside an event handler.
 autocmd BufReadPost *
             \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
             \   exe "normal g`\"" |
             \ endif
+
+" ----Autoformat file upon saving
+au BufWrite * :Autoformat
+
+" ----Write file on losing focus
+au FocusLost * :wa
+
+" ----source file if the file being saved is .vimrc
+au BufWritePost .vimrc source $MYVIMRC
+
+" ----for proper less support
+autocmd BufNewFile,BufRead *.less set filetype=less
+autocmd FileType less set omnifunc=csscomplete#CompleteCSS
 
 " ----plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
@@ -205,16 +216,23 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'gorkunov/smartpairs.vim'
 Plugin 'maxbrunsfeld/vim-yankstack'
+Plugin 'tpope/vim-surround'
 Bundle 'ntpeters/vim-airline-colornum'
 
 " web dev related plugins
-Plugin 'tpope/vim-surround'
 Plugin 'mattn/emmet-vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'othree/html5.vim'
 Plugin 'docunext/closetag.vim'
 Plugin 'pangloss/vim-javascript'
+Plugin 'moll/vim-node'
+Plugin 'burnettk/vim-angular'
+Plugin 'groenewege/vim-less'
 Plugin 'msanders/snipmate.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'matthewsimo/angular-vim-snippets'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'Chiel92/vim-autoformat'
+
 call vundle#end()
