@@ -12,7 +12,7 @@
 (require 'smartparens-config)
 (require 'flycheck)
 (require 'expand-region)
-(require 'company-mode)
+(require 'company)
 (global-set-key (kbd "C-=") 'er/expand-region)
 (add-hook 'js-mode-hook
           (lambda () (flycheck-mode t)))
