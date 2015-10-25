@@ -1,6 +1,51 @@
+" ----Plugins
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+" general plugins
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'mileszs/ack.vim'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'bling/vim-airline'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'Raimondi/delimitMate'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'gorkunov/smartpairs.vim'
+Plugin 'maxbrunsfeld/vim-yankstack'
+Plugin 'tpope/vim-surround'
+Bundle 'ntpeters/vim-airline-colornum'
+Plugin 'junegunn/limelight.vim'
+Bundle 'sickill/vim-pasta'
+
+" web dev related plugins
+Plugin 'mattn/emmet-vim'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'othree/html5.vim'
+Plugin 'docunext/closetag.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'moll/vim-node'
+Plugin 'burnettk/vim-angular'
+Plugin 'groenewege/vim-less'
+Plugin 'msanders/snipmate.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'matthewsimo/angular-vim-snippets'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'Chiel92/vim-autoformat'
+
+call vundle#end()
+
 " ----important
 set nocompatible
-set rtp+=~/.vim/bundle/Vundle.vim
 runtime macros/matchit.vim      " enable matchit
 
 " ----moving around,searching and patterns
@@ -28,6 +73,9 @@ set laststatus=2        " always show airline status bar
 set hidden
 set splitbelow
 set splitright
+
+" ----terminal
+set title
 
 " ----using the mouse
 set mouse=a
@@ -102,6 +150,7 @@ nnoremap <leader>t <esc>:NERDTreeToggle<CR>
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>f <esc>:Autoformat<CR>
+nmap <leader>l :Limelight!!<cr>
 
 " ----toggle between terminal and vim mouse
 map <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
@@ -180,6 +229,11 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+" ----for Nerdtree
+let g:NERDTreeQuitOnOpen=0
+let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.js.map$']
+
 " ----this configures CtrlP to use git or silver searcher for autocompletion
 let g:ctrlp_use_caching = 0
 if executable('ag')
@@ -196,43 +250,38 @@ let g:ctrlp_map = '<c-p>'       " map CtrlP to <c-p>
 let g:ctrlp_cmd = 'CtrlP'
 
 " ----for Vundle plugin management
-call vundle#begin()
-" general plugins
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'mileszs/ack.vim'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'bling/vim-airline'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'Raimondi/delimitMate'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'sjl/gundo.vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'gorkunov/smartpairs.vim'
-Plugin 'maxbrunsfeld/vim-yankstack'
-Plugin 'tpope/vim-surround'
-Bundle 'ntpeters/vim-airline-colornum'
-
-" web dev related plugins
-Plugin 'mattn/emmet-vim'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'othree/html5.vim'
-Plugin 'docunext/closetag.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'moll/vim-node'
-Plugin 'burnettk/vim-angular'
-Plugin 'groenewege/vim-less'
-Plugin 'msanders/snipmate.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'matthewsimo/angular-vim-snippets'
-Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'Chiel92/vim-autoformat'
-
-call vundle#end()
+" Set a nicer foldtext function
+set foldtext=MyFoldText()
+function! MyFoldText()
+    let line = getline(v:foldstart)
+    if match( line, '^[ \t]*\(\/\*\|\/\/\)[*/\\]*[ \t]*$' ) == 0
+        let initial = substitute( line, '^\([ \t]\)*\(\/\*\|\/\/\)\(.*\)', '\1\2', '' )
+        let linenum = v:foldstart + 1
+        while linenum < v:foldend
+            let line = getline( linenum )
+            let comment_content = substitute( line, '^\([ \t\/\*]*\)\(.*\)$', '\2', 'g' )
+            if comment_content != ''
+                break
+            endif
+            let linenum = linenum + 1
+        endwhile
+        let sub = initial . ' ' . comment_content
+    else
+        let sub = line
+        let startbrace = substitute( line, '^.*{[ \t]*$', '{', 'g')
+        if startbrace == '{'
+            let line = getline(v:foldend)
+            let endbrace = substitute( line, '^[ \t]*}\(.*\)$', '}', 'g')
+            if endbrace == '}'
+                let sub = sub.substitute( line, '^[ \t]*}\(.*\)$', '...}\1', 'g')
+            endif
+        endif
+    endif
+    let n = v:foldend - v:foldstart + 1
+    let info = " " . n . " lines"
+    let sub = sub . "                                                                                                                  "
+    let num_w = getwinvar( 0, '&number' ) * getwinvar( 0, '&numberwidth' )
+    let fold_w = getwinvar( 0, '&foldcolumn' )
+    let sub = strpart( sub, 0, winwidth(0) - strlen( info ) - num_w - fold_w - 1 )
+    return sub . info
+endfunction
