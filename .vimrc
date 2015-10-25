@@ -198,6 +198,7 @@ au BufWritePost .vimrc source $MYVIMRC
 autocmd BufNewFile,BufRead *.less set filetype=less
 autocmd FileType less set omnifunc=csscomplete#CompleteCSS
 
+" ----toggle relativenumber according to mode
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 
@@ -221,6 +222,15 @@ let g:ycm_filetype_specific_completion_to_disable = { 'javascript': 1 }
 " ----for airline
 let g:airline#extensions#tabline#enabled = 1
 function! AirLineInit()
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_detect_paste=1
+    let g:airline_symbols.branch = '⎇'
+    let g:airline_symbols.readonly = ''
+    let g:airline_left_sep='›'  " Slightly fancier than '>'
+    let g:airline_right_sep='‹' " Slightly fancier than '<'
+    let g:airline_right_sep = ''
+    let g:airline_left_sep = ''
     let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
     let g:airline_section_b = airline#section#create_left(['ffenc', 'hunks', '%f'])
     let g:airline_section_c = airline#section#create(['filetype'])
@@ -228,10 +238,6 @@ function! AirLineInit()
     let g:airline_section_y = airline#section#create(['%B'])
     let g:airline_section_z = airline#section#create_right(['%l/%L', '%c'])
 endfunction
-let g:airline_right_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_left_alt_sep= ''
-let g:airline_left_sep = ''
 autocmd VimEnter * call AirLineInit()
 
 " ----Always on - rainbow paranthesis
