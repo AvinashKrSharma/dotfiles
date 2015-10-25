@@ -1,4 +1,4 @@
-" ----Plugins
+" ----for Vundle plugin management
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
@@ -24,23 +24,30 @@ Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'tpope/vim-surround'
 Bundle 'ntpeters/vim-airline-colornum'
 Plugin 'junegunn/limelight.vim'
+Plugin 'Chiel92/vim-autoformat'
 Bundle 'sickill/vim-pasta'
 
 " web dev related plugins
-Plugin 'mattn/emmet-vim'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'othree/html5.vim'
-Plugin 'docunext/closetag.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'moll/vim-node'
-Plugin 'burnettk/vim-angular'
-Plugin 'groenewege/vim-less'
 Plugin 'msanders/snipmate.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'matthewsimo/angular-vim-snippets'
+Plugin 'othree/html5.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'gregsexton/MatchTag'
+Plugin 'docunext/closetag.vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'Chiel92/vim-autoformat'
+
+Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript-syntax'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'elzr/vim-json'
+Plugin 'moll/vim-node'
+Plugin 'mxw/vim-jsx'
+Plugin 'burnettk/vim-angular'
+Plugin 'matthewsimo/angular-vim-snippets'
+
+Plugin 'ap/vim-css-color'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'groenewege/vim-less'
 
 call vundle#end()
 
@@ -59,7 +66,7 @@ set scrolloff=3
 set linebreak
 set fillchars+=stl:\ ,stlnc:\
 set list lcs=tab:\|\
-set number
+set relativenumber
 
 " ----syntax, highlighting and spelling
 set background=dark
@@ -136,17 +143,17 @@ nnoremap \ :echo &mod<cr>
 
 " ----leader key mappings
 nmap <leader>v :tabedit $MYVIMRC<cr>
-nnoremap <leader>n gg=G''      " indent whole file
+nnoremap <leader>i gg=G''      " indent whole file
 noremap <leader>a ggVG      " select all in normal mode
-nnoremap <silent><leader>l :set relativenumber!<cr>     " toggle relativenumber
+nnoremap <silent><leader>r :set relativenumber!<cr>     " toggle relativenumber
 nnoremap <leader>b <c-^>     " toggle between buffers
 nnoremap <leader><leader> <esc>:w<cr>
 
 " ----mappings for plugins using leader key
-map <leader>m <c-_><c-_>       " map TComment command to Ctrl+c
+map <leader>c <c-_><c-_>       " map TComment command to Ctrl+c
 nnoremap <leader>s <esc>:SyntasticToggleMode<cr>
 nnoremap <leader>g <esc>:GundoToggle<CR>
-nnoremap <leader>t <esc>:NERDTreeToggle<CR>
+nnoremap <leader>n <esc>:NERDTreeToggle<CR>
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>f <esc>:Autoformat<CR>
@@ -181,9 +188,6 @@ autocmd BufReadPost *
             \   exe "normal g`\"" |
             \ endif
 
-" ----Autoformat file upon saving
-au BufWrite * :Autoformat
-
 " ----Write file on losing focus
 au FocusLost * :wa
 
@@ -193,6 +197,9 @@ au BufWritePost .vimrc source $MYVIMRC
 " ----for proper less support
 autocmd BufNewFile,BufRead *.less set filetype=less
 autocmd FileType less set omnifunc=csscomplete#CompleteCSS
+
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
 
 " ----plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
@@ -221,6 +228,10 @@ function! AirLineInit()
     let g:airline_section_y = airline#section#create(['%B'])
     let g:airline_section_z = airline#section#create_right(['%l/%L', '%c'])
 endfunction
+let g:airline_right_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_left_alt_sep= ''
+let g:airline_left_sep = ''
 autocmd VimEnter * call AirLineInit()
 
 " ----Always on - rainbow paranthesis
@@ -249,7 +260,13 @@ endif
 let g:ctrlp_map = '<c-p>'       " map CtrlP to <c-p>
 let g:ctrlp_cmd = 'CtrlP'
 
-" ----for Vundle plugin management
+" ----for Limelight
+" Number of preceding/following paragraphs to include (default: 0)
+let g:limelight_paragraph_span = 2
+let g:limelight_bop = '^\s'
+let g:limelight_eop = '\ze\n^\s'
+let g:limelight_conceal_ctermfg = 240
+
 " Set a nicer foldtext function
 set foldtext=MyFoldText()
 function! MyFoldText()
