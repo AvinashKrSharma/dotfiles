@@ -2,13 +2,22 @@
 ;-*-Emacs-Lisp-*-
 ;;; Commentary:
 
+(setq user-full-name 
+      "Avinash")
+	  
+(setq initial-buffer-choice 
+      t)
+(setq initial-scratch-message 
+      "")
+(setq-default indent-tabs-mode 
+              nil)
+
 (require 'package)
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 
-(setq package-enable-at-startup nil)
 (package-initialize)
 
 (defun ensure-package-installed (&rest packages)
@@ -31,7 +40,13 @@ Return a list of installed packages or nil for every skipped package."
 ;; Activate installed packages
 (package-initialize)
 
-(ensure-package-installed 'evil 'magit 'powerline 'airline-themes 'git-gutter 'web-mode 'smartparens 'helm 'helm-projectile 'org 'evil-surround 'expand-region 'smex  'company 'flycheck 'angularjs-mode 'yasnippet 'auto-complete 'projectile 'rainbow-delimiters 'smooth-scrolling 'js3-mode 'rainbow-mode 'emmet-mode 'mmm-mode 'which-key 'sr-speedbar)
+(menu-bar-mode -1)
+
+(tool-bar-mode -1)
+
+(scroll-bar-mode -1)
+
+(ensure-package-installed 'evil 'magit 'powerline 'airline-themes 'git-gutter 'web-mode 'smartparens 'helm 'helm-projectile 'org 'evil-surround 'expand-region 'smex  'company 'flycheck 'angularjs-mode 'yasnippet 'auto-complete 'projectile 'rainbow-delimiters 'smooth-scrolling 'js3-mode 'rainbow-mode 'emmet-mode 'mmm-mode 'which-key 'sr-speedbar 'multiple-cursors 'ace-jump-mode 'switch-window 'ac-js2 'less-css-mode 'sass-mode 'scss-mode 'autopair 'column-enforce-mode 'undo-tree 'anzu 'command-log-mode 'skewer-mode)
 
 (require 'evil)
 (evil-mode t)
@@ -42,19 +57,46 @@ Return a list of installed packages or nil for every skipped package."
 (require 'git-gutter)
 (global-git-gutter-mode +1)
 
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(autopair-global-mode)
+
+(global-undo-tree-mode)
+
+(show-paren-mode)
+
+(global-hl-line-mode -1)
+
+(winner-mode t)
+
+(autoload 'ace-jump-mode 
+  "ace-jump-mode" 
+  "Emacs quick move minor mode"
+  t)
+(autoload 'ace-jump-mode-pop-mark 
+  "ace-jump-mode" 
+  "Ace jump back:-"
+  t)
+
+(add-hook 'js2-mode-hook
+	  'column-enforce-mode)
+
+(add-to-list 'auto-mode-alist 
+	     '("\\.js\\'" . js2-mode))
+
+	  
+(global-anzu-mode +1)
+
+(add-to-list 'auto-mode-alist
+             '("\\.scss\\'" . scss-mode))
+(add-to-list 'auto-mode-alist
+             '("\\.sass\\'" . sass-mode))
 
 (require 'smartparens-config)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+
+(add-hook 'js2-mode-hook 
+          'ac-js2-mode)
 
 (require 'js3-mode)
 (defun ome-tern-setup ()
@@ -70,10 +112,11 @@ Return a list of installed packages or nil for every skipped package."
 
 (require 'helm)
 (helm-mode t)
+(helm-autoresize-mode 1)
+(setq helm-split-window-in-side-p
+      t)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-
-(require 'org)
 
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
@@ -164,33 +207,44 @@ Return a list of installed packages or nil for every skipped package."
 
 (which-key-mode 1)
 
+(require 'powerline)
+(require 'airline-themes)
+(load-theme 'airline-badwolf)
+
+(require 'ido)
+    (ido-mode t)
+
+(defun my-move-line-up ()
+  "Move the current line up by one step"
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2))
+
+(defun my-move-line-down ()
+  "Move the current line down by one step"
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1))
+  
+(defun my-eval-and-replace ()
+  "Replace expression to the left with it's value in the current buffer"
+  (interactive)
+  (backward-kill-sexp)
+  (prin1 (eval (read (current-kill 0)))
+	 (current-buffer)))
+  
+(defun my-reload-current-file ()
+  "Reloads the file loaded in current buffer from the disk"
+  (interactive)
+  (cond (buffer-file-name (progn (find-alternate-file buffer-file-name)
+                                 (message "File reloaded")))
+        (t (message "You're not editing a file!"))))
+		
+
 (defvar show-paren-delay 0
   "Delay (in seconds) before matching paren is highlighted.")
 
-;; Essential settings.
-(setq inhibit-splash-screen t
-      inhibit-startup-message t
-      inhibit-startup-echo-area-message t)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(when (boundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
-(show-paren-mode 1)
-(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
-(global-visual-line-mode nil)
-(setq-default left-fringe-width nil)
-(setq-default indent-tabs-mode nil)
-(eval-after-load "vc" '(setq vc-handled-backends nil))
-(setq vc-follow-symlinks t)
-(setq large-file-warning-threshold nil)
-(setq split-width-threshold nil)
-(setq visible-bell t)
-
-;;; File type overrides.
-(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
-
-;;; Stuff for line numbers.
 (defface linum-current
   '((t (:inherit linum :weight bold :underline "#555")))
   "The current line number.")
@@ -225,17 +279,24 @@ Return a list of installed packages or nil for every skipped package."
 (global-linum-mode t)
 (add-hook 'linum-before-numbering-hook 'my-linum-get-format-string)
 
-(require 'powerline)
-(require 'airline-themes)
-(load-theme 'airline-badwolf)
+(defun my-apply-keyboard-bindings (pair)
+  "Apply keyboard-bindings for supplied list of key-pair values"
+  (global-set-key (kbd (car pair))
+                  (cdr pair)))
 
-(require 'ido)
-    (ido-mode t)
+(defvar my-custom-keyboard-bindings 
+  '(("C-M-)" . transparency-increase)
+    ("C-M-(" . transparency-decrease)
+    ("C->" . ace-jump-mode)
+    ("C-<" . ace-jump-mode-pop-mark)
+    ("M-/" . undo-tree-visualize)
+    ("C-M-z" . switch-window)
+    ("<f5>" . my-reload-current-file)))
 
-(require 'speedbar)
-(speedbar 1)
+(mapc 'my-apply-keyboard-bindings
+      my-custom-keyboard-bindings)
 
-;;; emacs ends here
+;;emacs ends
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -243,7 +304,7 @@ Return a list of installed packages or nil for every skipped package."
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("a0bbe4dc3513cbd049eb95f79c467b6f19dc42979fec27a0481bb6980bd8d405" "977513781c8dd86f4f0a04dbf518df5ba496da42b71173368b305478703eea42" "e8586a76a96fd322ccb644ca0c3a1e4f4ca071ccfdb0f19bef90c4040d5d3841" "8c75217782ccea7e9f3ad2dae831487a5fb636d042263d0a0e0438d551da3224" "aab598c4d024d544b4e8b356a95ca693afa9de000b154bd2f86eed68c9e75557" "b869a1353d39ab81b19eb79de40ff3e7bb6eaad705e61f7e4dbdcb183f08c5a6" "b5fe3893c8808466711c1b55bb7e66b9c6aa2a86811783375a43e1beabb1af33" "fbcdb6b7890d0ec1708fa21ab08eb0cc16a8b7611bb6517b722eba3891dfc9dd" "532769a638787d1196bc22c885e9b85269c3fc650fdecfc45135bb618127034c" "2a5be663818e1e23fd2175cc8dac8a2015dcde6b2e07536712451b14658bbf68" "f9d34593e9dd14b2d798494609aa0fddca618145a5d4b8a1819283bc5b7a2bfd" "8e7ca85479dab486e15e0119f2948ba7ffcaa0ef161b3facb8103fb06f93b428" "beeb5ac6b65fcccfe434071d4624ff0308b5968bf2f0c01b567d212bcaf66054" default))))
+    ("beeb5ac6b65fcccfe434071d4624ff0308b5968bf2f0c01b567d212bcaf66054" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
