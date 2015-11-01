@@ -95,9 +95,6 @@ Return a list of installed packages or nil for every skipped package."
 
 (setq js2-highlight-level 3)
 
-(define-key js-mode-map "{" 'paredit-open-curly)
-(define-key js-mode-map "}" 'paredit-close-curly-and-newline)"}")
-
 (require 'helm)
 (helm-mode t)
 (helm-autoresize-mode 1)
