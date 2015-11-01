@@ -46,7 +46,7 @@ Return a list of installed packages or nil for every skipped package."
 
 (scroll-bar-mode -1)
 
-(ensure-package-installed 'evil 'magit 'powerline 'airline-themes 'git-gutter 'web-mode 'smartparens 'helm 'helm-projectile 'org 'evil-surround 'expand-region 'smex  'company 'flycheck 'angularjs-mode 'yasnippet 'auto-complete 'projectile 'rainbow-delimiters 'smooth-scrolling 'js3-mode 'rainbow-mode 'emmet-mode 'mmm-mode 'which-key 'sr-speedbar 'multiple-cursors 'ace-jump-mode 'switch-window 'ac-js2 'less-css-mode 'sass-mode 'scss-mode 'autopair 'column-enforce-mode 'undo-tree 'anzu 'command-log-mode 'skewer-mode)
+(ensure-package-installed 'evil 'magit 'powerline 'airline-themes 'git-gutter 'web-mode 'smartparens 'helm 'helm-projectile 'org 'evil-surround 'expand-region 'smex  'company 'flycheck 'angularjs-mode 'yasnippet 'auto-complete 'projectile 'rainbow-delimiters 'smooth-scrolling 'js3-mode 'rainbow-mode 'emmet-mode 'mmm-mode 'which-key 'sr-speedbar 'multiple-cursors 'ace-jump-mode 'switch-window 'ac-js2 'less-css-mode 'sass-mode 'scss-mode 'autopair 'column-enforce-mode 'undo-tree 'anzu 'command-log-mode 'skewer-mode 'js2-refactor)
 
 (require 'evil)
 (evil-mode t)
@@ -75,13 +75,6 @@ Return a list of installed packages or nil for every skipped package."
   "ace-jump-mode" 
   "Ace jump back:-"
   t)
-
-(add-hook 'js2-mode-hook
-	  'column-enforce-mode)
-
-(add-to-list 'auto-mode-alist 
-	     '("\\.js\\'" . js2-mode))
-
 	  
 (global-anzu-mode +1)
 
@@ -92,23 +85,18 @@ Return a list of installed packages or nil for every skipped package."
 
 (require 'smartparens-config)
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
+(add-hook 'js2-mode-hook
+	  'column-enforce-mode)
 
 (add-hook 'js2-mode-hook 
           'ac-js2-mode)
 
-(require 'js3-mode)
-(defun ome-tern-setup ()
-  (when (el-get-package-installed-p 'js2-mode)
-    (add-hook 'js2-mode-hook (lambda () (tern-mode t))))
-  (when (el-get-package-installed-p 'js3-mode)
-    (add-hook 'js3-mode-hook (lambda () (tern-mode t))))
-  (setq tern-command (cons (executable-find "tern") '()))
-  (eval-after-load 'tern
-    '(progn
-       (require 'tern-auto-complete)
-       (tern-ac-setup))))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+(setq js2-highlight-level 3)
+
+(define-key js-mode-map "{" 'paredit-open-curly)
+(define-key js-mode-map "}" 'paredit-close-curly-and-newline)"}")
 
 (require 'helm)
 (helm-mode t)
@@ -285,9 +273,7 @@ Return a list of installed packages or nil for every skipped package."
                   (cdr pair)))
 
 (defvar my-custom-keyboard-bindings 
-  '(("C-M-)" . transparency-increase)
-    ("C-M-(" . transparency-decrease)
-    ("C->" . ace-jump-mode)
+  '(("C->" . ace-jump-mode)
     ("C-<" . ace-jump-mode-pop-mark)
     ("M-/" . undo-tree-visualize)
     ("C-M-z" . switch-window)
