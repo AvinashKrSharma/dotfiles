@@ -9,6 +9,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-fugitive'
@@ -223,29 +224,34 @@ let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 let g:ycm_filetype_specific_completion_to_disable = { 'javascript': 1 }
 
 " ----for airline
-let g:airline#extensions#tabline#enabled = 1
 function! AirLineInit()
     let g:airline_powerline_fonts = 1
-    let g:airline#extensions#tabline#enabled = 1
     let g:airline_detect_paste=1
+    let g:airline_detect_modified=1
     let g:airline_symbols.branch = '⎇'
+    let g:airline_symbols.linenr = '␤'
     let g:airline_symbols.readonly = ''
+    let g:airline_symbols.paste = 'ρ'
     let g:airline_left_sep='›'
     let g:airline_right_sep='‹'
     let g:airline_right_sep = ''
     let g:airline_left_sep = ''
-    let g:airline_section_a = airline#section#create(['mode'])
-    let g:airline_section_b = airline#section#create(['branch'])
-    let g:airline_section_c = airline#section#create(['ffenc'])
-    let g:airline_section_d = airline#section#create(['hunks'])
-    let g:airline_section_e = airline#section#create_left(['%f'])
-    let g:airline_section_f = airline#section#create(['filetype'])
-    let g:airline_section_w = airline#section#create(['%P'])
-    let g:airline_section_x = airline#section#create(['%B'])
-    let g:airline_section_y = airline#section#create(['%l/%L'])
-    let g:airline_section_z = airline#section#create_right(['%c'])
+    let g:airline_section_a = airline#section#create(['mode', '', 'branch'])
+    let g:airline_section_b = airline#section#create(['hunks', '%f'])
+    let g:airline_section_c = airline#section#create(['filetype'])
+    let g:airline_section_x = airline#section#create(['%P'])
+    let g:airline_section_y = airline#section#create(['%B'])
+    let g:airline_section_z = airline#section#create_right(['%l/%L  %c'])
+
 endfunction
 autocmd VimEnter * call AirLineInit()
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
+let g:airline#extensions#wordcount#enabled = 1
 
 " ----Always on - rainbow paranthesis
 au VimEnter * RainbowParenthesesToggle
@@ -276,7 +282,7 @@ let g:ctrlp_cmd = 'CtrlP'
 " ----for gitgutter
 let g:gitgutter_max_signs = 200
 let g:gitgutter_highlight_lines = 1
-let g:gitgutter_enabled = 0
+let g:gitgutter_enabled = 1
 
 " ----for Limelight
 " Number of preceding/following paragraphs to include (default: 0)
