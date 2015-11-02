@@ -13,6 +13,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/syntastic'
 Plugin 'Raimondi/delimitMate'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -151,10 +152,11 @@ nnoremap <leader>b <c-^>     " toggle between buffers
 nnoremap <leader><leader> <esc>:w<cr>
 
 " ----mappings for plugins using leader key
+nnoremap <leader>n <esc>:NERDTreeToggle<CR>
 map <leader>c <c-_><c-_>       " map TComment command to Ctrl+c
 nnoremap <leader>s <esc>:SyntasticToggleMode<cr>
-nnoremap <leader>g <esc>:GundoToggle<CR>
-nnoremap <leader>n <esc>:NERDTreeToggle<CR>
+nnoremap <leader>u <esc>:GundoToggle<CR>
+nnoremap <leader>g <esc>:GitGutterToggle<CR>
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>f <esc>:Autoformat<CR>
@@ -270,6 +272,11 @@ else
 endif
 let g:ctrlp_map = '<c-p>'       " map CtrlP to <c-p>
 let g:ctrlp_cmd = 'CtrlP'
+
+" ----for gitgutter
+let g:gitgutter_max_signs = 200
+let g:gitgutter_highlight_lines = 1
+let g:gitgutter_enabled = 0
 
 " ----for Limelight
 " Number of preceding/following paragraphs to include (default: 0)
