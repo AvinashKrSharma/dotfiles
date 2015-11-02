@@ -19,6 +19,7 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'gorkunov/smartpairs.vim'
 Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'tpope/vim-surround'
@@ -65,7 +66,8 @@ set smartcase
 set scrolloff=3
 set linebreak
 set fillchars+=stl:\ ,stlnc:\
-set list lcs=tab:\|\
+" set list lcs=tab:\|\
+set nolist
 set relativenumber
 
 " ----syntax, highlighting and spelling
