@@ -37,7 +37,6 @@ Plugin 'docunext/closetag.vim'
 Plugin 'majutsushi/tagbar'
 
 Plugin 'pangloss/vim-javascript'
-Plugin 'pangloss/vim-javascript-syntax'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'elzr/vim-json'
@@ -229,16 +228,20 @@ function! AirLineInit()
     let g:airline_detect_paste=1
     let g:airline_symbols.branch = '⎇'
     let g:airline_symbols.readonly = ''
-    let g:airline_left_sep='›'  " Slightly fancier than '>'
-    let g:airline_right_sep='‹' " Slightly fancier than '<'
+    let g:airline_left_sep='›'
+    let g:airline_right_sep='‹'
     let g:airline_right_sep = ''
     let g:airline_left_sep = ''
-    let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
-    let g:airline_section_b = airline#section#create_left(['ffenc', 'hunks', '%f'])
-    let g:airline_section_c = airline#section#create(['filetype'])
-    let g:airline_section_x = airline#section#create(['%P'])
-    let g:airline_section_y = airline#section#create(['%B'])
-    let g:airline_section_z = airline#section#create_right(['%l/%L', '%c'])
+    let g:airline_section_a = airline#section#create(['mode'])
+    let g:airline_section_b = airline#section#create(['branch'])
+    let g:airline_section_c = airline#section#create(['ffenc'])
+    let g:airline_section_d = airline#section#create(['hunks'])
+    let g:airline_section_e = airline#section#create_left(['%f'])
+    let g:airline_section_f = airline#section#create(['filetype'])
+    let g:airline_section_w = airline#section#create(['%P'])
+    let g:airline_section_x = airline#section#create(['%B'])
+    let g:airline_section_y = airline#section#create(['%l/%L'])
+    let g:airline_section_z = airline#section#create_right(['%c'])
 endfunction
 autocmd VimEnter * call AirLineInit()
 
