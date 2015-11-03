@@ -240,6 +240,8 @@ autocmd FileType less set omnifunc=csscomplete#CompleteCSS
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+
 " ----plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
