@@ -4,36 +4,36 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " general plugins
 Plugin 'gmarik/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-surround'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'sjl/gundo.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'rking/ag.vim'
+Plugin 'godlygeek/tabular'
 Plugin 'sessionman.vim'
 Plugin 'sudo.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'mileszs/ack.vim'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
 Plugin 'zhaocai/GoldenView.Vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'kien/ctrlp.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/syntastic'
-Plugin 'Raimondi/delimitMate'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'sjl/gundo.vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'tpope/vim-unimpaired'
 Plugin 'gorkunov/smartpairs.vim'
-Plugin 'maxbrunsfeld/vim-yankstack'
-Plugin 'tpope/vim-surround'
-Bundle 'ntpeters/vim-airline-colornum'
-Plugin 'junegunn/limelight.vim'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'maxbrunsfeld/vim-yankstack'
 Bundle 'sickill/vim-pasta'
 
-" web dev related plugins
+" ----web dev related plugins
+" -----html related
 Plugin 'msanders/snipmate.vim'
 Plugin 'othree/html5.vim'
 Plugin 'mattn/emmet-vim'
@@ -41,6 +41,7 @@ Plugin 'gregsexton/MatchTag'
 Plugin 'docunext/closetag.vim'
 Plugin 'majutsushi/tagbar'
 
+" -----js related
 Plugin 'pangloss/vim-javascript'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
@@ -50,6 +51,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'burnettk/vim-angular'
 Plugin 'matthewsimo/angular-vim-snippets'
 
+" -----css related
 Plugin 'ap/vim-css-color'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'groenewege/vim-less'
@@ -58,7 +60,7 @@ call vundle#end()
 
 " ----important
 set nocompatible
-runtime macros/matchit.vim      " enable matchit
+runtime macros/matchit.vim
 
 " ----moving around,searching and patterns
 set path=$PWD/**
@@ -68,12 +70,6 @@ set smartcase
 
 " ----tags
 set tags=./tags;/,~/.vimtags
-
-" Make tags placed in .git/tags file available in all levels of a repository
-let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
-if gitroot != ''
-    let &tags = &tags . ',' . gitroot . '/.git/tags'
-endif
 
 " ----displaying text ----
 set scrolloff=3
@@ -123,6 +119,7 @@ set autoindent
 set smartindent
 
 " ----folding
+set foldtext=MyFoldText()
 set foldmethod=indent
 
 " ----reading and writing files
@@ -156,36 +153,46 @@ set t_Co=256
 colorscheme darcula
 filetype plugin indent on
 
+" ----some more settings
 " highlight spell errors
 hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
-" toggle spell check with F7
-map <F7> :setlocal spell! spell?<CR>
+
+" Make tags placed in .git/tags file available in all levels of a repository
+let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+if gitroot != ''
+    let &tags = &tags . ',' . gitroot . '/.git/tags'
+endif
 
 " ----mappings
+map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<cr>
 
 " ----leader key mappings
-nmap <leader>v :tabedit $MYVIMRC<cr>
+nnoremap <leader><leader> :w<cr>
+nnoremap <leader><leader>q :wq<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>qa :qa<cr>
+nnoremap <leader>d :bd<cr>
+nnoremap <leader>bd :%bd<cr>
+nnoremap <leader>v :tabedit $MYVIMRC<cr>
 nnoremap <leader>i gg=G''      " indent whole file
-noremap <leader>a ggVG      " select all in normal mode
-nnoremap <silent><leader>r :set relativenumber!<cr>     " toggle relativenumber
+nnoremap <leader>a ggVG      " select all in normal mode
+nnoremap <leader>r :call RelativeNumberToggle()<cr>
 nnoremap <leader>b <c-^>     " toggle between buffers
-nnoremap <leader><leader> <esc>:w<cr>
 
 " ----mappings for plugins using leader key
 nnoremap <leader>n <esc>:NERDTreeToggle<CR>
-map <leader>c <c-_><c-_>       " map TComment command to Ctrl+c
+nnoremap <leader>c <c-_><c-_>       " map TComment command to Ctrl+c
 nnoremap <leader>s <esc>:SyntasticToggleMode<cr>
 nnoremap <leader>u <esc>:GundoToggle<CR>
-nnoremap <leader>g <esc>:GitGutterToggle<CR>
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
+nnoremap <leader>t <esc>:GitGutterToggle<CR>
+nnoremap <leader>p <Plug>yankstack_substitute_older_paste
+nnoremap <leader>P <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>f <esc>:Autoformat<CR>
-nmap <leader>l :Limelight!!<cr>
 
 " ----for fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>     " same as :vimdiff in case of conflicts
 nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gl :Glog<CR>
@@ -193,22 +200,22 @@ nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
-" Mnemonic _i_nteractive
+nnoremap <silent> <leader>gv :Gvsplit<CR>
 nnoremap <silent> <leader>gi :Git add -p %<CR>
-nnoremap <silent> <leader>gg :SignifyToggle<CR>
+nnoremap <silent> <leader>gg :diffget
+nnoremap <silent> <leader>gp [c
+nnoremap <silent> <leader>gn ]c
+
+" ----for goldenview
+nmap <silent> <C-G> <Plug>GoldenViewSplit
+nmap <silent> <C-Up>   <Plug>GoldenViewSwitchMain
+nmap <silent> <C-Down> <Plug>GoldenViewSwitchToggle
+nmap <silent> <C-Right>  <Plug>GoldenViewNext
+nmap <silent> <C-Left>  <Plug>GoldenViewPrevious
 
 " ----toggle between terminal and vim mouse
 map <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
-function! ShowMouseMode()
-    if (&mouse == 'a')
-        set number
-        echo "mouse-vim"
-    else
-        set nonumber
-        echo "mouse-xterm"
-    endif
-endfunction
 
 " ----abbreviations for common mistyped commands
 cnoreabbrev W w
@@ -242,6 +249,15 @@ autocmd InsertLeave * :set relativenumber
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 
+" ----for airline 
+autocmd VimEnter * call AirLineInit()
+
+" ----Always on - rainbow paranthesis
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 " ----plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
@@ -257,6 +273,9 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming em
 let g:syntastic_csslint_options="--warnings=none"
 let g:syntastic_javascript_jshint_args = '--config /home/avinash/.jshintrc'
 
+" ----for goldenview
+let g:goldenview__enable_default_mapping = 0
+
 " ----for ycm
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
@@ -264,27 +283,6 @@ let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 let g:ycm_filetype_specific_completion_to_disable = { 'javascript': 1 }
 
 " ----for airline
-function! AirLineInit()
-    let g:airline_powerline_fonts = 1
-    let g:airline_detect_paste=1
-    let g:airline_detect_modified=1
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.readonly = ''
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_left_sep='›'
-    let g:airline_right_sep='‹'
-    let g:airline_right_sep = ''
-    let g:airline_left_sep = ''
-    let g:airline_section_a = airline#section#create(['mode', '', 'branch'])
-    let g:airline_section_b = airline#section#create(['hunks', '', ' %f'])
-    let g:airline_section_c = airline#section#create(['filetype'])
-    let g:airline_section_x = airline#section#create(['%P'])
-    let g:airline_section_y = airline#section#create(['%B'])
-    let g:airline_section_z = airline#section#create_right(['%l/%L  %c'])
-
-endfunction
-autocmd VimEnter * call AirLineInit()
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#enabled = 1
@@ -293,19 +291,8 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 let g:airline#extensions#wordcount#enabled = 1
 
-" ----Always on - rainbow paranthesis
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-" ----for sessionman
-if isdirectory(expand("~/.vim/bundle/sessionman.vim/"))
-    nmap <leader>sl :SessionList<CR>
-    nmap <leader>ss :SessionSave<CR>
-    nmap <leader>sc :SessionClose<CR>
-endif
-
+" ----for ag
+let g:ag_working_path_mode="r"
 
 " ----for Nerdtree
 let g:NERDTreeQuitOnOpen=1
@@ -350,8 +337,46 @@ let g:limelight_bop = '^\s'
 let g:limelight_eop = '\ze\n^\s'
 let g:limelight_conceal_ctermfg = 240
 
-" Set a nicer foldtext function
-set foldtext=MyFoldText()
+" ----All the function definitions
+
+function! RelativeNumberToggle()
+    if(&relativenumber == 1)
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
+
+function! ShowMouseMode()
+    if (&mouse == 'a')
+        set number
+        echo "mouse-vim"
+    else
+        set nonumber
+        echo "mouse-xterm"
+    endif
+endfunction
+
+function! AirLineInit()
+    let g:airline_powerline_fonts = 1
+    let g:airline_detect_paste=1
+    let g:airline_detect_modified=1
+    let g:airline_symbols.branch = '⎇'
+    let g:airline_symbols.linenr = '␤'
+    let g:airline_symbols.readonly = ''
+    let g:airline_symbols.paste = 'ρ'
+    let g:airline_left_sep='›'
+    let g:airline_right_sep='‹'
+    let g:airline_right_sep = ''
+    let g:airline_left_sep = ''
+    let g:airline_section_a = airline#section#create(['mode', '', 'branch'])
+    let g:airline_section_b = airline#section#create(['hunks', '', ' %f'])
+    let g:airline_section_c = airline#section#create(['filetype'])
+    let g:airline_section_x = airline#section#create(['%P'])
+    let g:airline_section_y = airline#section#create(['%B'])
+    let g:airline_section_z = airline#section#create_right(['%l/%L  %c'])
+endfunction
+
 function! MyFoldText()
     let line = getline(v:foldstart)
     if match( line, '^[ \t]*\(\/\*\|\/\/\)[*/\\]*[ \t]*$' ) == 0
