@@ -8,4 +8,3 @@
 >ln -s dotfiles/jshintrc ~/.jshintrc  
 >ln -s dotfiles/vimrc ~/.vimrc  
 >ln -s dotfiles/zshrc ~/.zshrc  
->ln -s dotfiles/zsh_prompt ~/.zsh_prompt
