@@ -96,6 +96,7 @@ set showcmd
 " ----editing text
 set modifiable
 set backspace=indent,eol,start
+set completeopt=menuone,preview
 set omnifunc=syntaxcomplete#Complete
 set showmatch
 
@@ -121,7 +122,9 @@ set autoread
 " set swapfile
 
 " ----command line editing
+set history=1000
 set wildmode=list:longest,full
+set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
 set wildmenu
 set undofile
 
@@ -140,6 +143,11 @@ let mapleader = "\<Space>"
 set t_Co=256
 colorscheme darcula
 filetype plugin indent on
+
+" highlight spell errors
+hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
+" toggle spell check with F7
+map <F7> :setlocal spell! spell?<CR>
 
 " ----mappings
 nnoremap \ :echo &mod<cr>
@@ -212,7 +220,10 @@ let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,require
 " ----for syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_auto_jump=1
+let g:syntastic_enable_highlighting=1
+let g:syntastic_echo_current_error=1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 let g:syntastic_csslint_options="--warnings=none"
@@ -266,6 +277,10 @@ let NERDTreeIgnore = ['\.js.map$']
 
 " ----this configures CtrlP to use git or silver searcher for autocompletion
 let g:ctrlp_use_caching = 0
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:25'
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 
