@@ -4,12 +4,15 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " general plugins
 Plugin 'gmarik/Vundle.vim'
+Plugin 'sessionman.vim'
+Plugin 'sudo.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
+Plugin 'zhaocai/GoldenView.Vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-fugitive'
@@ -62,6 +65,15 @@ set path=$PWD/**
 set incsearch
 set ignorecase
 set smartcase
+
+" ----tags
+set tags=./tags;/,~/.vimtags
+
+" Make tags placed in .git/tags file available in all levels of a repository
+let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+if gitroot != ''
+    let &tags = &tags . ',' . gitroot . '/.git/tags'
+endif
 
 " ----displaying text ----
 set scrolloff=3
@@ -171,6 +183,20 @@ nmap <leader>P <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>f <esc>:Autoformat<CR>
 nmap <leader>l :Limelight!!<cr>
 
+" ----for fugitive
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gr :Gread<CR>
+nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>ge :Gedit<CR>
+" Mnemonic _i_nteractive
+nnoremap <silent> <leader>gi :Git add -p %<CR>
+nnoremap <silent> <leader>gg :SignifyToggle<CR>
+
 " ----toggle between terminal and vim mouse
 map <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
@@ -230,6 +256,7 @@ let g:syntastic_csslint_options="--warnings=none"
 let g:syntastic_javascript_jshint_args = '--config /home/avinash/.jshintrc'
 
 " ----for ycm
+let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 let g:ycm_filetype_specific_completion_to_disable = { 'javascript': 1 }
@@ -270,9 +297,20 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+" ----for sessionman
+if isdirectory(expand("~/.vim/bundle/sessionman.vim/"))
+    nmap <leader>sl :SessionList<CR>
+    nmap <leader>ss :SessionSave<CR>
+    nmap <leader>sc :SessionClose<CR>
+endif
+
+
 " ----for Nerdtree
-let g:NERDTreeQuitOnOpen=0
+let g:NERDTreeQuitOnOpen=1
+let g:nerdtree_tabs_open_on_gui_startup=0
+let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
+let NERDTreeKeepTreeInNewTab=1
 let NERDTreeIgnore = ['\.js.map$']
 
 " ----this configures CtrlP to use git or silver searcher for autocompletion
@@ -280,7 +318,11 @@ let g:ctrlp_use_caching = 0
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:25'
+let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+            \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 
