@@ -1,4 +1,4 @@
-" ----for Vundle plugin management
+" ----Vundle plugin management
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
@@ -32,8 +32,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'maxbrunsfeld/vim-yankstack'
 Bundle 'sickill/vim-pasta'
 
-" ----web dev related plugins
-" -----html related
+"html related
 Plugin 'msanders/snipmate.vim'
 Plugin 'othree/html5.vim'
 Plugin 'mattn/emmet-vim'
@@ -41,7 +40,7 @@ Plugin 'gregsexton/MatchTag'
 Plugin 'docunext/closetag.vim'
 Plugin 'majutsushi/tagbar'
 
-" -----js related
+"js related
 Plugin 'pangloss/vim-javascript'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
@@ -51,7 +50,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'burnettk/vim-angular'
 Plugin 'matthewsimo/angular-vim-snippets'
 
-" -----css related
+"css related
 Plugin 'ap/vim-css-color'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'groenewege/vim-less'
@@ -153,115 +152,116 @@ set t_Co=256
 colorscheme darcula
 filetype plugin indent on
 
-" ----some more settings
+" ----Some more settings
 " highlight spell errors
 hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
 
-" Make tags placed in .git/tags file available in all levels of a repository
+" make tags placed in .git/tags file available in all levels of a repository
 let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
 if gitroot != ''
     let &tags = &tags . ',' . gitroot . '/.git/tags'
 endif
 
-" ----mappings
+" ----Mappings
+" leader key mappings
+nnoremap <leader>a  ggVG
+nnoremap <leader>b  <c-^>
+nnoremap <leader>c  <c-_><c-_>
+nnoremap <leader>d  <esc>:bd<cr>
+nnoremap <leader>dd <esc>:%bd<cr>
+nnoremap <leader>f  <esc>:Autoformat<CR>
+
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gg :diffget
+nnoremap <leader>gi :Git add -p %<CR>
+nnoremap <leader>gl :Glog<CR>
+nnoremap <leader>gn ]c
+nnoremap <leader>gp [c
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gv :Gvsplit<CR>
+nnoremap <leader>gw :Gwrite<CR>
+
+nnoremap <leader>i  gg=G''
+nnoremap <leader>n  <esc>:NERDTreeToggle<CR>
+nnoremap <leader>p  <Plug>yankstack_substitute_older_paste
+nnoremap <leader>P  <Plug>yankstack_substitute_newer_paste
+nnoremap <leader>qq :q<cr>
+nnoremap <leader>qa :qa<cr>
+nnoremap <leader>r  :call RelativeNumberToggle()<cr>
+nnoremap <leader>s  <esc>:SyntasticToggleMode<cr>
+nnoremap <leader>t  <esc>:GitGutterToggle<CR>
+nnoremap <leader>u  <esc>:GundoToggle<CR>
+nnoremap <leader>v  :tabedit $MYVIMRC<cr>
+
+nnoremap <leader><leader>  :w<cr>
+nnoremap <leader><leader>q :wq<cr>
+
+" general mappings
 map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<cr>
 
-" ----leader key mappings
-nnoremap <leader><leader> :w<cr>
-nnoremap <leader><leader>q :wq<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>qa :qa<cr>
-nnoremap <leader>d :bd<cr>
-nnoremap <leader>bd :%bd<cr>
-nnoremap <leader>v :tabedit $MYVIMRC<cr>
-nnoremap <leader>i gg=G''      " indent whole file
-nnoremap <leader>a ggVG      " select all in normal mode
-nnoremap <leader>r :call RelativeNumberToggle()<cr>
-nnoremap <leader>b <c-^>     " toggle between buffers
+" for goldenview
+nmap <C-Up>    <Plug>GoldenViewSwitchMain
+nmap <C-Down>  <Plug>GoldenViewSwitchToggle
+nmap <C-Right> <Plug>GoldenViewNext
+nmap <C-Left>  <Plug>GoldenViewPrevious
+nmap <C-G>     <Plug>GoldenViewSplit
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
-" ----mappings for plugins using leader key
-nnoremap <leader>n <esc>:NERDTreeToggle<CR>
-nnoremap <leader>c <c-_><c-_>       " map TComment command to Ctrl+c
-nnoremap <leader>s <esc>:SyntasticToggleMode<cr>
-nnoremap <leader>u <esc>:GundoToggle<CR>
-nnoremap <leader>t <esc>:GitGutterToggle<CR>
-nnoremap <leader>p <Plug>yankstack_substitute_older_paste
-nnoremap <leader>P <Plug>yankstack_substitute_newer_paste
-nnoremap <leader>f <esc>:Autoformat<CR>
-
-" ----for fugitive
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>     " same as :vimdiff in case of conflicts
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
-nnoremap <silent> <leader>gp :Git push<CR>
-nnoremap <silent> <leader>gr :Gread<CR>
-nnoremap <silent> <leader>gw :Gwrite<CR>
-nnoremap <silent> <leader>ge :Gedit<CR>
-nnoremap <silent> <leader>gv :Gvsplit<CR>
-nnoremap <silent> <leader>gi :Git add -p %<CR>
-nnoremap <silent> <leader>gg :diffget
-nnoremap <silent> <leader>gp [c
-nnoremap <silent> <leader>gn ]c
-
-" ----for goldenview
-nmap <silent> <C-G> <Plug>GoldenViewSplit
-nmap <silent> <C-Up>   <Plug>GoldenViewSwitchMain
-nmap <silent> <C-Down> <Plug>GoldenViewSwitchToggle
-nmap <silent> <C-Right>  <Plug>GoldenViewNext
-nmap <silent> <C-Left>  <Plug>GoldenViewPrevious
-
-" ----toggle between terminal and vim mouse
-map <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
+" toggle between terminal and vim mouse
+map <silent><F12>  :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 
-" ----abbreviations for common mistyped commands
-cnoreabbrev W w
+" abbreviations for common mistyped commands
+cnoreabbrev W  w
 cnoreabbrev Wq wq
 cnoreabbrev WQ wq
 cnoreabbrev wQ wq
-cnoreabbrev Q q
+cnoreabbrev Q  q
 
-" ----autocommands
-" ----When editing a file, always jump to the last known cursor position.
-" -----Don't do it for commit messages, when the position is invalid, or when
-" ------inside an event handler.
+" ----Autocommands
+" When editing a file, always jump to the last known cursor position.
+" Don't do it for commit messages, when the position is invalid, or when
+" inside an event handler.
 autocmd BufReadPost *
             \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
             \   exe "normal g`\"" |
             \ endif
 
-" ----Write file on losing focus
+" Write file on losing focus
 au FocusLost * :wa
 
-" ----source file if the file being saved is .vimrc
-au BufWritePost .vimrc source $MYVIMRC
+" source file if the file being saved is .vimrc
+au BufWritePost vimrc source $MYVIMRC
 
-" ----for proper less support
+" for proper less support
 autocmd BufNewFile,BufRead *.less set filetype=less
 autocmd FileType less set omnifunc=csscomplete#CompleteCSS
 
-" ----toggle relativenumber according to mode
+" toggle relativenumber according to mode
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 
-" ----for airline 
+" for airline 
 autocmd VimEnter * call AirLineInit()
 
-" ----Always on - rainbow paranthesis
+" Always on - rainbow paranthesis
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-" ----plugin specific settings
+" ----Plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
-" ----for syntastic
+" for syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -273,16 +273,16 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming em
 let g:syntastic_csslint_options="--warnings=none"
 let g:syntastic_javascript_jshint_args = '--config /home/avinash/.jshintrc'
 
-" ----for goldenview
+" for goldenview
 let g:goldenview__enable_default_mapping = 0
 
-" ----for ycm
+" for ycm
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 let g:ycm_filetype_specific_completion_to_disable = { 'javascript': 1 }
 
-" ----for airline
+" for airline
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#enabled = 1
@@ -291,10 +291,10 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 let g:airline#extensions#wordcount#enabled = 1
 
-" ----for ag
+" for ag
 let g:ag_working_path_mode="r"
 
-" ----for Nerdtree
+" for Nerdtree
 let g:NERDTreeQuitOnOpen=1
 let g:nerdtree_tabs_open_on_gui_startup=0
 let NERDTreeMouseMode=2
@@ -302,7 +302,7 @@ let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 let NERDTreeIgnore = ['\.js.map$']
 
-" ----this configures CtrlP to use git or silver searcher for autocompletion
+" this configures CtrlP to use git or silver searcher for autocompletion
 let g:ctrlp_use_caching = 0
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_show_hidden = 1
@@ -322,23 +322,19 @@ else
                 \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
                 \ }
 endif
-let g:ctrlp_map = '<c-p>'       " map CtrlP to <c-p>
-let g:ctrlp_cmd = 'CtrlP'
 
-" ----for gitgutter
+" for gitgutter
 let g:gitgutter_max_signs = 200
 let g:gitgutter_highlight_lines = 1
 let g:gitgutter_enabled = 1
 
-" ----for Limelight
-" Number of preceding/following paragraphs to include (default: 0)
+" for limelight
 let g:limelight_paragraph_span = 2
 let g:limelight_bop = '^\s'
 let g:limelight_eop = '\ze\n^\s'
 let g:limelight_conceal_ctermfg = 240
 
 " ----All the function definitions
-
 function! RelativeNumberToggle()
     if(&relativenumber == 1)
         set number
