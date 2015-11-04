@@ -23,7 +23,6 @@ Plugin 'godlygeek/tabular'
 Plugin 'sessionman.vim'
 Plugin 'sudo.vim'
 Plugin 'bling/vim-bufferline'
-Plugin 'zhaocai/GoldenView.Vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'gorkunov/smartpairs.vim'
@@ -189,7 +188,6 @@ nnoremap <leader>p  <Plug>yankstack_substitute_older_paste
 nnoremap <leader>P  <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>qq :q<cr>
 nnoremap <leader>qa :qa<cr>
-nnoremap <leader>r  :call RelativeNumberToggle()<cr>
 nnoremap <leader>s  <esc>:SyntasticToggleMode<cr>
 nnoremap <leader>t  <esc>:GitGutterToggle<CR>
 nnoremap <leader>u  <esc>:GundoToggle<CR>
@@ -202,12 +200,7 @@ nnoremap <leader><leader>q :wq<cr>
 map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<cr>
 
-" for goldenview
-nmap <C-Up>    <Plug>GoldenViewSwitchMain
-nmap <C-Down>  <Plug>GoldenViewSwitchToggle
-nmap <C-Right> <Plug>GoldenViewNext
-nmap <C-Left>  <Plug>GoldenViewPrevious
-nmap <C-G>     <Plug>GoldenViewSplit
+" Ctrlp mapping
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
@@ -278,7 +271,6 @@ let g:goldenview__enable_default_mapping = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
-let g:ycm_filetype_specific_completion_to_disable = { 'javascript': 1 }
 
 " for airline
 let g:airline#extensions#bufferline#enabled = 1
@@ -326,21 +318,7 @@ let g:gitgutter_max_signs = 200
 let g:gitgutter_highlight_lines = 1
 let g:gitgutter_enabled = 1
 
-" for limelight
-let g:limelight_paragraph_span = 2
-let g:limelight_bop = '^\s'
-let g:limelight_eop = '\ze\n^\s'
-let g:limelight_conceal_ctermfg = 240
-
 " ----All the function definitions
-function! RelativeNumberToggle()
-    if(&relativenumber == 1)
-        set number
-    else
-        set relativenumber
-    endif
-endfunc
-
 function! ShowMouseMode()
     if (&mouse == 'a')
         set number
