@@ -38,10 +38,8 @@ Plugin 'othree/html5.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'gregsexton/MatchTag'
 Plugin 'docunext/closetag.vim'
-Plugin 'majutsushi/tagbar'
 
 "js related
-Plugin 'pangloss/vim-javascript'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'elzr/vim-json'
