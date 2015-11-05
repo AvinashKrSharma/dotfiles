@@ -1,11 +1,8 @@
-" ----Vundle plugin management
-" set rtp+=~/.vim/bundle/Vundle.vim
+" ----vim-plug plugin management
 
-call plug#begin('~/.vim/autoload')
+call plug#begin('~/.vim/bundle')
 
-" call vundle#begin()
 " general plugins
-" Plugin 'gmarik/Vundle.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic', {'on': 'SyntasticToggleMode'}
@@ -58,23 +55,23 @@ Plug 'groenewege/vim-less', {'for': 'less'}
 call plug#end()
 
 " ----important
-" set nocompatible
+set nocompatible
 runtime macros/matchit.vim
 
 " ----moving around,searching and patterns
 set path=$PWD/**
-" set incsearch
+set incsearch
 set ignorecase
 set smartcase
 
 " ----tags
-" set tags=./tags;/,~/.vimtags
+set tags=./tags;/,~/.vimtags
 
 " ----displaying text ----
 set scrolloff=3
 set linebreak
 set fillchars+=stl:\ ,stlnc:\
-" set list lcs=tab:\|\
+set list lcs=tab:\|\
 set nolist
 set relativenumber
 
@@ -82,11 +79,11 @@ set relativenumber
 set background=dark
 filetype on
 syntax enable
-" set hlsearch
+set hlsearch
 set cursorline
 
 " ----multiple windows
-" set laststatus=2        " always show airline status bar
+set laststatus=2        " always show airline status bar
 set hidden
 set splitbelow
 set splitright
@@ -95,14 +92,14 @@ set splitright
 set title
 
 " ----using the mouse
-" set mouse=a
+set mouse=a
 
 " ----messages and info
 set showcmd
 
 " ----editing text
 set modifiable
-" set backspace=indent,eol,start
+set backspace=indent,eol,start
 set completeopt=menuone,preview
 set omnifunc=syntaxcomplete#Complete
 set showmatch
@@ -110,11 +107,11 @@ set showmatch
 " ----tabs and indenting
 set tabstop=4
 set shiftwidth=4
-" set smarttab
+set smarttab
 set softtabstop=4
 set shiftround
 set expandtab
-" set autoindent
+set autoindent
 set smartindent
 
 " ----folding
@@ -124,23 +121,23 @@ set foldmethod=indent
 " ----reading and writing files
 " set backup
 " set autowrite
-" set autoread
+set autoread
 
 " ----the swap file
 " set swapfile
 
 " ----command line editing
-" set history=1000
+set history=1000
 set wildmode=list:longest,full
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
-" set wildmenu
+set wildmenu
 set undofile
 
 " ----executing external commands
 set formatprg=par\ -w50
 
 " ----multi-byte characters
-" set encoding=utf-8
+set encoding=utf-8
 set fileencoding=utf-8
 
 " ----various
