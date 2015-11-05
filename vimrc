@@ -5,7 +5,7 @@ call plug#begin('~/.vim/bundle')
 " general plugins
 Plug 'Valloric/YouCompleteMe'
 Plug 'kien/ctrlp.vim'
-Plug 'scrooloose/syntastic', {'on': 'SyntasticToggleMode'}
+Plug 'scrooloose/syntastic'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
