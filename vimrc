@@ -1,71 +1,74 @@
 " ----Vundle plugin management
-set rtp+=~/.vim/bundle/Vundle.vim
+" set rtp+=~/.vim/bundle/Vundle.vim
 
-call vundle#begin()
+call plug#begin('~/.vim/autoload')
+
+" call vundle#begin()
 " general plugins
-Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-surround'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'sjl/gundo.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'rking/ag.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'sessionman.vim'
-Plugin 'sudo.vim'
-Plugin 'bling/vim-bufferline'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'gorkunov/smartpairs.vim'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'maxbrunsfeld/vim-yankstack'
-Bundle 'sickill/vim-pasta'
+" Plugin 'gmarik/Vundle.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/syntastic', {'on': 'SyntasticToggleMode'}
+Plug 'bling/vim-airline'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-unimpaired'
+Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
+Plug 'sjl/gundo.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'rking/ag.vim', {'on': 'Ag'}
+Plug 'godlygeek/tabular', {'on': 'Tabularize'}
+Plug 'sessionman.vim'
+Plug 'sudo.vim'
+Plug 'bling/vim-bufferline'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'gorkunov/smartpairs.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
+Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'sickill/vim-pasta'
 
 "html related
-Plugin 'msanders/snipmate.vim'
-Plugin 'othree/html5.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'gregsexton/MatchTag'
-Plugin 'docunext/closetag.vim'
+Plug 'msanders/snipmate.vim'
+Plug 'othree/html5.vim', {'for': 'html'}
+Plug 'mattn/emmet-vim', {'for': 'html'}
+Plug 'gregsexton/MatchTag', {'for': 'html'}
+Plug 'docunext/closetag.vim', {'for': 'html'}
 
 "js related
-Plugin 'marijnh/tern_for_vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'elzr/vim-json'
-Plugin 'moll/vim-node'
-Plugin 'mxw/vim-jsx'
-Plugin 'burnettk/vim-angular'
-Plugin 'matthewsimo/angular-vim-snippets'
+Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
+Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
+Plug 'elzr/vim-json', {'for': 'javascript'}
+Plug 'moll/vim-node', {'for': 'javascript'}
+Plug 'mxw/vim-jsx', {'for': 'javascript'}
+Plug 'burnettk/vim-angular', {'for': 'javascript'}
+Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
 
 "css related
-Plugin 'ap/vim-css-color'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'groenewege/vim-less'
+Plug 'ap/vim-css-color', {'for': 'css'}
+Plug 'cakebaker/scss-syntax.vim', {'for': 'scss'}
+Plug 'groenewege/vim-less', {'for': 'less'}
 
-call vundle#end()
+" call vundle#end()
+call plug#end()
 
 " ----important
-set nocompatible
+" set nocompatible
 runtime macros/matchit.vim
 
 " ----moving around,searching and patterns
 set path=$PWD/**
-set incsearch
+" set incsearch
 set ignorecase
 set smartcase
 
 " ----tags
-set tags=./tags;/,~/.vimtags
+" set tags=./tags;/,~/.vimtags
 
 " ----displaying text ----
 set scrolloff=3
@@ -79,11 +82,11 @@ set relativenumber
 set background=dark
 filetype on
 syntax enable
-set hlsearch
+" set hlsearch
 set cursorline
 
 " ----multiple windows
-set laststatus=2        " always show airline status bar
+" set laststatus=2        " always show airline status bar
 set hidden
 set splitbelow
 set splitright
@@ -92,14 +95,14 @@ set splitright
 set title
 
 " ----using the mouse
-set mouse=a
+" set mouse=a
 
 " ----messages and info
 set showcmd
 
 " ----editing text
 set modifiable
-set backspace=indent,eol,start
+" set backspace=indent,eol,start
 set completeopt=menuone,preview
 set omnifunc=syntaxcomplete#Complete
 set showmatch
@@ -107,11 +110,11 @@ set showmatch
 " ----tabs and indenting
 set tabstop=4
 set shiftwidth=4
-set smarttab
+" set smarttab
 set softtabstop=4
 set shiftround
 set expandtab
-set autoindent
+" set autoindent
 set smartindent
 
 " ----folding
@@ -121,23 +124,23 @@ set foldmethod=indent
 " ----reading and writing files
 " set backup
 " set autowrite
-set autoread
+" set autoread
 
 " ----the swap file
 " set swapfile
 
 " ----command line editing
-set history=1000
+" set history=1000
 set wildmode=list:longest,full
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
-set wildmenu
+" set wildmenu
 set undofile
 
 " ----executing external commands
 set formatprg=par\ -w50
 
 " ----multi-byte characters
-set encoding=utf-8
+" set encoding=utf-8
 set fileencoding=utf-8
 
 " ----various
