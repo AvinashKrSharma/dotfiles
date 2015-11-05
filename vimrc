@@ -161,12 +161,12 @@ endif
 
 " ----Mappings
 " leader key mappings
-nnoremap <leader>a  ggVG
-nnoremap <leader>b  <c-^>
-nnoremap <leader>c  <c-_><c-_>
-nnoremap <leader>d  <esc>:bd<cr>
-nnoremap <leader>dd <esc>:%bd<cr>
-nnoremap <leader>f  <esc>:Autoformat<CR>
+nnoremap   <leader>a    ggVG
+nnoremap   <leader>b    <c-^>
+map        <leader>c    <c-_><c-_>
+nnoremap   <leader>d    <esc>:bd<cr>
+nnoremap   <leader>dd   <esc>:%bd<cr>
+nnoremap   <leader>f    <esc>:Autoformat<CR>
 
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
