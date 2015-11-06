@@ -1,9 +1,15 @@
-" ----vim-plug plugin management
+" Download vim-plug if already not present
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 
+" ----Vim-plug plugin management
 call plug#begin('~/.vim/bundle')
 
 " general plugins
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
 Plug 'bling/vim-airline'
@@ -71,8 +77,8 @@ set tags=./tags;/,~/.vimtags
 set scrolloff=3
 set linebreak
 set fillchars+=stl:\ ,stlnc:\
-set list lcs=tab:\|\
 set nolist
+set number
 set relativenumber
 
 " ----syntax, highlighting and spelling
@@ -81,6 +87,7 @@ filetype on
 syntax enable
 set hlsearch
 set cursorline
+set colorcolumn=80
 
 " ----multiple windows
 set laststatus=2        " always show airline status bar
@@ -119,8 +126,8 @@ set foldtext=MyFoldText()
 set foldmethod=indent
 
 " ----reading and writing files
-" set backup
-" set autowrite
+set backup
+set autowrite
 set autoread
 
 " ----the swap file
@@ -208,7 +215,7 @@ let g:ctrlp_cmd = 'CtrlP'
 map <silent><F12>  :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 
-" abbreviations for common mistyped commands
+" ----Abbreviations for common mistyped commands
 cnoreabbrev W  w
 cnoreabbrev Wq wq
 cnoreabbrev WQ wq
@@ -224,9 +231,6 @@ autocmd BufReadPost *
             \   exe "normal g`\"" |
             \ endif
 
-" Write file on losing focus
-au FocusLost * :wa
-
 " source file if the file being saved is .vimrc
 au BufWritePost vimrc source $MYVIMRC
 
@@ -235,9 +239,10 @@ autocmd BufNewFile,BufRead *.less set filetype=less
 autocmd FileType less set omnifunc=csscomplete#CompleteCSS
 
 " toggle relativenumber according to mode
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
+autocmd InsertEnter * set relativenumber!
+autocmd InsertLeave * set relativenumber
 
+" set indent style for html files
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 
 " for airline 
@@ -245,9 +250,9 @@ autocmd VimEnter * call AirLineInit()
 
 " Always on - rainbow paranthesis
 au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+au Syntax   * RainbowParenthesesLoadRound
+au Syntax   * RainbowParenthesesLoadSquare
+au Syntax   * RainbowParenthesesLoadBraces
 
 " ----Plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
@@ -263,9 +268,6 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 let g:syntastic_csslint_options="--warnings=none"
 let g:syntastic_javascript_jshint_args = '--config /home/avinash/.jshintrc'
-
-" for goldenview
-let g:goldenview__enable_default_mapping = 0
 
 " for ycm
 let g:ycm_collect_identifiers_from_tags_files = 1
