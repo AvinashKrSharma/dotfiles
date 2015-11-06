@@ -9,6 +9,7 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " general plugins
+Plug 'blueshirts/darcula'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
