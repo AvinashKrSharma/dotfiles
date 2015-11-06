@@ -28,7 +28,7 @@ Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'sessionman.vim'
 Plug 'sudo.vim'
-Plug 'bling/vim-bufferline'
+Plug 'jeetsukumaran/vim-buffergator'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'gorkunov/smartpairs.vim'
@@ -170,7 +170,6 @@ endif
 " ----Mappings
 " leader key mappings
 nnoremap   <leader>a    ggVG
-nnoremap   <leader>b    <c-^>
 map        <leader>c    <c-_><c-_>
 nnoremap   <leader>d    <esc>:bd<cr>
 nnoremap   <leader>dd   <esc>:%bd<cr>
