@@ -13,6 +13,7 @@ Plug 'blueshirts/darcula'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
+Plug 'powerline/fonts'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
@@ -20,8 +21,10 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'osyo-manga/vim-over'
 Plug 'tpope/vim-unimpaired'
 Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'sjl/gundo.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'rking/ag.vim', {'on': 'Ag'}
@@ -43,6 +46,7 @@ Plug 'othree/html5.vim', {'for': 'html'}
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'gregsexton/MatchTag', {'for': 'html'}
 Plug 'docunext/closetag.vim', {'for': 'html'}
+Plug 'spf13/vim-preview'
 
 "js related
 Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
@@ -54,9 +58,9 @@ Plug 'burnettk/vim-angular', {'for': 'javascript'}
 Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
 
 "css related
-Plug 'ap/vim-css-color', {'for': 'css'}
 Plug 'cakebaker/scss-syntax.vim', {'for': 'scss'}
 Plug 'groenewege/vim-less', {'for': 'less'}
+Plug 'gorodinskiy/vim-coloresque'
 
 " call vundle#end()
 call plug#end()
@@ -170,6 +174,7 @@ endif
 " ----Mappings
 " leader key mappings
 nnoremap   <leader>a    ggVG
+nnoremap   <leader>b    :BuffergatorToggle<cr>
 map        <leader>c    <c-_><c-_>
 nnoremap   <leader>d    :bd<cr>
 nnoremap   <leader>dd   :%bd<cr>
@@ -190,14 +195,18 @@ nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i  gg=G''
+nnoremap <leader>m  :GitGutterToggle<CR>
 nnoremap <leader>n  :NERDTreeToggle<CR>
+nnoremap <leader>o  :OverCommandLine<CR>
+
 nnoremap <leader>p  <Plug>yankstack_substitute_older_paste
 nnoremap <leader>P  <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>q  :q<cr>
 nnoremap <leader>s  :SyntasticToggleMode<cr>
-nnoremap <leader>t  :GitGutterToggle<CR>
+nnoremap <leader>t  :BuffergatorTabsToggle<cr>
 nnoremap <leader>u  :GundoToggle<CR>
 nnoremap <leader>v  :tabedit $MYVIMRC<cr>
+nnoremap <leader>w  :IndentGuidesToggle<cr>
 
 nnoremap <leader><leader>  :w<cr>
 
