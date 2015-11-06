@@ -171,9 +171,9 @@ endif
 " leader key mappings
 nnoremap   <leader>a    ggVG
 map        <leader>c    <c-_><c-_>
-nnoremap   <leader>d    <esc>:bd<cr>
-nnoremap   <leader>dd   <esc>:%bd<cr>
-nnoremap   <leader>f    <esc>:Autoformat<CR>
+nnoremap   <leader>d    :bd<cr>
+nnoremap   <leader>dd   :%bd<cr>
+nnoremap   <leader>f    :Autoformat<CR>
 
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
@@ -190,18 +190,16 @@ nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i  gg=G''
-nnoremap <leader>n  <esc>:NERDTreeToggle<CR>
+nnoremap <leader>n  :NERDTreeToggle<CR>
 nnoremap <leader>p  <Plug>yankstack_substitute_older_paste
 nnoremap <leader>P  <Plug>yankstack_substitute_newer_paste
-nnoremap <leader>qq :q<cr>
-nnoremap <leader>qa :qa<cr>
-nnoremap <leader>s  <esc>:SyntasticToggleMode<cr>
-nnoremap <leader>t  <esc>:GitGutterToggle<CR>
-nnoremap <leader>u  <esc>:GundoToggle<CR>
+nnoremap <leader>q  :q<cr>
+nnoremap <leader>s  :SyntasticToggleMode<cr>
+nnoremap <leader>t  :GitGutterToggle<CR>
+nnoremap <leader>u  :GundoToggle<CR>
 nnoremap <leader>v  :tabedit $MYVIMRC<cr>
 
 nnoremap <leader><leader>  :w<cr>
-nnoremap <leader><leader>q :wq<cr>
 
 " general mappings
 map <F7> :setlocal spell! spell?<CR>
