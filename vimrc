@@ -13,7 +13,7 @@ Plug 'blueshirts/darcula'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
-Plug 'powerline/fonts'
+Plug 'powerline/fonts', {'do': './install.sh'}
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
