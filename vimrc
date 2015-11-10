@@ -5,6 +5,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+function! PatchPowerline()
+    !wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf
+    !mkdir -p ~/.fonts/ && mv PowerlineSymbols.otf ~/.fonts/
+    !fc-cache -vf ~/.fonts
+    !mkdir -p ~/.config/fontconfig/conf.d/ && mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
+endfunction
+
 " ----Vim-plug plugin management
 call plug#begin('~/.vim/bundle')
 
@@ -13,7 +20,7 @@ Plug 'blueshirts/darcula'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
-Plug 'powerline/fonts', {'do': './install.sh'}
+Plug 'powerline/fonts', {'do': function('PatchPowerline')}
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
@@ -393,3 +400,4 @@ function! MyFoldText()
     let sub = strpart( sub, 0, winwidth(0) - strlen( info ) - num_w - fold_w - 1 )
     return sub . info
 endfunction
+
