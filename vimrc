@@ -331,8 +331,10 @@ let g:gitgutter_enabled = 1
 function! ShowMouseMode()
     if (&mouse == 'a')
         set number
+        set relativenumber
         echo "mouse-vim"
     else
+        set relativenumber!
         set nonumber
         echo "mouse-xterm"
     endif
