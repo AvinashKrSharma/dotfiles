@@ -17,6 +17,8 @@ call plug#begin('~/.vim/bundle')
 
 " general plugins
 Plug 'flazz/vim-colorschemes'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
@@ -165,7 +167,7 @@ set gdefault
 " ----others
 let mapleader = "\<Space>"
 set t_Co=256
-colorscheme vividchalk
+colorscheme wombat256mod
 filetype plugin indent on
 
 " ----Some more settings
