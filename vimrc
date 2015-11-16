@@ -16,7 +16,7 @@ endfunction
 call plug#begin('~/.vim/bundle')
 
 " general plugins
-Plug 'blueshirts/darcula'
+Plug 'flazz/vim-colorschemes'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
@@ -165,7 +165,7 @@ set gdefault
 " ----others
 let mapleader = "\<Space>"
 set t_Co=256
-colorscheme darcula
+colorscheme codeschool
 filetype plugin indent on
 
 " ----Some more settings
@@ -181,10 +181,10 @@ endif
 " ----Mappings
 " leader key mappings
 nnoremap   <leader>a    ggVG
-nnoremap   <leader>b    :BuffergatorToggle<cr>
+nnoremap   <leader>b    :BuffergatorToggle<CR>
 map        <leader>c    <c-_><c-_>
-nnoremap   <leader>d    :bd<cr>
-nnoremap   <leader>dd   :%bd<cr>
+nnoremap   <leader>d    :bd<CR>
+nnoremap   <leader>dd   :%bd<CR>
 nnoremap   <leader>f    :Autoformat<CR>
 
 nnoremap <leader>gb :Gblame<CR>
@@ -208,18 +208,18 @@ nnoremap <leader>o  :OverCommandLine<CR>
 
 nnoremap <leader>p  <Plug>yankstack_substitute_older_paste
 nnoremap <leader>P  <Plug>yankstack_substitute_newer_paste
-nnoremap <leader>q  :q<cr>
-nnoremap <leader>s  :SyntasticToggleMode<cr>
-nnoremap <leader>t  :BuffergatorTabsToggle<cr>
+nnoremap <leader>q  :q<CR>
+nnoremap <leader>s  :SyntasticToggleMode<CR>
+nnoremap <leader>t  :BuffergatorTabsToggle<CR>
 nnoremap <leader>u  :GundoToggle<CR>
-nnoremap <leader>v  :tabedit $MYVIMRC<cr>
-nnoremap <leader>w  :IndentGuidesToggle<cr>
+nnoremap <leader>v  :tabedit $MYVIMRC<CR>
+nnoremap <leader>w  :IndentGuidesToggle<CR>
 
-nnoremap <leader><leader>  :w<cr>
+nnoremap <leader><leader>  :w<CR>
 
 " general mappings
 map <F7> :setlocal spell! spell?<CR>
-nnoremap \ :echo &mod<cr>
+nnoremap \ :echo &mod<CR>
 
 " Ctrlp mapping
 let g:ctrlp_map = '<c-p>'
@@ -235,6 +235,9 @@ cnoreabbrev Wq wq
 cnoreabbrev WQ wq
 cnoreabbrev wQ wq
 cnoreabbrev Q  q
+cnoreabbrev d  bd
+cnoreabbrev D  %bd
+
 
 " ----Autocommands
 " When editing a file, always jump to the last known cursor position.
@@ -301,7 +304,6 @@ let g:airline#extensions#wordcount#enabled = 1
 let g:ag_working_path_mode="r"
 
 " for Nerdtree
-let g:NERDTreeQuitOnOpen=1
 let g:nerdtree_tabs_open_on_gui_startup=0
 let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
