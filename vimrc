@@ -165,7 +165,7 @@ set gdefault
 " ----others
 let mapleader = "\<Space>"
 set t_Co=256
-colorscheme codeschool
+colorscheme vividchalk
 filetype plugin indent on
 
 " ----Some more settings
@@ -220,6 +220,7 @@ nnoremap <leader><leader>  :w<CR>
 " general mappings
 map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
+nnoremap ; "0p
 
 " Ctrlp mapping
 let g:ctrlp_map = '<c-p>'
