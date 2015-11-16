@@ -57,7 +57,7 @@ Plug 'spf13/vim-preview'
 
 "js related
 Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
-Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
+Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'elzr/vim-json', {'for': 'javascript'}
 Plug 'moll/vim-node', {'for': 'javascript'}
 Plug 'mxw/vim-jsx', {'for': 'javascript'}
