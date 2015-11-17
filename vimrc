@@ -1,10 +1,12 @@
-" Download vim-plug if already not present
+" ----Plugin related stuff
+" download vim-plug if already not present
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+" function to install Powerline fonts
 function! PatchPowerline()
     !wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf
     !mkdir -p ~/.fonts/ && mv PowerlineSymbols.otf ~/.fonts/
@@ -12,7 +14,7 @@ function! PatchPowerline()
     !mkdir -p ~/.config/fontconfig/conf.d/ && mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 endfunction
 
-" ----Vim-plug plugin management
+" vim-plug plugin management
 call plug#begin('~/.vim/bundle')
 
 " general plugins
@@ -182,12 +184,12 @@ endif
 
 " ----Mappings
 " leader key mappings
-nnoremap   <leader>a    ggVG
-nnoremap   <leader>b    :BuffergatorToggle<CR>
-map        <leader>c    <c-_><c-_>
-nnoremap   <leader>d    :bd<CR>
-nnoremap   <leader>dd   :%bd<CR>
-nnoremap   <leader>f    :Autoformat<CR>
+nnoremap <leader>a  ggVG
+nnoremap <leader>b  :BuffergatorToggle<CR>
+map      <leader>c  <c-_><c-_>
+nnoremap <leader>d  :bd<CR>
+nnoremap <leader>dd :%bd<CR>
+nnoremap <leader>f  :Autoformat<CR>
 
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
@@ -203,21 +205,21 @@ nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
-nnoremap <leader>i  gg=G''
-nnoremap <leader>m  :GitGutterToggle<CR>
-nnoremap <leader>n  :NERDTreeToggle<CR>
-nnoremap <leader>o  :OverCommandLine<CR>
+nnoremap <leader>i gg=G''
+nnoremap <leader>m :GitGutterToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>o :OverCommandLine<CR>
 
-nnoremap <leader>p  <Plug>yankstack_substitute_older_paste
-nnoremap <leader>P  <Plug>yankstack_substitute_newer_paste
-nnoremap <leader>q  :q<CR>
-nnoremap <leader>s  :SyntasticToggleMode<CR>
-nnoremap <leader>t  :BuffergatorTabsToggle<CR>
-nnoremap <leader>u  :GundoToggle<CR>
-nnoremap <leader>v  :tabedit $MYVIMRC<CR>
-nnoremap <leader>w  :IndentGuidesToggle<CR>
+nnoremap <leader>p <Plug>yankstack_substitute_older_paste
+nnoremap <leader>P <Plug>yankstack_substitute_newer_paste
+nnoremap <leader>q :q<CR>
+nnoremap <leader>s :SyntasticToggleMode<CR>
+nnoremap <leader>t :BuffergatorTabsToggle<CR>
+nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>v :tabedit $MYVIMRC<CR>
+nnoremap <leader>w :IndentGuidesToggle<CR>
 
-nnoremap <leader><leader>  :w<CR>
+nnoremap <leader><leader> :w<CR>
 
 " general mappings
 map <F7> :setlocal spell! spell?<CR>
