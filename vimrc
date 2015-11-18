@@ -226,6 +226,9 @@ map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
 nnoremap ; "0p
 
+nnoremap zr zR
+nnoremap zs zr
+
 " Ctrlp mapping
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -242,7 +245,6 @@ cnoreabbrev wQ wq
 cnoreabbrev Q  q
 cnoreabbrev d  bd
 cnoreabbrev D  %bd
-
 
 " ----Autocommands
 " When editing a file, always jump to the last known cursor position.
