@@ -6,14 +6,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-" function to install Powerline fonts
-function! PatchPowerline()
-    !wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf
-    !mkdir -p ~/.fonts/ && mv PowerlineSymbols.otf ~/.fonts/
-    !fc-cache -vf ~/.fonts
-    !mkdir -p ~/.config/fontconfig/conf.d/ && mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
-endfunction
-
 " vim-plug plugin management
 call plug#begin('~/.vim/bundle')
 
@@ -24,7 +16,6 @@ Plug 'xolox/vim-colorscheme-switcher'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
-Plug 'powerline/fonts', {'do': function('PatchPowerline')}
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
@@ -356,23 +347,22 @@ function! ShowMouseMode()
 endfunction
 
 function! AirLineInit()
-    let g:airline_powerline_fonts = 1
     let g:airline_detect_paste=1
     let g:airline_detect_modified=1
     let g:airline_symbols.branch = '⎇'
     let g:airline_symbols.linenr = '␤'
     let g:airline_symbols.readonly = ''
     let g:airline_symbols.paste = 'ρ'
-    let g:airline_left_sep='›'
-    let g:airline_right_sep='‹'
-    let g:airline_right_sep = ''
-    let g:airline_left_sep = ''
-    let g:airline_section_a = airline#section#create(['mode', '', 'branch'])
-    let g:airline_section_b = airline#section#create(['hunks', '', ' %f'])
-    let g:airline_section_c = airline#section#create(['filetype'])
+    let g:airline_left_sep=' '
+    let g:airline_right_sep=' '
+    let g:airline_right_sep = ' '
+    let g:airline_left_sep = ' '
+    let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
+    let g:airline_section_b = airline#section#create(['%f', ' - ', '(%{getcwd()})', 'hunks'])
+    let g:airline_section_c = airline#section#create(['type:', 'filetype'])
     let g:airline_section_x = airline#section#create(['%P'])
-    let g:airline_section_y = airline#section#create(['%B'])
-    let g:airline_section_z = airline#section#create_right(['%l/%L  %c'])
+    let g:airline_section_y = airline#section#create(['%c'])
+    let g:airline_section_z = airline#section#create_right(['%l/%L'])
 endfunction
 
 function! MyFoldText()
