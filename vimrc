@@ -169,7 +169,7 @@ set gdefault
 " ----others
 let mapleader = "\<Space>"
 set t_Co=256
-colorscheme wombat256mod
+colorscheme seti
 filetype plugin indent on
 
 " ----Some more settings
@@ -188,7 +188,7 @@ nnoremap <leader>a  ggVG
 nnoremap <leader>b  :BuffergatorToggle<CR>
 map      <leader>c  <c-_><c-_>
 nnoremap <leader>d  :bd<CR>
-nnoremap <leader>dd :%bd<CR>
+nnoremap <leader>e  :IndentGuidesToggle<CR>
 nnoremap <leader>f  :Autoformat<CR>
 
 nnoremap <leader>gb :Gblame<CR>
@@ -202,22 +202,21 @@ nnoremap <leader>gn ]c
 nnoremap <leader>gp [c
 nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gt :GitGutterToggle<CR>
 nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i gg=G''
-nnoremap <leader>m :GitGutterToggle<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>o :OverCommandLine<CR>
-
 nnoremap <leader>p <Plug>yankstack_substitute_older_paste
 nnoremap <leader>P <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>q :q<CR>
+nnoremap <leader>r :source $MYVIMRC<CR>
 nnoremap <leader>s :SyntasticToggleMode<CR>
 nnoremap <leader>t :BuffergatorTabsToggle<CR>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
-nnoremap <leader>w :IndentGuidesToggle<CR>
 
 nnoremap <leader><leader> :w<CR>
 
@@ -225,6 +224,7 @@ nnoremap <leader><leader> :w<CR>
 map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
 nnoremap ; "0p
+nnoremap : "0P
 
 nnoremap zr zR
 nnoremap zs zr
@@ -234,7 +234,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " toggle between terminal and vim mouse
-map <silent><F12>  :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
+map  <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 
 " ----Abbreviations for common mistyped commands
