@@ -224,7 +224,6 @@ nnoremap <leader><leader> :w<CR>
 map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
 nnoremap ; "0p
-nnoremap : "0P
 
 nnoremap zr zR
 nnoremap zs zr
