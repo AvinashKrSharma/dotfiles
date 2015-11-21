@@ -26,7 +26,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'osyo-manga/vim-over'
 Plug 'tpope/vim-unimpaired'
 Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesToggle'}
 Plug 'sjl/gundo.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'rking/ag.vim', {'on': 'Ag'}
@@ -160,7 +160,7 @@ set gdefault
 " ----others
 let mapleader = "\<Space>"
 set t_Co=256
-colorscheme seti
+colorscheme tir_black
 filetype plugin indent on
 
 " ----Some more settings
@@ -332,6 +332,10 @@ endif
 let g:gitgutter_max_signs = 200
 let g:gitgutter_highlight_lines = 1
 let g:gitgutter_enabled = 1
+
+" for indentguides
+let g:indent_guides_strat_level = 2
+let g:indent_guides_guide_size = 1
 
 " ----All the function definitions
 function! ShowMouseMode()
