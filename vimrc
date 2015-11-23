@@ -219,6 +219,10 @@ nnoremap ; "0p
 nnoremap zr zR
 nnoremap zs zr
 
+nnoremap <C-j> <C-f>
+nnoremap <C-k> <C-b>
+
+
 " Ctrlp mapping
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -363,7 +367,7 @@ function! AirLineInit()
     let g:airline_left_sep = ' '
     let g:airline_section_a = airline#section#create(['mode'])
     let g:airline_section_b = airline#section#create(['branch', 'hunks'])
-    let g:airline_section_c = airline#section#create(['%f', ' - ', '(%{getcwd()})'])
+    let g:airline_section_c = airline#section#create(['%f'])
     let g:airline_section_x = airline#section#create(['type:', 'filetype'])
     let g:airline_section_y = airline#section#create(['%L'])
     let g:airline_section_z = airline#section#create_right(['%l/%c'])
