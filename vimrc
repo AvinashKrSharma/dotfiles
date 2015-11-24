@@ -219,8 +219,10 @@ nnoremap ; "0p
 nnoremap zr zR
 nnoremap zs zr
 
-nnoremap <C-j> <C-f>
-nnoremap <C-k> <C-b>
+nnoremap <C-h> <C-u>
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-f>
+nnoremap <C-l> <C-b>
 
 
 " Ctrlp mapping
@@ -338,7 +340,7 @@ let g:gitgutter_highlight_lines = 1
 let g:gitgutter_enabled = 1
 
 " for indentguides
-let g:indent_guides_strat_level = 2
+let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 
 " ----All the function definitions
