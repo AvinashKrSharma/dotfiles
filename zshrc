@@ -29,3 +29,8 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 source ~/.aliases
+
+xmodmap -e "clear Lock"
+xmodmap -e "keycode 9 = Caps_Lock"
+xmodmap -e "keycode 66 = Escape"
+xmodmap -e "add Lock = Caps_Lock"
