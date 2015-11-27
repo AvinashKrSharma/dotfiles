@@ -209,7 +209,7 @@ nnoremap <leader>t :BuffergatorTabsToggle<CR>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 
-nnoremap <leader><leader> :w<CR>
+nnoremap <leader><leader> :update<CR>
 
 " general mappings
 map <F7> :setlocal spell! spell?<CR>
