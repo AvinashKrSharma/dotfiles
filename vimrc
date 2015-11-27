@@ -93,6 +93,7 @@ set background=dark
 filetype on
 syntax enable
 set hlsearch
+set cursorcolumn
 set cursorline
 set colorcolumn=80
 
