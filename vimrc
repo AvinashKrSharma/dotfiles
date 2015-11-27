@@ -64,7 +64,6 @@ Plug 'cakebaker/scss-syntax.vim', {'for': 'scss'}
 Plug 'groenewege/vim-less', {'for': 'less'}
 Plug 'gorodinskiy/vim-coloresque'
 
-" call vundle#end()
 call plug#end()
 
 " ----important
@@ -168,12 +167,6 @@ filetype plugin indent on
 " highlight spell errors
 hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
 
-" make tags placed in .git/tags file available in all levels of a repository
-let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
-if gitroot != ''
-    let &tags = &tags . ',' . gitroot . '/.git/tags'
-endif
-
 " ----Mappings
 " leader key mappings
 nnoremap <leader>a  ggVG
@@ -217,9 +210,11 @@ map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
 nnoremap ; "0p
 
+" folding related mappings
 nnoremap zr zR
 nnoremap zs zr
 
+" mappings for page up/down, half/full
 nnoremap <C-h> <C-u>
 nnoremap <C-j> <C-d>
 nnoremap <C-k> <C-f>
