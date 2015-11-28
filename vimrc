@@ -6,65 +6,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-" vim-plug plugin management
-call plug#begin('~/.vim/bundle')
-
-" general plugins
-Plug 'flazz/vim-colorschemes'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-Plug 'kien/ctrlp.vim'
-Plug 'scrooloose/syntastic'
-Plug 'bling/vim-airline'
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-surround'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'osyo-manga/vim-over'
-Plug 'tpope/vim-unimpaired'
-Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
-Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesToggle'}
-Plug 'sjl/gundo.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'rking/ag.vim', {'on': 'Ag'}
-Plug 'godlygeek/tabular', {'on': 'Tabularize'}
-Plug 'sessionman.vim'
-Plug 'sudo.vim'
-Plug 'jeetsukumaran/vim-buffergator'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'gorkunov/smartpairs.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
-Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'sickill/vim-pasta'
-
-"html related
-Plug 'msanders/snipmate.vim'
-Plug 'othree/html5.vim', {'for': 'html'}
-Plug 'mattn/emmet-vim', {'for': 'html'}
-Plug 'gregsexton/MatchTag', {'for': 'html'}
-Plug 'docunext/closetag.vim', {'for': 'html'}
-Plug 'spf13/vim-preview'
-
-"js related
-Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'elzr/vim-json', {'for': 'javascript'}
-Plug 'moll/vim-node', {'for': 'javascript'}
-Plug 'mxw/vim-jsx', {'for': 'javascript'}
-Plug 'burnettk/vim-angular', {'for': 'javascript'}
-Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
-
-"css related
-Plug 'cakebaker/scss-syntax.vim', {'for': 'scss'}
-Plug 'groenewege/vim-less', {'for': 'less'}
-Plug 'gorodinskiy/vim-coloresque'
-
-call plug#end()
 
 " ----important
 set nocompatible
@@ -285,6 +226,14 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming em
 let g:syntastic_csslint_options="--warnings=none"
 let g:syntastic_javascript_jshint_args = '--config /home/avinash/.jshintrc'
 
+" for ctrlspace
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
+if executable("ag")
+    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+endif
+
 " for ycm
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
@@ -308,6 +257,10 @@ let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 let NERDTreeIgnore = ['\.js.map$']
+
+" for snipmate
+let g:snips_trigger_key = '<c-tab>'
+let g:snips_trigger_key_backwards = '<c-s-tab>'
 
 " this configures CtrlP to use git or silver searcher for autocompletion
 let g:ctrlp_use_caching = 0
@@ -353,18 +306,17 @@ function! ShowMouseMode()
 endfunction
 
 function! AirLineInit()
+    let g:airline_exclude_preview = 1
     let g:airline_detect_paste=1
     let g:airline_detect_modified=1
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.linenr = '␤'
+    let g:airline_symbols.branch = '⎇ '
     let g:airline_symbols.readonly = ''
-    let g:airline_symbols.paste = 'ρ'
     let g:airline_left_sep=' '
     let g:airline_right_sep=' '
     let g:airline_right_sep = ' '
     let g:airline_left_sep = ' '
-    let g:airline_section_a = airline#section#create(['mode'])
-    let g:airline_section_b = airline#section#create(['branch', 'hunks'])
+   let g:airline_section_a = airline#section#create(['mode'])
+    let g:airline_section_b = airline#section#create(['branch'])
     let g:airline_section_c = airline#section#create(['%f'])
     let g:airline_section_x = airline#section#create(['type:', 'filetype'])
     let g:airline_section_y = airline#section#create(['%c'])
@@ -405,3 +357,65 @@ function! MyFoldText()
     return sub . info
 endfunction
 
+" vim-plug plugin management
+call plug#begin('~/.vim/bundle')
+
+" general plugins
+Plug 'flazz/vim-colorschemes'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'szw/vim-ctrlspace'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'kien/ctrlp.vim'
+Plug 'paradigm/SkyBison'
+Plug 'scrooloose/syntastic'
+Plug 'bling/vim-airline'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'osyo-manga/vim-over'
+Plug 'tpope/vim-unimpaired'
+Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
+Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesToggle'}
+Plug 'sjl/gundo.vim'
+" Plug 'Raimondi/delimitMate'
+Plug 'rking/ag.vim', {'on': 'Ag'}
+Plug 'godlygeek/tabular', {'on': 'Tabularize'}
+Plug 'craigemery/vim-autotag'
+Plug 'sessionman.vim'
+Plug 'sudo.vim'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'gorkunov/smartpairs.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
+Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'sickill/vim-pasta'
+
+"html related
+Plug 'msanders/snipmate.vim'
+Plug 'othree/html5.vim', {'for': 'html'}
+Plug 'mattn/emmet-vim', {'for': 'html'}
+Plug 'gregsexton/MatchTag', {'for': 'html'}
+Plug 'docunext/closetag.vim', {'for': 'html'}
+Plug 'spf13/vim-preview'
+
+"js related
+Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'elzr/vim-json', {'for': 'javascript'}
+Plug 'moll/vim-node', {'for': 'javascript'}
+Plug 'mxw/vim-jsx', {'for': 'javascript'}
+Plug 'burnettk/vim-angular', {'for': 'javascript'}
+Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
+
+"css related
+Plug 'cakebaker/scss-syntax.vim', {'for': 'scss'}
+Plug 'groenewege/vim-less', {'for': 'less'}
+Plug 'gorodinskiy/vim-coloresque'
+
+call plug#end()
