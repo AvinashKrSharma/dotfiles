@@ -1,4 +1,5 @@
-" ----Plugin related stuff
+" ----Install vim-plug, npm, jshint, csslint
+
 " download vim-plug if already not present
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -14,7 +15,10 @@ if !isNpmInstalled
         echo "==============================================="
         echo "Your need to install npm to enable all features"
         echo "==============================================="
-    endif
+endif
+
+" set default node modules install directory
+let s:defaultNodeModules = '~/.vim/node_modules/.bin/'
 
 " Install jshint and csslint for syntastic
 " Path to jshint if it not installed, then use local installation
@@ -56,7 +60,7 @@ Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
 Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesToggle'}
 Plug 'sjl/gundo.vim'
 Plug 'jszakmeister/vim-togglecursor'
-" Plug 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'craigemery/vim-autotag'
@@ -180,7 +184,7 @@ set autowrite
 set autoread
 
 " ----the swap file
-" set swapfile
+set swapfile
 
 " ----command line editing
 set history=1000
@@ -266,8 +270,6 @@ nnoremap ; "0p
 nmap <silent>[ :lprev<cr>    " previous syntastic error
 nmap <silent>] :lnext<cr>    " next syntastic error
 
-
-
 " folding related mappings
 nnoremap zr zR
 nnoremap zs zr
@@ -277,7 +279,6 @@ nnoremap <C-h> <C-u>
 nnoremap <C-j> <C-d>
 nnoremap <C-k> <C-f>
 nnoremap <C-l> <C-b>
-
 
 " Ctrlp mapping
 let g:ctrlp_map = '<c-p>'
@@ -298,16 +299,16 @@ cnoreabbrev D  %bd
 
 " ----Autocommands
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-
 
 if has("autocmd")
     augroup vimrc
     " Delete any previosly defined autocommands
     au!
+    " Enable omni completion.
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
         " Auto reload vim after its changed
         au BufWritePost *.vim source $MYVIMRC | AirlineRefresh
         au BufWritePost .vimrc source $MYVIMRC | AirlineRefresh
