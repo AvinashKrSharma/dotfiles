@@ -6,12 +6,102 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+" Check if npm is installed
+let isNpmInstalled = executable("npm")
+
+" if npm isn't installed, show message to install
+if !isNpmInstalled
+        echo "==============================================="
+        echo "Your need to install npm to enable all features"
+        echo "==============================================="
+    endif
+
+" Install jshint and csslint for syntastic
+" Path to jshint if it not installed, then use local installation
+if isNpmInstalled
+    if !executable(expand(s:defaultNodeModules . 'jshint'))
+        silent ! echo 'Installing jshint' && npm --prefix ~/.vim/ install jshint
+    endif
+    if !executable(expand(s:defaultNodeModules . 'csslint'))
+        silent ! echo 'Installing csslint' && npm --prefix ~/.vim/ install csslint
+    endif
+endif
+
+" Turn off filetype plugins before bundles init
+filetype off
+
+" vim-plug plugin management
+call plug#begin('~/.vim/bundle')
+
+" general plugins
+Plug 'flazz/vim-colorschemes'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'szw/vim-ctrlspace'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'kien/ctrlp.vim'
+Plug 'paradigm/SkyBison'
+Plug 'scrooloose/syntastic'
+Plug 'bling/vim-airline'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'vim-scripts/DirDiff.vim'
+Plug 'osyo-manga/vim-over'
+Plug 'tpope/vim-unimpaired'
+Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
+Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesToggle'}
+Plug 'sjl/gundo.vim'
+Plug 'jszakmeister/vim-togglecursor'
+" Plug 'Raimondi/delimitMate'
+Plug 'rking/ag.vim', {'on': 'Ag'}
+Plug 'godlygeek/tabular', {'on': 'Tabularize'}
+Plug 'craigemery/vim-autotag'
+Plug 'sessionman.vim'
+Plug 'sudo.vim'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'gorkunov/smartpairs.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
+Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'sickill/vim-pasta'
+
+"html related
+Plug 'msanders/snipmate.vim'
+Plug 'digitaltoad/vim-jade'
+Plug 'othree/html5.vim', {'for': 'html'}
+Plug 'mattn/emmet-vim', {'for': 'html'}
+Plug 'gregsexton/MatchTag', {'for': 'html'}
+Plug 'docunext/closetag.vim', {'for': 'html'}
+Plug 'spf13/vim-preview'
+
+"js related
+Plug 'marijnh/tern_for_vim', {'do': 'build' : {'unix' : 'npm install'}, 'for': 'javascript'}
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'elzr/vim-json', {'for': 'javascript'}
+Plug 'moll/vim-node', {'for': 'javascript'}
+Plug 'mxw/vim-jsx', {'for': 'javascript'}
+Plug 'burnettk/vim-angular', {'for': 'javascript'}
+Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
+
+"css related
+Plug 'cakebaker/scss-syntax.vim', {'for': 'scss'}
+Plug 'groenewege/vim-less', {'for': 'less'}
+Plug 'gorodinskiy/vim-coloresque'
+
+call plug#end()
 
 " ----important
 set nocompatible
 runtime macros/matchit.vim
 
 " ----moving around,searching and patterns
+set whichwrap=b,s,<,>,[,],
 set path=$PWD/**
 set incsearch
 set ignorecase
@@ -23,8 +113,11 @@ set tags=./tags;/,~/.vimtags
 " ----displaying text ----
 set scrolloff=3
 set linebreak
+set scrolloff=10
+set sidescrolloff=10
 set fillchars+=stl:\ ,stlnc:\
 set nolist
+set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~
 set number
 set relativenumber
 
@@ -44,6 +137,7 @@ set splitbelow
 set splitright
 
 " ----terminal
+set ttyfast
 set title
 
 " ----using the mouse
@@ -51,12 +145,15 @@ set mouse=a
 
 " ----messages and info
 set showcmd
+set noshowmode
 
 " ----editing text
 set modifiable
+set textwidth=80
 set backspace=indent,eol,start
 set completeopt=menuone,preview
 set omnifunc=syntaxcomplete#Complete
+set matchpairs+=<:>
 set showmatch
 
 " ----tabs and indenting
@@ -73,7 +170,11 @@ set smartindent
 set foldtext=MyFoldText()
 set foldmethod=indent
 
+" ----diff mode
+set diffopt=filler
+
 " ----reading and writing files
+set nowritebackup
 set backup
 set autowrite
 set autoread
@@ -83,6 +184,7 @@ set autoread
 
 " ----command line editing
 set history=1000
+set wildcharm=<TAB>
 set wildmode=list:longest,full
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
 set wildmenu
@@ -90,6 +192,9 @@ set undofile
 
 " ----executing external commands
 set formatprg=par\ -w50
+
+" ----language specific
+set iskeyword+=-
 
 " ----multi-byte characters
 set encoding=utf-8
@@ -103,6 +208,9 @@ let mapleader = "\<Space>"
 set t_Co=256
 colorscheme tir_black
 filetype plugin indent on
+
+" if You have problem with background, uncomment this line
+" let g:solarized_termtrans=1
 
 " ----Some more settings
 " highlight spell errors
@@ -133,16 +241,21 @@ nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i gg=G''
+nnoremap <leader>l :NERDTreeFind<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>o :OverCommandLine<CR>
 nnoremap <leader>p <Plug>yankstack_substitute_older_paste
 nnoremap <leader>P <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>q :q<CR>
-nnoremap <leader>r :source $MYVIMRC<CR>
+nnoremap <leader>s :%s//<left>
+vnoremap <leader>s :s//<left>
 nnoremap <leader>s :SyntasticToggleMode<CR>
-nnoremap <leader>t :BuffergatorTabsToggle<CR>
+nnoremap <leader>tr :TernRefs<CR>
+nnoremap <leader>tn :TernRename<CR>
+
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
+nnoremap <leader>w <c-w>w
 
 nnoremap <leader><leader> :update<CR>
 
@@ -150,6 +263,10 @@ nnoremap <leader><leader> :update<CR>
 map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
 nnoremap ; "0p
+nmap <silent>[ :lprev<cr>    " previous syntastic error
+nmap <silent>] :lnext<cr>    " next syntastic error
+
+
 
 " folding related mappings
 nnoremap zr zR
@@ -180,44 +297,103 @@ cnoreabbrev d  bd
 cnoreabbrev D  %bd
 
 " ----Autocommands
-" When editing a file, always jump to the last known cursor position.
-" Don't do it for commit messages, when the position is invalid, or when
-" inside an event handler.
-autocmd BufReadPost *
-            \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-            \   exe "normal g`\"" |
-            \ endif
 
-" source file if the file being saved is .vimrc
-au BufWritePost vimrc source $MYVIMRC
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
-" for proper less support
-autocmd BufNewFile,BufRead *.less set filetype=less
-autocmd FileType less set omnifunc=csscomplete#CompleteCSS
 
-" toggle relativenumber according to mode
-autocmd InsertEnter * set relativenumber!
-autocmd InsertLeave * set relativenumber
+if has("autocmd")
+    augroup vimrc
+    " Delete any previosly defined autocommands
+    au!
+        " Auto reload vim after its changed
+        au BufWritePost *.vim source $MYVIMRC | AirlineRefresh
+        au BufWritePost .vimrc source $MYVIMRC | AirlineRefresh
 
-" set indent style for html files
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
+        " Set filetypes aliases
+        au FileType htmldjango set ft=html.htmldjango
+        au FileType scss set ft=scss.css
+        au FileType less set ft=less.css
 
-" for airline 
-autocmd VimEnter * call AirLineInit()
+        au BufRead,BufNewFile *.js set ft=javascript.javascript-jquery
+        au BufRead,BufNewFile *.json set ft=json
+        " Execute python \ -mjson.tool for autoformatting *.json
+        au BufRead,BufNewFile *.bemhtml set ft=javascript
+        au BufRead,BufNewFile *.bemtree set ft=javascript
+        au BufRead,BufNewFile *.xjst set ft=javascript
+        au BufRead,BufNewFile *.tt2 set ft=tt2
+        au BufRead,BufNewFile *.plaintex set ft=plaintex.tex
 
-" Always on - rainbow paranthesis
-au VimEnter * RainbowParenthesesToggle
-au Syntax   * RainbowParenthesesLoadRound
-au Syntax   * RainbowParenthesesLoadSquare
-au Syntax   * RainbowParenthesesLoadBraces
+        " disable syntax highlighting on laaarge files
+        au BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
+
+        " Disable vertical line at max string length in NERDTree
+        autocmd FileType * setlocal colorcolumn=+1
+        autocmd FileType nerdtree setlocal colorcolumn=""
+
+        " Not enable Folding - it really slow on large files, uses plugin vim-javascript-syntax
+        au FileType javascript* call JavaScriptFold()
+
+        au FileType html let b:loaded_delimitMate = 1
+        au FileType handlebars let b:loaded_delimitMate = 1
+
+        " When editing a file, always jump to the last known cursor position.
+        " Don't do it for commit messages, when the position is invalid, or when
+        " inside an event handler.
+        autocmd BufReadPost *
+                    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+                    \   exe "normal g`\"" |
+                    \ endif
+
+        " for proper less support
+        autocmd BufNewFile,BufRead *.less set filetype=less
+        autocmd FileType less set omnifunc=csscomplete#CompleteCSS
+
+        " toggle relativenumber according to mode
+        autocmd InsertEnter * set relativenumber!
+        autocmd InsertLeave * set relativenumber
+
+        " set indent style for html files
+        autocmd FileType html setlocal shiftwidth=2 tabstop=2
+
+        " for airline 
+        autocmd VimEnter * call AirLineInit()
+
+        " Always on - rainbow paranthesis
+        au VimEnter * RainbowParenthesesToggle
+        au Syntax   * RainbowParenthesesLoadRound
+        au Syntax   * RainbowParenthesesLoadSquare
+        au Syntax   * RainbowParenthesesLoadBraces
+
+        " install missing plugins on startup
+        autocmd VimEnter *
+                    \| if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
+                        \|   PlugInstall | q
+                        \| endif
+
+        " Group end
+    augroup END
+
+endif
+
 
 " ----Plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
 " for syntastic
+
+" setting up jshint csslint and jscs if available
+let g:syntastic_javascript_jshint_exec = s:FindSyntasticExecPath('jshint')
+let g:syntastic_javascript_jscs_exec = s:FindSyntasticExecPath('jscs')
+let g:syntastic_css_csslint_exec= s:FindSyntasticExecPath('csslint')
+
+" other settings for syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
+let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=1
 let g:syntastic_enable_highlighting=1
 let g:syntastic_echo_current_error=1
@@ -225,6 +401,9 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 let g:syntastic_csslint_options="--warnings=none"
 let g:syntastic_javascript_jshint_args = '--config /home/avinash/.jshintrc'
+let g:syntastic_filetype_map = { "json": "javascript", }
+let g:syntastic_javascript_checkers = ["jshint", "jscs"]
+
 
 " for ctrlspace
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
@@ -234,10 +413,12 @@ if executable("ag")
     let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
 endif
 
+
 " for ycm
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+
 
 " for airline
 let g:airline#extensions#bufferline#enabled = 1
@@ -248,19 +429,24 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 let g:airline#extensions#wordcount#enabled = 1
 
+
 " for ag
 let g:ag_working_path_mode="r"
 
+
 " for Nerdtree
 let g:nerdtree_tabs_open_on_gui_startup=0
+let NERDTreeMinimalUI=1
 let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 let NERDTreeIgnore = ['\.js.map$']
 
+
 " for snipmate
 let g:snips_trigger_key = '<c-tab>'
 let g:snips_trigger_key_backwards = '<c-s-tab>'
+
 
 " this configures CtrlP to use git or silver searcher for autocompletion
 let g:ctrlp_use_caching = 0
@@ -283,14 +469,33 @@ else
                 \ }
 endif
 
+
 " for gitgutter
 let g:gitgutter_max_signs = 200
 let g:gitgutter_highlight_lines = 1
 let g:gitgutter_enabled = 1
 
+
 " for indentguides
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
+
+
+" for delimitmate
+
+" Delimitmate place cursor correctly n multiline objects e.g.
+" if you press enter in {} cursor still be
+" in the middle line instead of the last
+let delimitMate_expand_cr = 1
+
+" Delimitmate place cursor correctly in singleline pairs e.g.
+" if x - cursor if you press space in {x} result will be { x } instead of { x}
+let delimitMate_expand_space = 1
+
+" Without this we can't disable delimitMate for specific file types
+let loaded_delimitMate = 1
+
+
 
 " ----All the function definitions
 function! ShowMouseMode()
@@ -304,6 +509,7 @@ function! ShowMouseMode()
         echo "mouse-xterm"
     endif
 endfunction
+
 
 function! AirLineInit()
     let g:airline_exclude_preview = 1
@@ -322,6 +528,7 @@ function! AirLineInit()
     let g:airline_section_y = airline#section#create(['%c'])
     let g:airline_section_z = airline#section#create_right(['%l/%L'])
 endfunction
+
 
 function! MyFoldText()
     let line = getline(v:foldstart)
@@ -357,65 +564,3 @@ function! MyFoldText()
     return sub . info
 endfunction
 
-" vim-plug plugin management
-call plug#begin('~/.vim/bundle')
-
-" general plugins
-Plug 'flazz/vim-colorschemes'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'szw/vim-ctrlspace'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-Plug 'kien/ctrlp.vim'
-Plug 'paradigm/SkyBison'
-Plug 'scrooloose/syntastic'
-Plug 'bling/vim-airline'
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-surround'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'osyo-manga/vim-over'
-Plug 'tpope/vim-unimpaired'
-Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
-Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesToggle'}
-Plug 'sjl/gundo.vim'
-" Plug 'Raimondi/delimitMate'
-Plug 'rking/ag.vim', {'on': 'Ag'}
-Plug 'godlygeek/tabular', {'on': 'Tabularize'}
-Plug 'craigemery/vim-autotag'
-Plug 'sessionman.vim'
-Plug 'sudo.vim'
-Plug 'jeetsukumaran/vim-buffergator'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'gorkunov/smartpairs.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
-Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'sickill/vim-pasta'
-
-"html related
-Plug 'msanders/snipmate.vim'
-Plug 'othree/html5.vim', {'for': 'html'}
-Plug 'mattn/emmet-vim', {'for': 'html'}
-Plug 'gregsexton/MatchTag', {'for': 'html'}
-Plug 'docunext/closetag.vim', {'for': 'html'}
-Plug 'spf13/vim-preview'
-
-"js related
-Plug 'marijnh/tern_for_vim', {'for': 'javascript'}
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'elzr/vim-json', {'for': 'javascript'}
-Plug 'moll/vim-node', {'for': 'javascript'}
-Plug 'mxw/vim-jsx', {'for': 'javascript'}
-Plug 'burnettk/vim-angular', {'for': 'javascript'}
-Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
-
-"css related
-Plug 'cakebaker/scss-syntax.vim', {'for': 'scss'}
-Plug 'groenewege/vim-less', {'for': 'less'}
-Plug 'gorodinskiy/vim-coloresque'
-
-call plug#end()
