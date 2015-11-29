@@ -12,9 +12,9 @@ let isNpmInstalled = executable("npm")
 
 " if npm isn't installed, show message to install
 if !isNpmInstalled
-        echo "==============================================="
-        echo "Your need to install npm to enable all features"
-        echo "==============================================="
+    echo "==============================================="
+    echo "Your need to install npm to enable all features"
+    echo "==============================================="
 endif
 
 " set default node modules install directory
@@ -85,7 +85,7 @@ Plug 'docunext/closetag.vim', {'for': 'html'}
 Plug 'spf13/vim-preview'
 
 "js related
-Plug 'marijnh/tern_for_vim', {'do': 'build' : {'unix' : 'npm install'}, 'for': 'javascript'}
+Plug 'marijnh/tern_for_vim', {'build' : {'unix' : 'npm install'}}
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'elzr/vim-json', {'for': 'javascript'}
 Plug 'moll/vim-node', {'for': 'javascript'}
@@ -132,7 +132,7 @@ syntax enable
 set hlsearch
 set cursorcolumn
 set cursorline
-set colorcolumn=80
+set colorcolumn=+1
 
 " ----multiple windows
 set laststatus=2        " always show airline status bar
@@ -298,16 +298,14 @@ cnoreabbrev d  bd
 cnoreabbrev D  %bd
 
 " ----Autocommands
-
-
 if has("autocmd")
     augroup vimrc
-    " Delete any previosly defined autocommands
-    au!
-    " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        " Delete any previously defined autocommands
+        au!
+        " Enable omni completion.
+        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
         " Auto reload vim after its changed
         au BufWritePost *.vim source $MYVIMRC | AirlineRefresh
@@ -376,7 +374,6 @@ if has("autocmd")
 
         " Group end
     augroup END
-
 endif
 
 
@@ -384,11 +381,6 @@ endif
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
 " for syntastic
-
-" setting up jshint csslint and jscs if available
-let g:syntastic_javascript_jshint_exec = s:FindSyntasticExecPath('jshint')
-let g:syntastic_javascript_jscs_exec = s:FindSyntasticExecPath('jscs')
-let g:syntastic_css_csslint_exec= s:FindSyntasticExecPath('csslint')
 
 " other settings for syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -522,7 +514,7 @@ function! AirLineInit()
     let g:airline_right_sep=' '
     let g:airline_right_sep = ' '
     let g:airline_left_sep = ' '
-   let g:airline_section_a = airline#section#create(['mode'])
+    let g:airline_section_a = airline#section#create(['mode'])
     let g:airline_section_b = airline#section#create(['branch'])
     let g:airline_section_c = airline#section#create(['%f'])
     let g:airline_section_x = airline#section#create(['type:', 'filetype'])
@@ -564,4 +556,3 @@ function! MyFoldText()
     let sub = strpart( sub, 0, winwidth(0) - strlen( info ) - num_w - fold_w - 1 )
     return sub . info
 endfunction
-
