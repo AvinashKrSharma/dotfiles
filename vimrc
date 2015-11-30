@@ -69,7 +69,6 @@ Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'craigemery/vim-autotag'
 Plug 'sessionman.vim'
 Plug 'sudo.vim'
-Plug 'jeetsukumaran/vim-buffergator'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'gorkunov/smartpairs.vim'
@@ -108,7 +107,6 @@ set nocompatible
 runtime macros/matchit.vim
 
 " ----moving around,searching and patterns
-set whichwrap=b,s,<,>,[,],
 set path=$PWD/**
 set incsearch
 set ignorecase
@@ -226,7 +224,7 @@ hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
 " ----Mappings
 " leader key mappings
 nnoremap <leader>a  ggVG
-nnoremap <leader>b  :BuffergatorToggle<CR>
+nnoremap <leader>b  :buffers<CR>:buffer<Space>
 map      <leader>c  <c-_><c-_>
 nnoremap <leader>d  :bd<CR>
 nnoremap <leader>e  :IndentGuidesToggle<CR>
@@ -283,6 +281,10 @@ nnoremap <C-j> <C-d>
 nnoremap <C-k> <C-f>
 nnoremap <C-l> <C-b>
 
+" mappings for switching buffers
+nnoremap gb :bn<cr>
+nnoremap gv :bp<cr>
+
 " Ctrlp mapping
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -334,9 +336,6 @@ if has("autocmd")
         " Disable vertical line at max string length in NERDTree
         autocmd FileType * setlocal colorcolumn=+1
         autocmd FileType nerdtree setlocal colorcolumn=""
-
-        " Not enable Folding - it really slow on large files, uses plugin vim-javascript-syntax
-        au FileType javascript* call JavaScriptFold()
 
         au FileType html let b:loaded_delimitMate = 1
         au FileType handlebars let b:loaded_delimitMate = 1
