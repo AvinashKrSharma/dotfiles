@@ -10,6 +10,9 @@ endif
 " Check if npm is installed
 let isNpmInstalled = executable("npm")
 
+" do this incase jshint/csslint installation fails because of write permissions
+" sudo chown -R $(whoami) ~/.npm
+
 " if npm isn't installed, show message to install
 if !isNpmInstalled
     echo "==============================================="
