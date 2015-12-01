@@ -4,7 +4,6 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 " ----For npm
@@ -106,6 +105,11 @@ Plug 'groenewege/vim-less', {'for': 'less'}
 Plug 'gorodinskiy/vim-coloresque'
 
 call plug#end()
+
+" ----Install Plugins
+if !isdirectory('~/.vim/bundle')
+  PlugInstall | q
+endif
 
 " ----important
 set nocompatible
