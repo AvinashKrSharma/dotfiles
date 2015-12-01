@@ -1,11 +1,5 @@
 " ########Install important stuff like vim-plug, npm, jshint, csslint
 
-" ----Download vim-plug if already not present
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
-
 " ----For npm
 
 " Check if npm is installed
@@ -43,6 +37,13 @@ endif
 
 " ----Turn off filetype plugins before bundles init, to make every work sane
 filetype off
+
+" ----Download vim-plug if already not present
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	let g:doPlugInstall = "set"
+endif
 
 " Vim-plug plugin management
 call plug#begin('~/.vim/bundle')
@@ -107,7 +108,7 @@ Plug 'gorodinskiy/vim-coloresque'
 call plug#end()
 
 " ----Install Plugins
-if !isdirectory('~/.vim/bundle')
+if exists('doPlugInstall') 
   PlugInstall | q
 endif
 
@@ -378,12 +379,6 @@ if has("autocmd")
         au Syntax   * RainbowParenthesesLoadRound
         au Syntax   * RainbowParenthesesLoadSquare
         au Syntax   * RainbowParenthesesLoadBraces
-
-        " install missing plugins on startup
-        autocmd VimEnter *
-                    \| if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
-                        \|   PlugInstall | q
-                        \| endif
 
         " Group end
     augroup END
