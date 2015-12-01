@@ -1,29 +1,37 @@
-" ----Install vim-plug, npm, jshint, csslint
+" ########Install important stuff like vim-plug, npm, jshint, csslint
 
-" download vim-plug if already not present
+" ----Download vim-plug if already not present
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+" ----For npm
+
 " Check if npm is installed
 let isNpmInstalled = executable("npm")
 
-" do this incase jshint/csslint installation fails because of write permissions
+" Note: do this incase jshint/csslint installation fails because of write permissions
 " sudo chown -R $(whoami) ~/.npm
 
-" if npm isn't installed, show message to install
+" If npm isn't installed, show message to install
 if !isNpmInstalled
     echo "==============================================="
     echo "Your need to install npm to enable all features"
     echo "==============================================="
 endif
 
-" set default node modules install directory
+" Set default node modules install directory
 let s:defaultNodeModules = '~/.vim/node_modules/.bin/'
 
-" Install jshint and csslint for syntastic
+" ----For creating backup directory if does not exist
+" If backup directory does not exist, then create it
+if !isdirectory("~/.vim/tmp")
+    call mkdir("~/.vim/tmp", "p")
+endif
+
+" ----Install jshint and csslint for syntastic
 " Path to jshint if it not installed, then use local installation
 if isNpmInstalled
     if !executable(expand(s:defaultNodeModules . 'jshint'))
@@ -34,10 +42,10 @@ if isNpmInstalled
     endif
 endif
 
-" Turn off filetype plugins before bundles init
+" ----Turn off filetype plugins before bundles init, to make every work sane
 filetype off
 
-" vim-plug plugin management
+" Vim-plug plugin management
 call plug#begin('~/.vim/bundle')
 
 " general plugins
@@ -104,7 +112,7 @@ call plug#end()
 
 " ----important
 set nocompatible
-runtime macros/matchit.vim
+runtime macros/matchit.vim      " to make % switch b/w opening & closing brackets
 
 " ----moving around,searching and patterns
 set path=$PWD/**
@@ -113,16 +121,15 @@ set ignorecase
 set smartcase
 
 " ----tags
-set tags=./tags;/,~/.vimtags
+set tags=./tags;/
 
 " ----displaying text ----
-set scrolloff=3
 set linebreak
-set scrolloff=10
+set scrolloff=3
 set sidescrolloff=10
 set fillchars+=stl:\ ,stlnc:\
 set nolist
-set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~
+set listchars=tab:>-,trail:·,eol:$
 set number
 set relativenumber
 
@@ -149,8 +156,10 @@ set title
 set mouse=a
 
 " ----messages and info
+set shortmess=I
 set showcmd
 set noshowmode
+set ruler
 
 " ----editing text
 set modifiable
@@ -179,20 +188,21 @@ set foldmethod=indent
 set diffopt=filler
 
 " ----reading and writing files
-set nowritebackup
 set backup
+set backupdir=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set autowrite
 set autoread
 
 " ----the swap file
+set directory=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set swapfile
 
 " ----command line editing
 set history=1000
 set wildcharm=<TAB>
-set wildmode=list:longest,full
+set wildmode=list:longest,full      " pressing tab takes to next command
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
-set wildmenu
+set wildmenu        " show available option in command mode
 set undofile
 
 " ----executing external commands
@@ -214,15 +224,42 @@ set t_Co=256
 colorscheme tir_black
 filetype plugin indent on
 
-" if You have problem with background, uncomment this line
-" let g:solarized_termtrans=1
+" ########Some more settings
 
-" ----Some more settings
+" if You have problem with background, uncomment this line
+let g:solarized_termtrans=1
+
 " highlight spell errors
 hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
 
-" ----Mappings
-" leader key mappings
+" ########Mappings
+
+" ----general mappings
+map <F7> :setlocal spell! spell?<CR>
+nnoremap \ :echo &mod<CR>
+nnoremap ; "0p
+nmap <silent>[ :lprev<cr>    " previous syntastic error
+nmap <silent>] :lnext<cr>    " next syntastic error
+
+" folding related mappings
+nnoremap zr zR
+nnoremap zs zr
+
+" mappings for page up/down, half/full
+nnoremap <C-h> <C-u>
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-b>
+nnoremap <C-l> <C-f>
+
+" mappings for switching buffers
+nnoremap gb :bn<cr>
+nnoremap gv :bp<cr>
+
+" toggle between terminal and vim mouse
+map  <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
+imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
+
+" ----Leader key mappings
 nnoremap <leader>a  ggVG
 nnoremap <leader>b  :buffers<CR>:buffer<Space>
 map      <leader>c  <c-_><c-_>
@@ -245,16 +282,17 @@ nnoremap <leader>gt :GitGutterToggle<CR>
 nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
-nnoremap <leader>i gg=G''
-nnoremap <leader>l :NERDTreeFind<CR>
-nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>o :OverCommandLine<CR>
-nnoremap <leader>p <Plug>yankstack_substitute_older_paste
-nnoremap <leader>P <Plug>yankstack_substitute_newer_paste
-nnoremap <leader>q :q<CR>
-nnoremap <leader>s :%s//<left>
-vnoremap <leader>s :s//<left>
-nnoremap <leader>s :SyntasticToggleMode<CR>
+nnoremap <leader>i  gg=G''
+nnoremap <leader>l  :NERDTreeFind<CR>
+nnoremap <leader>n  :NERDTreeToggle<CR>
+nnoremap <leader>o  :OverCommandLine<CR>
+nnoremap <leader>p  <Plug>yankstack_substitute_older_paste
+nnoremap <leader>P  <Plug>yankstack_substitute_newer_paste
+nnoremap <leader>q  :q<CR>
+vmap     <leader>r  :Tabularize/ /l0<cr>
+nnoremap <leader>s  :%s//<left>
+vnoremap <leader>s  :s//<left>
+nnoremap <leader>s  :SyntasticToggleMode<CR>
 nnoremap <leader>tr :TernRefs<CR>
 nnoremap <leader>tn :TernRename<CR>
 
@@ -264,36 +302,8 @@ nnoremap <leader>w <c-w>w
 
 nnoremap <leader><leader> :update<CR>
 
-" general mappings
-map <F7> :setlocal spell! spell?<CR>
-nnoremap \ :echo &mod<CR>
-nnoremap ; "0p
-nmap <silent>[ :lprev<cr>    " previous syntastic error
-nmap <silent>] :lnext<cr>    " next syntastic error
+" ########Abbreviations for common mistyped commands
 
-" folding related mappings
-nnoremap zr zR
-nnoremap zs zr
-
-" mappings for page up/down, half/full
-nnoremap <C-h> <C-u>
-nnoremap <C-j> <C-d>
-nnoremap <C-k> <C-f>
-nnoremap <C-l> <C-b>
-
-" mappings for switching buffers
-nnoremap gb :bn<cr>
-nnoremap gv :bp<cr>
-
-" Ctrlp mapping
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
-" toggle between terminal and vim mouse
-map  <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
-imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
-
-" ----Abbreviations for common mistyped commands
 cnoreabbrev W  w
 cnoreabbrev Wq wq
 cnoreabbrev WQ wq
@@ -308,20 +318,20 @@ if has("autocmd")
         " Delete any previously defined autocommands
         au!
         " Enable omni completion.
-        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
 
         " Auto reload vim after its changed
-        au BufWritePost *.vim source $MYVIMRC | AirlineRefresh
+        au BufWritePost *.vim  source $MYVIMRC | AirlineRefresh
         au BufWritePost .vimrc source $MYVIMRC | AirlineRefresh
+        au BufWritePost vimrc  source $MYVIMRC | AirlineRefresh
 
         " Set filetypes aliases
         au FileType htmldjango set ft=html.htmldjango
-        au FileType scss set ft=scss.css
-        au FileType less set ft=less.css
-
-        au BufRead,BufNewFile *.js set ft=javascript.javascript-jquery
+        au FileType scss       set ft=scss.css
+        au FileType less       set ft=less.css
+        au BufRead,BufNewFile *.js   set ft=javascript.javascript-jquery
         au BufRead,BufNewFile *.json set ft=json
         " Execute python \ -mjson.tool for autoformatting *.json
         au BufRead,BufNewFile *.bemhtml set ft=javascript
@@ -334,11 +344,8 @@ if has("autocmd")
         au BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
 
         " Disable vertical line at max string length in NERDTree
-        autocmd FileType * setlocal colorcolumn=+1
+        autocmd FileType *        setlocal colorcolumn=+1
         autocmd FileType nerdtree setlocal colorcolumn=""
-
-        au FileType html let b:loaded_delimitMate = 1
-        au FileType handlebars let b:loaded_delimitMate = 1
 
         " When editing a file, always jump to the last known cursor position.
         " Don't do it for commit messages, when the position is invalid, or when
@@ -350,7 +357,7 @@ if has("autocmd")
 
         " for proper less support
         autocmd BufNewFile,BufRead *.less set filetype=less
-        autocmd FileType less set omnifunc=csscomplete#CompleteCSS
+        autocmd FileType           less   set omnifunc=csscomplete#CompleteCSS
 
         " toggle relativenumber according to mode
         autocmd InsertEnter * set relativenumber!
@@ -379,12 +386,11 @@ if has("autocmd")
 endif
 
 
-" ----Plugin specific settings
+" ########Plugin specific settings
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
-" for syntastic
+" ----for syntastic
 
-" other settings for syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -400,7 +406,7 @@ let g:syntastic_filetype_map = { "json": "javascript", }
 let g:syntastic_javascript_checkers = ["jshint", "jscs"]
 
 
-" for ctrlspace
+" ----for ctrlspace
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
 let g:CtrlSpaceSaveWorkspaceOnExit = 1
@@ -409,13 +415,13 @@ if executable("ag")
 endif
 
 
-" for ycm
+" ----for ycm
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 
 
-" for airline
+" ----for airline
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#enabled = 1
@@ -425,11 +431,11 @@ let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 let g:airline#extensions#wordcount#enabled = 1
 
 
-" for ag
+" ----for ag
 let g:ag_working_path_mode="r"
 
 
-" for Nerdtree
+" ----for Nerdtree
 let g:nerdtree_tabs_open_on_gui_startup=0
 let NERDTreeMinimalUI=1
 let NERDTreeMouseMode=2
@@ -438,12 +444,12 @@ let NERDTreeKeepTreeInNewTab=1
 let NERDTreeIgnore = ['\.js.map$']
 
 
-" for snipmate
+" ----for snipmate
 let g:snips_trigger_key = '<c-tab>'
 let g:snips_trigger_key_backwards = '<c-s-tab>'
 
 
-" this configures CtrlP to use git or silver searcher for autocompletion
+" ----for ctrlp
 let g:ctrlp_use_caching = 0
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_show_hidden = 1
@@ -465,18 +471,18 @@ else
 endif
 
 
-" for gitgutter
+" ----for gitgutter
 let g:gitgutter_max_signs = 200
 let g:gitgutter_highlight_lines = 1
 let g:gitgutter_enabled = 1
 
 
-" for indentguides
+" ----for indentguides
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 
 
-" for delimitmate
+" ----for delimitmate
 
 " Delimitmate place cursor correctly n multiline objects e.g.
 " if you press enter in {} cursor still be
@@ -489,8 +495,6 @@ let delimitMate_expand_space = 1
 
 " Without this we can't disable delimitMate for specific file types
 let loaded_delimitMate = 1
-
-
 
 " ----All the function definitions
 function! ShowMouseMode()
