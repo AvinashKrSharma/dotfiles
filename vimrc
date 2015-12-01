@@ -70,20 +70,17 @@ Plug 'tpope/vim-unimpaired'
 Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
 Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesToggle'}
 Plug 'sjl/gundo.vim'
-Plug 'jszakmeister/vim-togglecursor'
 Plug 'Raimondi/delimitMate'
 Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
-Plug 'craigemery/vim-autotag'
-Plug 'sessionman.vim'
 Plug 'sudo.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
-Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'sickill/vim-pasta'
+" Plug 'craigemery/vim-autotag'
 
 "html related
 Plug 'msanders/snipmate.vim'
@@ -258,6 +255,9 @@ nnoremap gv :bp<cr>
 " toggle between terminal and vim mouse
 map  <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
+
+" replace normal command mode with skybison
+nnoremap : :<c-u>call SkyBison("")<cr>
 
 " ----Leader key mappings
 nnoremap <leader>a  ggVG
