@@ -187,7 +187,7 @@ set foldtext=MyFoldText()
 set foldmethod=indent
 
 " ----diff mode
-set diffopt=filler
+set diffopt=vertical
 
 " ----reading and writing files
 set backup
