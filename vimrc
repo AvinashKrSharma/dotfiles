@@ -42,7 +42,7 @@ filetype off
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	let g:doPlugInstall = "set"
+    let g:doPlugInstall = "set"
 endif
 
 " Vim-plug plugin management
@@ -59,57 +59,49 @@ Plug 'paradigm/SkyBison'
 Plug 'scrooloose/syntastic'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
+Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-surround'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'vim-scripts/DirDiff.vim'
-Plug 'osyo-manga/vim-over'
-Plug 'tpope/vim-unimpaired'
-Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
-Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesToggle'}
-Plug 'sjl/gundo.vim'
-Plug 'Raimondi/delimitMate'
 Plug 'rking/ag.vim', {'on': 'Ag'}
+Plug 'tpope/vim-surround'
+Plug 'osyo-manga/vim-over'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'sjl/gundo.vim'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
-Plug 'sudo.vim'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
+Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-unimpaired'
+Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesToggle'}
 Plug 'gorkunov/smartpairs.vim'
-Plug 'sheerun/vim-polyglot'
+Plug 'kien/rainbow_parentheses.vim'
 Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
 Plug 'sickill/vim-pasta'
-" Plug 'craigemery/vim-autotag'
+Plug 'vim-scripts/DirDiff.vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
 
 "html related
 Plug 'msanders/snipmate.vim'
-Plug 'digitaltoad/vim-jade'
-Plug 'othree/html5.vim', {'for': 'html'}
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'gregsexton/MatchTag', {'for': 'html'}
 Plug 'docunext/closetag.vim', {'for': 'html'}
-Plug 'spf13/vim-preview'
-
-"js related
-Plug 'marijnh/tern_for_vim', {'build' : {'unix' : 'npm install'}}
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'elzr/vim-json', {'for': 'javascript'}
-Plug 'moll/vim-node', {'for': 'javascript'}
-Plug 'mxw/vim-jsx', {'for': 'javascript'}
-Plug 'burnettk/vim-angular', {'for': 'javascript'}
-Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
 
 "css related
-Plug 'cakebaker/scss-syntax.vim', {'for': 'scss'}
-Plug 'groenewege/vim-less', {'for': 'less'}
 Plug 'gorodinskiy/vim-coloresque'
+Plug 'vim-scripts/prefixer.vim', {'for': 'css'}
+
+"js related
+Plug 'moll/vim-node', {'for': 'javascript'}
+Plug 'burnettk/vim-angular', {'for': 'javascript'}
+Plug 'marijnh/tern_for_vim', {'build' : {'unix' : 'npm install'}}
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
 
 call plug#end()
 
 " ----Install Plugins
 if exists('doPlugInstall') 
-  PlugInstall | q
+    PlugInstall | q
 endif
 
 " ----important
@@ -226,6 +218,7 @@ set t_Co=256
 colorscheme tir_black
 filetype plugin indent on
 
+
 " ########Some more settings
 
 " if You have problem with background, uncomment this line
@@ -234,13 +227,20 @@ let g:solarized_termtrans=1
 " highlight spell errors
 hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
 
+
 " ########Mappings
 
 " ----general mappings
 map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
+
+" mappings for syntastic error navigation
 nmap <silent>[ :lprev<cr>    " previous syntastic error
 nmap <silent>] :lnext<cr>    " next syntastic error
+
+" to create new line without entering insert mode
+nmap oo o<Esc>k
+nmap OO O<Esc>j
 
 " folding related mappings
 nnoremap zr zR
@@ -260,7 +260,7 @@ nnoremap gv :bp<cr>
 map  <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 
-" replace normal command mode with skybison
+" mapping for skybison's command mode
 nnoremap ; :<c-u>call SkyBison("")<cr>
 
 " ----Leader key mappings
@@ -268,9 +268,10 @@ nnoremap <leader>a  ggVG
 nnoremap <leader>b  :buffers<CR>:buffer<Space>
 map      <leader>c  <c-_><c-_>
 nnoremap <leader>d  :bd<CR>
-nnoremap <leader>e  :IndentGuidesToggle<CR>
+nnoremap <leader>e  :SyntasticToggleMode<CR>
 nnoremap <leader>f  :Autoformat<CR>
 
+" specific to git fugitive
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gd :Gdiff<CR>
@@ -287,25 +288,23 @@ nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i  gg=G''
-nnoremap <leader>l  :NERDTreeFind<CR>
+nnoremap <leader>l  :IndentGuidesToggle<CR>
 nnoremap <leader>m  :source $MYVIMRC<CR>
 nnoremap <leader>n  :NERDTreeToggle<CR>
-nnoremap <leader>o  :OverCommandLine<CR>
 nnoremap <leader>q  :q<CR>
-vmap     <leader>r  :Tabularize/ /l0<cr>
-nnoremap <leader>s  :%s//<left>
-vnoremap <leader>s  :s//<left>
-nnoremap <leader>s  :SyntasticToggleMode<CR>
+nnoremap <leader>r  :NERDTreeFind<CR>
+vnoremap <leader>t  :Tabularize/ /l0<cr>
 nnoremap <leader>tr :TernRefs<CR>
 nnoremap <leader>tn :TernRename<CR>
-
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 nnoremap <leader>w <c-w>w
 
+nnoremap <leader>o  :OverCommandLine<CR>
 nnoremap <leader><leader> :update<CR>
 
-" ########Abbreviations for common mistyped commands
+
+" ######## Abbreviations for common mistyped commands
 
 cnoreabbrev W  w
 cnoreabbrev Wq wq
@@ -315,7 +314,9 @@ cnoreabbrev Q  q
 cnoreabbrev d  bd
 cnoreabbrev D  %bd
 
-" ----Autocommands
+
+" ######## Autocommands
+
 if has("autocmd")
     augroup vimrc
         " Delete any previously defined autocommands
@@ -331,17 +332,9 @@ if has("autocmd")
         au BufWritePost vimrc  source $MYVIMRC | AirlineRefresh
 
         " Set filetypes aliases
-        au FileType htmldjango set ft=html.htmldjango
         au FileType scss       set ft=scss.css
         au FileType less       set ft=less.css
-        au BufRead,BufNewFile *.js   set ft=javascript.javascript-jquery
         au BufRead,BufNewFile *.json set ft=json
-        " Execute python \ -mjson.tool for autoformatting *.json
-        au BufRead,BufNewFile *.bemhtml set ft=javascript
-        au BufRead,BufNewFile *.bemtree set ft=javascript
-        au BufRead,BufNewFile *.xjst set ft=javascript
-        au BufRead,BufNewFile *.tt2 set ft=tt2
-        au BufRead,BufNewFile *.plaintex set ft=plaintex.tex
 
         " disable syntax highlighting on laaarge files
         au BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
@@ -378,16 +371,16 @@ if has("autocmd")
         au Syntax   * RainbowParenthesesLoadSquare
         au Syntax   * RainbowParenthesesLoadBraces
 
-        " Group end
     augroup END
 endif
 
 
-" ########Plugin specific settings
+" ######## Plugin specific settings
+
+" ----for javascript libraries syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
 " ----for syntastic
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -402,7 +395,6 @@ let g:syntastic_javascript_jshint_args = '--config /home/avinash/.jshintrc'
 let g:syntastic_filetype_map = { "json": "javascript", }
 let g:syntastic_javascript_checkers = ["jshint", "jscs"]
 
-
 " ----for ctrlspace
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
@@ -411,12 +403,10 @@ if executable("ag")
     let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
 endif
 
-
 " ----for ycm
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
-
 
 " ----for airline
 let g:airline#extensions#bufferline#enabled = 1
@@ -427,10 +417,8 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 let g:airline#extensions#wordcount#enabled = 1
 
-
 " ----for ag
 let g:ag_working_path_mode="r"
-
 
 " ----for Nerdtree
 let g:nerdtree_tabs_open_on_gui_startup=0
@@ -440,11 +428,9 @@ let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 let NERDTreeIgnore = ['\.js.map$']
 
-
 " ----for snipmate
 let g:snips_trigger_key = '<c-tab>'
 let g:snips_trigger_key_backwards = '<c-s-tab>'
-
 
 " ----for ctrlp
 let g:ctrlp_use_caching = 0
@@ -467,33 +453,23 @@ else
                 \ }
 endif
 
-
 " ----for gitgutter
 let g:gitgutter_max_signs = 200
 let g:gitgutter_highlight_lines = 1
 let g:gitgutter_enabled = 1
 
-
 " ----for indentguides
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 
-
 " ----for delimitmate
-
-" Delimitmate place cursor correctly n multiline objects e.g.
-" if you press enter in {} cursor still be
-" in the middle line instead of the last
 let delimitMate_expand_cr = 1
-
-" Delimitmate place cursor correctly in singleline pairs e.g.
-" if x - cursor if you press space in {x} result will be { x } instead of { x}
 let delimitMate_expand_space = 1
-
-" Without this we can't disable delimitMate for specific file types
 let loaded_delimitMate = 1
 
-" ----All the function definitions
+
+" ######## All the function definitions
+
 function! ShowMouseMode()
     if (&mouse == 'a')
         set number
@@ -505,7 +481,6 @@ function! ShowMouseMode()
         echo "mouse-xterm"
     endif
 endfunction
-
 
 function! AirLineInit()
     let g:airline_exclude_preview = 1
@@ -524,7 +499,6 @@ function! AirLineInit()
     let g:airline_section_y = airline#section#create(['%c'])
     let g:airline_section_z = airline#section#create_right(['%l/%L'])
 endfunction
-
 
 function! MyFoldText()
     let line = getline(v:foldstart)
