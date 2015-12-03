@@ -239,7 +239,6 @@ hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
 " ----general mappings
 map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
-nnoremap ; "0p
 nmap <silent>[ :lprev<cr>    " previous syntastic error
 nmap <silent>] :lnext<cr>    " next syntastic error
 
@@ -262,7 +261,7 @@ map  <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<C
 imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 
 " replace normal command mode with skybison
-nnoremap : :<c-u>call SkyBison("")<cr>
+nnoremap ; :<c-u>call SkyBison("")<cr>
 
 " ----Leader key mappings
 nnoremap <leader>a  ggVG
