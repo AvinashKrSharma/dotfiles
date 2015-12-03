@@ -288,10 +288,9 @@ nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i  gg=G''
 nnoremap <leader>l  :NERDTreeFind<CR>
+nnoremap <leader>m  :source $MYVIMRC<CR>
 nnoremap <leader>n  :NERDTreeToggle<CR>
 nnoremap <leader>o  :OverCommandLine<CR>
-nnoremap <leader>p  <Plug>yankstack_substitute_older_paste
-nnoremap <leader>P  <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>q  :q<CR>
 vmap     <leader>r  :Tabularize/ /l0<cr>
 nnoremap <leader>s  :%s//<left>
