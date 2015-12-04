@@ -1,4 +1,4 @@
-" ########Install important stuff like vim-plug, npm, jshint, csslint
+" ######## Install important stuff like vim-plug, npm, jshint, csslint
 
 " ----For npm
 
@@ -24,6 +24,9 @@ if !isdirectory("~/.vim/tmp")
     call mkdir("~/.vim/tmp", "p")
 endif
 
+
+" ######## Install jshint and csslint
+
 " ----Install jshint and csslint for syntastic
 " Path to jshint if it not installed, then use local installation
 if isNpmInstalled
@@ -35,6 +38,9 @@ if isNpmInstalled
     endif
 endif
 
+
+" ######## More plugin related stuff
+
 " ----Turn off filetype plugins before bundles init, to make every work sane
 filetype off
 
@@ -45,29 +51,26 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     let g:doPlugInstall = "set"
 endif
 
-" Vim-plug plugin management
+" ----Vim-plug plugin management
 call plug#begin('~/.vim/bundle')
 
-" general plugins
-Plug 'flazz/vim-colorschemes'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'szw/vim-ctrlspace'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+" core plugins
 Plug 'kien/ctrlp.vim'
-Plug 'paradigm/SkyBison'
-Plug 'scrooloose/syntastic'
 Plug 'bling/vim-airline'
-Plug 'tpope/vim-fugitive'
+Plug 'szw/vim-ctrlspace'
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
-Plug 'tomtom/tcomment_vim'
 Plug 'rking/ag.vim', {'on': 'Ag'}
+Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
-Plug 'osyo-manga/vim-over'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'sjl/gundo.vim'
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-fugitive'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
+Plug 'paradigm/SkyBison'
+Plug 'osyo-manga/vim-over'
 Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-unimpaired'
@@ -79,6 +82,9 @@ Plug 'sickill/vim-pasta'
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
+Plug 'xolox/vim-misc'
+Plug 'flazz/vim-colorschemes'
+Plug 'xolox/vim-colorscheme-switcher'
 
 "html related
 Plug 'msanders/snipmate.vim'
@@ -103,6 +109,9 @@ call plug#end()
 if exists('doPlugInstall') 
     PlugInstall | q
 endif
+
+
+" ######## Vim settings
 
 " ----important
 set nocompatible
@@ -219,16 +228,16 @@ colorscheme tir_black
 filetype plugin indent on
 
 
-" ########Some more settings
+" ######## Some more settings
 
-" if You have problem with background, uncomment this line
+" ----if You have problem with background, uncomment this line
 let g:solarized_termtrans=1
 
-" highlight spell errors
+" ----highlight spell errors
 hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
 
 
-" ########Mappings
+" ######## Mappings
 
 " ----general mappings
 map <F7> :setlocal spell! spell?<CR>
