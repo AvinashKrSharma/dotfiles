@@ -59,15 +59,15 @@ Plug 'kien/ctrlp.vim'
 Plug 'bling/vim-airline'
 Plug 'szw/vim-ctrlspace'
 Plug 'sheerun/vim-polyglot'
-Plug 'rking/ag.vim', {'on': 'Ag'}
-Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'sjl/gundo.vim'
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
+Plug 'rking/ag.vim', {'on': 'Ag'}
+Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
+Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'paradigm/SkyBison'
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
@@ -79,7 +79,7 @@ Plug 'gorkunov/smartpairs.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
 Plug 'sickill/vim-pasta'
-Plug 'vim-scripts/DirDiff.vim'
+Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'xolox/vim-misc'
@@ -275,7 +275,7 @@ nnoremap ; :<c-u>call SkyBison("")<cr>
 " ----Leader key mappings
 nnoremap <leader>a  ggVG
 nnoremap <leader>b  :buffers<CR>:buffer<Space>
-map      <leader>c  <c-_><c-_>
+map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
 nnoremap <leader>e  :SyntasticToggleMode<CR>
 nnoremap <leader>f  :Autoformat<CR>
