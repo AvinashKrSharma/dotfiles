@@ -70,7 +70,7 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'paradigm/SkyBison'
-Plug 'osyo-manga/vim-over'
+Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-unimpaired'
