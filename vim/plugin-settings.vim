@@ -1,0 +1,91 @@
+" ######## Plugin specific settings
+
+" ----for javascript libraries syntax
+let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
+
+" ----for syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_jump=1
+let g:syntastic_enable_highlighting=1
+let g:syntastic_echo_current_error=1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
+let g:syntastic_csslint_options="--warnings=none"
+let g:syntastic_javascript_jshint_args = '--config /home/avinash/.jshintrc'
+let g:syntastic_filetype_map = { "json": "javascript", }
+let g:syntastic_javascript_checkers = ["jshint", "jscs"]
+
+" ----for ctrlspace
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
+if executable("ag")
+    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+endif
+
+" ----for ycm
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+
+" ----for airline
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
+let g:airline#extensions#wordcount#enabled = 1
+
+" ----for ag
+let g:ag_working_path_mode="r"
+
+" ----for Nerdtree
+let g:nerdtree_tabs_open_on_gui_startup=0
+let NERDTreeMinimalUI=1
+let NERDTreeMouseMode=2
+let NERDTreeShowHidden=1
+let NERDTreeKeepTreeInNewTab=1
+let NERDTreeIgnore = ['\.js.map$']
+
+" ----for snipmate
+let g:snips_trigger_key = '<c-tab>'
+let g:snips_trigger_key_backwards = '<c-s-tab>'
+
+" ----for ctrlp
+let g:ctrlp_use_caching = 0
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:25'
+let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+            \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+    let g:ctrlp_prompt_mappings = {
+                \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+                \ }
+endif
+
+" ----for gitgutter
+let g:gitgutter_max_signs = 200
+let g:gitgutter_highlight_lines = 1
+let g:gitgutter_enabled = 1
+
+" ----for indentguides
+let g:indent_guides_start_level = 1
+let g:indent_guides_guide_size = 1
+
+" ----for delimitmate
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
+let loaded_delimitMate = 1
