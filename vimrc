@@ -52,7 +52,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " include the plugins file
-source vim/plugins.vim
+source ~/dotfiles/vim/plugins.vim
 
 " ----Install Plugins
 if exists('doPlugInstall') 
@@ -60,7 +60,7 @@ if exists('doPlugInstall')
 endif
 
 " include settings for vim
-source vim/settings.vim
+source ~/dotfiles/vim/settings.vim
 
 " ######## Some more settings
 
@@ -71,16 +71,16 @@ let g:solarized_termtrans=1
 hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
 
 " include mappings
-source vim/mappings.vim
+source ~/dotfiles/vim/mappings.vim
 
 " include abbreviations
-source vim/abbreviations.vim
+source ~/dotfiles/vim/abbreviations.vim
 
 " include autocommands
-source vim/autocommands.vim
+source ~/dotfiles/vim/autocommands.vim
 
 "include plugins-settings
-source vim/plugin-settings.vim
+source ~/dotfiles/vim/plugin-settings.vim
 
 " include functions file
-source vim/functions.vim
+source ~/dotfiles/vim/functions.vim
