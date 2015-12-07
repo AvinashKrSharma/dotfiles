@@ -33,6 +33,25 @@ set -g visual-activity on
 # re-number windows when one is closed
 set -g renumber-windows on
 
+# Start numbering at 1
+set -g base-index 1
+
+# Activity monitoring
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Vi copypaste mode
+set-window-option -g mode-keys vi
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'y' copy-selection
+
+# reload config
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+# auto window rename
+set-window-option -g automatic-rename
+
+
 ###########################
 # Status Bar
 ###########################
@@ -53,6 +72,7 @@ set -g status-left '#[fg=green]#S#[fg=blue] #I:#P #[default]'
 # show hostname, date, time, and battery in right status bar
 set-option -g status-right '#[fg=green]#H#[default] %m/%d/%y %I:%M\
  #[fg=red]#(battery discharging)#[default]#(battery charging)'
+
 
 ###########################
 # Colors
@@ -81,3 +101,6 @@ set -g pane-active-border-bg black
 unbind C-b
 set -g prefix C-z
 
+# for splits
+bind-key v split-window -h
+bind-key s split-window
