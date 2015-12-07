@@ -14,6 +14,9 @@ setw -g mode-keys vi
 # enable mouse
 setw -g mode-mouse on
 
+# select pane with mouse-click
+set mouse-select-pane on
+
 # decrease command delay (increases vim responsiveness)
 set -sg escape-time 1
 
