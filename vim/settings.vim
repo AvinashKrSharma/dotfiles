@@ -113,3 +113,6 @@ let mapleader = "\<Space>"
 set t_Co=256
 colorscheme tir_black
 filetype plugin indent on
+
+" ----highlight spell errors
+hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
