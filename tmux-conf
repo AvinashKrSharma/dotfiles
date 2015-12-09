@@ -44,9 +44,6 @@ bind-key -t vi-copy 'y' copy-selection
 # reload config
 bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
 
-# auto window rename
-set-window-option -g automatic-rename
-
 
 ###########################
 # Status Bar
