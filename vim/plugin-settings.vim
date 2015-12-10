@@ -12,9 +12,8 @@ let g:syntastic_auto_jump=1
 let g:syntastic_enable_highlighting=1
 let g:syntastic_echo_current_error=1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_quiet_messages = { "type": "style" }
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
-let g:syntastic_csslint_options="--warnings=none"
-let g:syntastic_javascript_jshint_args = '--config /home/avinash/.jshintrc'
 let g:syntastic_filetype_map = { "json": "javascript", }
 let g:syntastic_javascript_checkers = ["jshint", "jscs"]
 
