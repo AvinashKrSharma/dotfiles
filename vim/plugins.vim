@@ -24,6 +24,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesToggle'}
 Plug 'gorkunov/smartpairs.vim'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'vim-scripts/YankRing.vim'
 Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
 Plug 'sickill/vim-pasta'
 Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}

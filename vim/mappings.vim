@@ -61,6 +61,7 @@ nnoremap <leader>i  gg=G''
 nnoremap <leader>l  :IndentGuidesToggle<CR>
 nnoremap <leader>m  :source $MYVIMRC<CR>
 nnoremap <leader>n  :NERDTreeToggle<CR>
+" leader p is mapped to ctrlp
 nnoremap <leader>q  :q<CR>
 nnoremap <leader>r  :NERDTreeFind<CR>
 vnoremap <leader>t  :Tabularize/ /l0<cr>
@@ -69,6 +70,7 @@ nnoremap <leader>tn :TernRename<CR>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 nnoremap <leader>w <c-w>w
+nnoremap <leader>y :YRShow<CR>
 
 nnoremap <leader>o  :OverCommandLine<CR>
 nnoremap <leader><leader> :update<CR>

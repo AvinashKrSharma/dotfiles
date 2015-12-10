@@ -16,6 +16,8 @@ let g:syntastic_quiet_messages = { "type": "style" }
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 let g:syntastic_filetype_map = { "json": "javascript", }
 let g:syntastic_javascript_checkers = ["jshint", "jscs"]
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '!'
 
 " ----for ctrlspace
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
@@ -29,6 +31,9 @@ endif
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+
+" ----for polyglot
+let g:polyglot_disabled = ['arduino', 'blade', 'c++11', 'clojure', 'cucumber', 'dart', 'elm', 'elixir', 'emblem', 'erlang', 'glsl', 'go', 'groovy', 'haskell', 'haxe', 'jinja', 'julia', 'kotlin', 'latex', 'liquid', 'objc', 'ocaml', 'octave', 'opencl', 'perl', 'puppet', 'qml', 'ragel', 'r-lang', 'rspec', 'ruby', 'rust', 'sbt', 'scala', 'slim', 'solidity', 'swift', 'systemd', 'textile', 'thrift', 'tomdoc', 'toml', 'twig', 'vala', 'vbnet', 'vcl', 'vm', 'yard']
 
 " ----for airline
 let g:airline#extensions#bufferline#enabled = 1
@@ -61,9 +66,7 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:25'
-let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-            \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|tmp|log|.bower-cache|.bower-registry|.bower-tmp)|(\.(swp|ico|png|jpg|git|svn))$'
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 
@@ -88,3 +91,8 @@ let g:indent_guides_guide_size = 1
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 let loaded_delimitMate = 1
+
+" ----for yankring
+let g:yankring_window_use_right = 0
+let g:yankring_replace_n_pkey = ''
+let g:yankring_replace_n_nkey = ''
