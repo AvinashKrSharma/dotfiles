@@ -54,5 +54,9 @@ if has("autocmd")
         au Syntax   * RainbowParenthesesLoadSquare
         au Syntax   * RainbowParenthesesLoadBraces
 
+        "save all files on focus lost, ignoring warnings about untitled buffers
+        au FocusLost * silent! wa
+
+
     augroup END
 endif

@@ -22,6 +22,7 @@ function! AirLineInit()
     let g:airline_right_sep=' '
     let g:airline_right_sep = ' '
     let g:airline_left_sep = ' '
+    let g:airline_powerline_fonts = 1
     let g:airline_section_a = airline#section#create(['mode'])
     let g:airline_section_b = airline#section#create(['branch'])
     let g:airline_section_c = airline#section#create(['%f'])

@@ -43,7 +43,10 @@ set ttyfast
 set title
 
 " ----using the mouse
-set mouse=a
+if has('mouse')
+    set mouse=a
+    set ttymouse=xterm2
+endif
 
 " ----messages and info
 set shortmess=I
@@ -53,7 +56,7 @@ set ruler
 
 " ----editing text
 set modifiable
-set textwidth=80
+set textwidth=120
 set backspace=indent,eol,start
 set completeopt=menuone,preview
 set omnifunc=syntaxcomplete#Complete
@@ -102,6 +105,7 @@ set formatprg=par\ -w50
 set iskeyword+=-
 
 " ----multi-byte characters
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
 set encoding=utf-8
 set fileencoding=utf-8
 
@@ -116,3 +120,5 @@ filetype plugin indent on
 
 " ----highlight spell errors
 hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
+
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'

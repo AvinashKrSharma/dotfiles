@@ -2,7 +2,9 @@
 call plug#begin('~/.vim/bundle')
 
 " core plugins
-Plug 'kien/ctrlp.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'benmills/vimux'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bling/vim-airline'
 Plug 'szw/vim-ctrlspace'
 Plug 'sheerun/vim-polyglot'
@@ -13,7 +15,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'paradigm/SkyBison'
