@@ -2,7 +2,8 @@
 call plug#begin('~/.vim/bundle')
 
 " core plugins
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/nerd-fonts', {'do': './install.sh'}
+" Plug 'ryanoasis/vim-devicons'
 Plug 'benmills/vimux'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bling/vim-airline'
