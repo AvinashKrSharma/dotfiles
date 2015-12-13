@@ -61,7 +61,7 @@ endif
 source ~/dotfiles/vim/plugins.vim
 
 " Install Plugins
-if exists('doPlugInstall') 
+if exists('doPlugInstall')
     PlugInstall | q
 endif
 

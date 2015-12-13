@@ -26,6 +26,10 @@ nnoremap <C-l> <C-f>
 nnoremap gb :bn<cr>
 nnoremap gv :bp<cr>
 
+" helpers for dealing with other people's code
+nmap \t :set ts=4 sts=4 sw=4 noet<cr>
+nmap \s :set ts=4 sts=4 sw=4 et<cr>
+
 " toggle between terminal and vim mouse
 map  <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
@@ -67,6 +71,7 @@ nnoremap <leader>r  :NERDTreeFind<CR>
 vnoremap <leader>t  :Tabularize/ /l0<cr>
 nnoremap <leader>tr :TernRefs<CR>
 nnoremap <leader>tn :TernRename<CR>
+nnoremap <leader>tw :%s/\s\+$//e<CR>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 nnoremap <leader>w <c-w>w
