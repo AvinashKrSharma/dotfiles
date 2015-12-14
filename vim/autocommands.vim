@@ -26,6 +26,9 @@ if has("autocmd")
         autocmd FileType *        setlocal colorcolumn=+1
         autocmd FileType nerdtree setlocal colorcolumn=""
 
+        " Run neomake on buffer write
+        autocmd! BufWritePost * Neomake
+
         " When editing a file, always jump to the last known cursor position.
         " Don't do it for commit messages, when the position is invalid, or when
         " inside an event handler.
@@ -45,7 +48,7 @@ if has("autocmd")
         " set indent style for html files
         autocmd FileType html setlocal shiftwidth=2 tabstop=2
 
-        " for airline 
+        " for airline
         autocmd VimEnter * call AirLineInit()
 
         " Always on - rainbow paranthesis

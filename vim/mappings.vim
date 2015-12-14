@@ -5,8 +5,12 @@ map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
 
 " mappings for syntastic error navigation
-nmap <silent>[ :lprev<cr>    " previous syntastic error
-nmap <silent>] :lnext<cr>    " next syntastic error
+" nmap <silent>[ :lprev<cr>    " previous syntastic error
+" nmap <silent>] :lnext<cr>    " next syntastic error
+
+" mappings for neomake error navigation
+nnoremap <silent>] :lprev<cr>
+nnoremap <silent>[ :call LocationNext()<cr>
 
 " to create new line without entering insert mode
 nmap oo o<Esc>k
@@ -42,7 +46,8 @@ nnoremap <leader>a  ggVG
 nnoremap <leader>b  :buffers<CR>:buffer<Space>
 map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
-nnoremap <leader>e  :SyntasticToggleMode<CR>
+" nnoremap <leader>e  :SyntasticToggleMode<CR>
+nnoremap <leader>e  :Neomake<CR>
 nnoremap <leader>f  :Autoformat<CR>
 
 " specific to git fugitive

@@ -11,7 +11,8 @@ Plug 'szw/vim-ctrlspace'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
+Plug 'benekastah/neomake'
 Plug 'tpope/vim-fugitive'
 Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
