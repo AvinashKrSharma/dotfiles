@@ -40,9 +40,7 @@ endif
 " ----For creating backup directory if does not exist
 "
 " If backup directory does not exist, then create it
-if !isdirectory("~/.vim/tmp")
-    call mkdir("~/.vim/tmp", "p")
-endif
+silent !mkdir ~/.vim/tmp > /dev/null 2>&1
 
 
 " ----For Plugins

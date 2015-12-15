@@ -82,12 +82,12 @@ set diffopt=vertical
 
 " ----reading and writing files
 set backup
-set backupdir=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupdir=~/.vim/tmp
 set autowrite
 set autoread
 
 " ----the swap file
-set directory=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim/tmp
 set swapfile
 
 " ----command line editing
