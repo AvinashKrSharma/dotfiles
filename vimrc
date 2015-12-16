@@ -48,20 +48,8 @@ silent !mkdir ~/.vim/tmp > /dev/null 2>&1
 " Turn off filetype plugins before bundles init, to make every work sane
 filetype off
 
-" Download vim-plug if already not present
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    let g:doPlugInstall = "set"
-endif
-
 " include the plugins file
 source ~/dotfiles/vim/plugins.vim
-
-" Install Plugins
-if exists('doPlugInstall')
-    PlugInstall | q
-endif
 
 " ----Vim settings
 source ~/dotfiles/vim/settings.vim
