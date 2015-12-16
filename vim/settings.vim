@@ -39,13 +39,16 @@ set splitbelow
 set splitright
 
 " ----terminal
-set ttyfast
+    set ttyfast
 set title
 
 " ----using the mouse
 if has('mouse')
     set mouse=a
-    set ttymouse=xterm2
+endif
+
+if !has('nvim')
+set ttymouse=xterm2
 endif
 
 " ----messages and info
