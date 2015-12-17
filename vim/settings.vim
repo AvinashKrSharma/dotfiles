@@ -61,6 +61,7 @@ set ruler
 set modifiable
 set textwidth=120
 set backspace=indent,eol,start
+set complete=.,w,b,u,t,k
 set completeopt=menuone,preview
 set omnifunc=syntaxcomplete#Complete
 set matchpairs+=<:>
@@ -123,5 +124,8 @@ filetype plugin indent on
 
 " ----highlight spell errors
 hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
+
+" ----highlight bad words in red
+hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
 
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
