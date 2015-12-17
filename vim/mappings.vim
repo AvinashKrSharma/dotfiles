@@ -12,6 +12,22 @@ nnoremap \ :echo &mod<CR>
 nnoremap <silent>] :lprev<cr>
 nnoremap <silent>[ :call LocationNext()<cr>
 
+" exit insert, dd line, enter insert
+inoremap <c-d> <esc>ddi
+
+" go to first non space character
+nnoremap H ^
+
+" Navigate between display lines
+noremap  <silent> <Up>   gk
+noremap  <silent> <Down> gj
+noremap  <silent> k gk
+noremap  <silent> j gj
+noremap  <silent> <Home> g<Home>
+noremap  <silent> <End>  g<End>
+inoremap <silent> <Home> <C-o>g<Home>
+inoremap <silent> <End>  <C-o>g<End>
+
 " to create new line without entering insert mode
 nmap oo o<Esc>k
 nmap OO O<Esc>j
@@ -40,6 +56,13 @@ imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<C
 
 " mapping for skybison's command mode
 nnoremap ; :<c-u>call SkyBison("")<cr>
+
+" make filepath autocomplete mapping let painful
+inoremap <c-f> <c-x><c-f>
+
+" Align blocks of text and keep them selected
+vmap < <gv
+vmap > >gv
 
 " ----Leader key mappings
 nnoremap <leader>a  ggVG
