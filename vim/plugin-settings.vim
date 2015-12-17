@@ -55,9 +55,31 @@ let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 let NERDTreeIgnore = ['\.js.map$']
 
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', 'none')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#6699CC', 'none')
+call NERDTreeHighlightFile('config', 'yellow', 'none', '#d8a235', 'none')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', '#d8a235', 'none')
+call NERDTreeHighlightFile('json', 'green', 'none', '#d8a235', 'none')
+call NERDTreeHighlightFile('html', 'yellow', 'none', '#d8a235', 'none')
+call NERDTreeHighlightFile('css', 'cyan', 'none', '#5486C0', 'none')
+call NERDTreeHighlightFile('less', 'cyan', 'none', '#5486C0', 'none')
+call NERDTreeHighlightFile('scss', 'cyan', 'none', '#5486C0', 'none')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', 'none')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', 'none')
+call NERDTreeHighlightFile('ts', 'Blue', 'none', '#6699cc', 'none')
+call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', 'none')
+call NERDTreeHighlightFile('gitconfig', 'black', 'none', '#686868', 'none')
+call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#7F7F7F', 'none')
+
 " ----for snipmate
 let g:snips_trigger_key = '<c-tab>'
 let g:snips_trigger_key_backwards = '<c-s-tab>'
+
+" ----for emmet
+" Enable Emmet in all modes
+let g:user_emmet_mode='a'
+let g:use_emmet_complete_tag = 1
+let g:user_emmet_install_global = 0
 
 " ----for ctrlp
 let g:ctrlp_use_caching = 0
@@ -96,3 +118,11 @@ let loaded_delimitMate = 1
 let g:yankring_window_use_right = 0
 let g:yankring_replace_n_pkey = ''
 let g:yankring_replace_n_nkey = ''
+
+" for vim-tmux-navigator
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <C-Down> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-Up> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-Right> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-Left> :TmuxNavigateLeft<CR>
+nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>

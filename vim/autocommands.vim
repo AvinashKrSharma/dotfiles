@@ -60,6 +60,9 @@ if has("autocmd")
         "save all files on focus lost, ignoring warnings about untitled buffers
         au FocusLost * silent! wa
 
+        "for emmet
+        autocmd FileType html imap <buffer><expr><tab> <sid>expand_html_tab()
+        autocmd FileType html,css,ejs EmmetInstall
 
     augroup END
 endif

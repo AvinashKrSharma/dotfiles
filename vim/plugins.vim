@@ -41,15 +41,18 @@ Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'paradigm/SkyBison'
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-unimpaired'
-Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesToggle'}
+Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
+Plug 'Shougo/FastFold'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
 Plug 'sickill/vim-pasta'
 Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
+Plug 'editorconfig/editorconfig-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'xolox/vim-misc'
@@ -61,6 +64,7 @@ Plug 'msanders/snipmate.vim'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'gregsexton/MatchTag', {'for': 'html'}
 Plug 'docunext/closetag.vim', {'for': 'html'}
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 
 "css related
 Plug 'gorodinskiy/vim-coloresque'
@@ -72,6 +76,10 @@ Plug 'burnettk/vim-angular', {'for': 'javascript'}
 Plug 'marijnh/tern_for_vim', {'build' : {'unix' : 'npm install'}}
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
+
+" Typescript
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
 
 call plug#end()
 
