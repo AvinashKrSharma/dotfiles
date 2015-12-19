@@ -1,5 +1,5 @@
-# Git aliases
-alias gb='git branch '                                                                                                                          
+# Git
+alias gb='git branch '
 alias ga='git add '
 alias gaa='git add -A'
 alias gc='git commit -m '
@@ -17,3 +17,9 @@ alias gch='git checkout '
 alias gcl='git clone '
 alias gl='git log --oneline --decorate --graph --color --summary'
 alias gst='git stash'
+
+# Vim
+alias v='vim'
+
+# Tmux
+alias t='tmux -2u'
