@@ -1,5 +1,5 @@
 " ####### If backup directory does not exist, then create it
-silent !mkdir ~/.vim/tmp > /dev/null 2>&1
+silent !mkdir $HOME/.vim/tmp > /dev/null 2>&1
 
 
 " ####### All the function definitions
@@ -336,6 +336,7 @@ set wildmode=list:longest,full      " pressing tab takes to next command
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
 set wildmenu        " show available option in command mode
 set undofile
+set undodir=~/.vim/tmp
 
 " ----executing external commands
 set formatprg=par\ -w50
