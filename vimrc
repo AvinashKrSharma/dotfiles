@@ -679,11 +679,3 @@ let loaded_delimitMate = 1
 let g:yankring_window_use_right = 0
 let g:yankring_replace_n_pkey = ''
 let g:yankring_replace_n_nkey = ''
-
-" for vim-tmux-navigator
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <C-Down> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-Up> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-Right> :TmuxNavigateRight<cr>
-nnoremap <silent> <C-Left> :TmuxNavigateLeft<CR>
-nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
