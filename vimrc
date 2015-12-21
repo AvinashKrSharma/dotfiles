@@ -185,7 +185,6 @@ Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'paradigm/SkyBison'
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-unimpaired'
 Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
