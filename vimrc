@@ -459,7 +459,7 @@ nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i  gg=G''
-nnoremap <leader>l  :IndentGuidesToggle<CR>
+nnoremap <leader>l  :IndentLinesToggle<CR>
 nnoremap <leader>m  :source $MYVIMRC<CR>
 nnoremap <leader>n  :NERDTreeToggle<CR>
 " leader p is mapped to ctrlp
