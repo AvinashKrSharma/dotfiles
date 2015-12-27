@@ -1,5 +1,5 @@
 #list of packages to be installed
-packages="curl git vim nodejs jshint tslint csslint lessc node-sass"
+packages="curl git vim nodejs jshint tslint csslint lessc node-sass zsh tmux"
 
 #for nodejs
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
@@ -11,6 +11,12 @@ sudo apt-get install -y $packages
 
 #make required directories
 mkdir $HOME/.vim/tmp
+
+#install the awesome oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+#make zsh default shell
+chsh -s $(which zsh)
 
 #create symlinks
 ln -s dotfiles/aliases ~/.aliases
