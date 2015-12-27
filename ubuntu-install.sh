@@ -18,6 +18,9 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 #make zsh default shell
 chsh -s $(which zsh)
 
+#remove default .zshrc file
+rm ~/.zshrc
+
 #create symlinks
 ln -s dotfiles/aliases ~/.aliases
 ln -s dotfiles/bash-profile ~/.bash_profile
