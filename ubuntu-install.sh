@@ -18,8 +18,8 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 #make zsh default shell
 chsh -s $(which zsh)
 
-#remove default .zshrc file
-rm ~/.zshrc
+#backup default .zshrc file created by oh-my-zsh
+cp ~/.zshrc.backup ~/.zshrc
 
 #create symlinks
 ln -s dotfiles/aliases ~/.aliases
