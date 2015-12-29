@@ -1,4 +1,4 @@
-export ZSH=/home/avinash/.oh-my-zsh
+ export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="ys"
 
@@ -25,7 +25,7 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # source in the aliases
-source ~/.aliases
+source $HOME/.aliases
 
 # reverse esc and caps lock keys
 xmodmap -e "clear Lock"
