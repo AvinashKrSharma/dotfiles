@@ -1,5 +1,5 @@
 #list of packages to be installed
-packages="curl git vim nodejs jshint js-beautify tslint typescript-formatter csslint tidy lessc node-sass zsh tmux"
+packages="curl git vim nodejs jshint js-beautify tslint typescript-formatter csslint tidy lessc node-sass zsh tmux default-jdk"
 
 #for nodejs
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
