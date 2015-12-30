@@ -574,7 +574,6 @@ let NERDTreeIgnore = ['\.js.map$']
 
 call NERDTreeHighlightFile('jade', 'green', 'none', 'green', 'none')
 call NERDTreeHighlightFile('md', 'blue', 'none', '#6699CC', 'none')
-call NERDTreeHighlightFile('config', 'yellow', 'none', '#d8a235', 'none')
 call NERDTreeHighlightFile('conf', 'yellow', 'none', '#d8a235', 'none')
 call NERDTreeHighlightFile('json', 'green', 'none', '#d8a235', 'none')
 call NERDTreeHighlightFile('html', 'yellow', 'none', '#d8a235', 'none')
@@ -585,7 +584,7 @@ call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', 'none')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', 'none')
 call NERDTreeHighlightFile('ts', 'Blue', 'none', '#6699cc', 'none')
 call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', 'none')
-call NERDTreeHighlightFile('gitconfig', 'black', 'none', '#686868', 'none')
+call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#7F7F7F', 'none')
 call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#7F7F7F', 'none')
 
 " ----for snipmate
