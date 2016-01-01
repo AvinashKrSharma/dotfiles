@@ -470,7 +470,7 @@ let NERDTreeMinimalUI=1
 let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
-let NERDTreeIgnore = ['\.js.map$']
+let NERDTreeIgnore=['.git$[[dir]]', '\.js.map$[[file]]']
 
 " shamelessly copied from mhartington's nvimrc
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
