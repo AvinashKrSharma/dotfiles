@@ -466,6 +466,7 @@ let g:ag_working_path_mode="r"
 
 " ----for Nerdtree
 let g:nerdtree_tabs_open_on_gui_startup=0
+let NERDTreeQuitOnOpen=1
 let NERDTreeMinimalUI=1
 let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
