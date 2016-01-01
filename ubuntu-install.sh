@@ -1,5 +1,7 @@
 #list of packages to be installed
-packages="curl git vim nodejs jshint js-beautify tslint typescript-formatter csslint tidy lessc node-sass zsh tmux default-jdk"
+packages="curl git vim nodejs tidy zsh tmux default-jdk"
+
+npm_modules="jshint js-beautify tslint node-sass less typescript-formatter csslint instant-markdown-d"
 
 #for nodejs
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
@@ -7,7 +9,11 @@ curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 #clone dotfiles in home directory
 git clone https://github.com/AvinashKrSharma/dotfiles.git ~
 
+#install apt-get packages
 sudo apt-get install -y $packages
+
+#install npm modules
+sudo npm install -g $npm_modules
 
 #make required directories
 mkdir $HOME/.vim/tmp
