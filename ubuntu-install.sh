@@ -1,5 +1,5 @@
 #list of packages to be installed
-packages="curl git vim nodejs tidy zsh tmux default-jdk"
+packages="curl git vim nodejs tidy zsh tmux build-essentials cmake python-dev default-jdk"
 
 npm_modules="jshint js-beautify tslint node-sass less typescript-formatter csslint instant-markdown-d"
 
