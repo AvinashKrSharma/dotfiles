@@ -63,7 +63,6 @@ Plug 'msanders/snipmate.vim'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'gregsexton/MatchTag', {'for': 'html'}
 Plug 'docunext/closetag.vim', {'for': 'html'}
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 
 "css related
 Plug 'gorodinskiy/vim-coloresque'
