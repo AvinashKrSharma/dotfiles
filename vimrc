@@ -130,7 +130,7 @@ set splitbelow
 set splitright
 
 " ----terminal
-    set ttyfast
+set ttyfast
 set title
 
 " ----using the mouse
@@ -139,7 +139,7 @@ if has('mouse')
 endif
 
 if !has('nvim')
-set ttymouse=xterm2
+    set ttymouse=xterm2
 endif
 
 " ----messages and info
@@ -296,7 +296,7 @@ map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
 " nnoremap <leader>e  :SyntasticToggleMode<CR>
 nnoremap <leader>e  :Neomake<CR>
-nnoremap <leader>f  :Autoformat<CR>
+nnoremap <leader>f  :Autoformat<CR>:update<CR>
 
 " specific to git fugitive
 nnoremap <leader>gb :Gblame<CR>
