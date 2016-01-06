@@ -288,6 +288,9 @@ inoremap <c-f> <c-x><c-f>
 vmap < <gv
 vmap > >gv
 
+" toggle textwidth
+nnoremap cot :call ToggleTextWidth()<cr>
+
 " ----Leader key mappings
 nnoremap <leader>a  ggVG
 nnoremap <leader>b  :buffers<CR>:buffer<Space>
@@ -354,6 +357,7 @@ if has("autocmd")
         autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
         autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType markdown      set textwidth=0
 
         " Auto reload vim after its changed
         au BufWritePost *.vim  source $MYVIMRC | AirlineRefresh
@@ -543,6 +547,16 @@ let g:yankring_replace_n_nkey = ''
 
 
 " ####### Function definitions
+function! ToggleTextWidth()
+    if (&textwidth == 120)
+        set textwidth=0
+        echo "textwidth = 0"
+    else
+        set textwidth=120
+        echo "textwidth = 120"
+    endif
+endfunction
+
 function! ShowMouseMode()
     if (&mouse == 'a')
         set number
