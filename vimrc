@@ -76,8 +76,8 @@ Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
 
 " Typescript
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+" Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
 
 call plug#end()
 
