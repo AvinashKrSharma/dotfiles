@@ -23,7 +23,7 @@ call plug#begin('~/.vim/bundle')
 " core plugins
 " Plug 'ryanoasis/nerd-fonts', {'do': './install.sh'}
 " Plug 'ryanoasis/vim-devicons'
-Plug 'benmills/vimux'
+" Plug 'benmills/vimux'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bling/vim-airline'
 Plug 'szw/vim-ctrlspace'
@@ -40,6 +40,7 @@ Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'X
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'paradigm/SkyBison'
+Plug 'ervandew/supertab'
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
 Plug 'Raimondi/delimitMate'
