@@ -12,6 +12,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     let g:doPlugInstall = "set"
 endif
 
+" Install Plugins for the first time
 if empty(glob('~/.vim/autoload/plug.vim'))
     let g:doPlugInstall = "set"
 endif
@@ -538,7 +539,6 @@ let g:indent_guides_guide_size = 1
 " ----for delimitmate
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
-let loaded_delimitMate = 1
 
 " ----for yankring
 let g:yankring_window_use_right = 0
