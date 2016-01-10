@@ -1,26 +1,27 @@
 # Git
-alias gb='git branch '
 alias ga='git add '
 alias gaa='git add -A'
+alias gb='git branch '
 alias gc='git commit -m '
 alias gca='git commit --amend'
+alias gcc='git commit'
+alias gch='git checkout '
+alias gcl='git clone '
 alias gd='git diff '
 alias gdc='git diff --cached'
 alias gds='git diff --staged'
-alias gsh='git show '
-alias gps='git push '
-alias gpso='git push origin '
+alias gl='git log --oneline --decorate --graph --color --summary'
+alias gm='git merge '
 alias gpl='git pull '
 alias gplo='git pull origin '
-alias gm='git merge '
+alias gps='git push '
+alias gpso='git push origin '
 alias gs='git status '
-alias gch='git checkout '
-alias gcl='git clone '
-alias gl='git log --oneline --decorate --graph --color --summary'
+alias gsh='git show '
 alias gst='git stash'
-
-# Vim
-alias v='vim'
 
 # Tmux
 alias t='tmux -2u'
+
+# Vim
+alias v='vim'
