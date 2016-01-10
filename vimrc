@@ -123,6 +123,7 @@ set hlsearch
 set cursorcolumn
 set cursorline
 set colorcolumn=+1
+set spell
 
 " ----multiple windows
 set laststatus=2        " always show airline status bar
@@ -241,9 +242,6 @@ nnoremap <silent>[ :call LocationNext()<cr>
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
 
-" go to first non space character
-nnoremap H ^
-
 " Navigate between display lines
 noremap  <silent> <Up>   gk
 noremap  <silent> <Down> gj
@@ -322,7 +320,7 @@ nnoremap <leader>i  gg=G''
 nnoremap <leader>l  :IndentLinesToggle<CR>
 nnoremap <leader>m  :source $MYVIMRC<CR>
 nnoremap <leader>n  :NERDTreeToggle<CR>
-" leader p is mapped to ctrlp
+nnoremap <leader>p  :YRShow<CR>
 nnoremap <leader>q  :q<CR>
 nnoremap <leader>r  :NERDTreeFind<CR>
 vnoremap <leader>t  :Tabularize/ /l0<cr>
@@ -332,7 +330,6 @@ nnoremap <leader>tw :%s/\s\+$//e<CR>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 nnoremap <leader>w <c-w>w
-nnoremap <leader>y :YRShow<CR>
 
 nnoremap <leader>o  :OverCommandLine<CR>
 nnoremap <leader><leader> :update<CR>
@@ -542,7 +539,9 @@ let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 
 " ----for yankring
+" make yanklist to appear at the bottom
 let g:yankring_window_use_right = 0
+" disable cycling through yanks
 let g:yankring_replace_n_pkey = ''
 let g:yankring_replace_n_nkey = ''
 
