@@ -1,16 +1,22 @@
 #list of packages to be installed
-packages="curl git vim nodejs tidy zsh tmux build-essentials cmake python-dev default-jdk editorconfig"
+packages="curl git vim tidy zsh tmux cmake python-dev default-jdk editorconfig"
 
 npm_modules="jshint js-beautify tslint node-sass less typescript-formatter csslint"
+
+#required beforehand(to be figured out why)
+sudo apt-get install -y build-essentials
+
+#upgrade before doing anything
+#sudo apt-get update
+
+#install apt-get packages
+sudo apt-get install -y $packages
 
 #for nodejs
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 
 #clone dotfiles in home directory
 git clone https://github.com/AvinashKrSharma/dotfiles.git ~
-
-#install apt-get packages
-sudo apt-get install -y $packages
 
 #install npm modules
 sudo npm install -g $npm_modules
