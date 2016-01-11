@@ -42,3 +42,5 @@ ln -s dotfiles/vimrc ~/.vimrc
 ln -s dotfiles/zshrc ~/.zshrc
 ln -s ~/.vim ~/.config/nvim
 ln -s dotfiles/vimrc ~/.config/nvim/init.vim
+
+echo "NOTE: zsh as default shell will be reflected after the next login"
