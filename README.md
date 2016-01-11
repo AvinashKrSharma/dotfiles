@@ -2,4 +2,4 @@
 
 ##Setting it up:
 
-cd ~ && sudo ./dotfiles/ubuntu-install.sh
+cd ~ && chmod +x dotfiles/ubuntu-install.sh && sudo ./dotfiles/ubuntu-install.sh
