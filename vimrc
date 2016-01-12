@@ -123,7 +123,7 @@ set hlsearch
 set cursorcolumn
 set cursorline
 set colorcolumn=+1
-set spell
+" set spell
 
 " ----multiple windows
 set laststatus=2        " always show airline status bar
@@ -184,7 +184,7 @@ set autowrite
 set autoread
 
 " ----the swap file
-set directory=~/.vim/tmp
+set directory=$HOME/.vim/tmp
 set swapfile
 
 " ----command line editing
