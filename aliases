@@ -25,3 +25,11 @@ alias t='tmux -2u'
 
 # Vim
 alias v='vim'
+
+# Ubuntu specific
+alias a="sudo apt-get "
+alias agg="sudo apt-get -y upgrade "
+alias agd="sudo apt-get -y update "
+alias agi="sudo apt-get -y install "
+alias agr="sudo apt-get -y remove "
+
