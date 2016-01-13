@@ -1,5 +1,5 @@
 #list of packages to be installed
-packages="curl git vim tidy zsh tmux cmake python-dev default-jdk editorconfig"
+packages="curl git vim tidy zsh tmux cmake python-dev default-jdk editorconfig silversearcher-ag"
 
 npm_modules="jshint js-beautify tslint node-sass less typescript-formatter csslint"
 
