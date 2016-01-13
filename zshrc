@@ -28,7 +28,14 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 
 # reverse esc and caps lock keys
-xmodmap -e "clear Lock"
-xmodmap -e "keycode 9 = Caps_Lock"
-xmodmap -e "keycode 66 = Escape"
-xmodmap -e "add Lock = Caps_Lock"
+# xmodmap -e "clear Lock"
+# xmodmap -e "keycode 9 = Caps_Lock"
+# xmodmap -e "keycode 66 = Escape"
+# xmodmap -e "add Lock = Caps_Lock"
+
+export NVM_DIR="/home/avinash/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export PATH=${PATH}:/home/avinash/arcanist/bin/
+
+source ~/arcanist/resources/shell/bash-completion
