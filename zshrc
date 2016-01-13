@@ -27,11 +27,8 @@ source $ZSH/oh-my-zsh.sh
 # source in the aliases
 source $HOME/.aliases
 
-# reverse esc and caps lock keys
-# xmodmap -e "clear Lock"
-# xmodmap -e "keycode 9 = Caps_Lock"
-# xmodmap -e "keycode 66 = Escape"
-# xmodmap -e "add Lock = Caps_Lock"
+#source keybindings
+source keybindings
 
 export NVM_DIR="/home/avinash/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
