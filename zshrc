@@ -28,7 +28,7 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 
 #source keybindings
-source keybindings
+source $HOME/dotfiles/keybindings
 
 export NVM_DIR="/home/avinash/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

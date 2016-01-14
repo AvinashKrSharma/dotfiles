@@ -10,4 +10,4 @@ PS1="\n\[\e[32;1m\](\[\e[37;1m\]\u\[\e[32;1m\])-(\[\e[37;1m\]\w\[\e[32;1m\])\$(p
 source ~/.aliases
 
 #source keybindings
-source keybindings
+source $HOME/dotfiles/keybindings
