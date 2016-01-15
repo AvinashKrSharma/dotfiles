@@ -394,8 +394,8 @@ if has("autocmd")
         autocmd InsertEnter * set relativenumber!
         autocmd InsertLeave * set relativenumber
 
-        " set indent style for html files
-        autocmd FileType html setlocal shiftwidth=2 tabstop=2
+        " set indent style and nowrap for html files
+        autocmd FileType html setlocal shiftwidth=2 tabstop=2 nowrap
 
         " for airline
         autocmd VimEnter * call AirLineInit()
