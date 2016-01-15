@@ -1,9 +1,9 @@
 # Ubuntu specific
 alias a="sudo apt-get "
-alias agd="sudo apt-get -y update "
-alias agg="sudo apt-get -y upgrade "
-alias agi="sudo apt-get -y install "
-alias agr="sudo apt-get -y remove "
+alias ad="sudo apt-get -y update "
+alias ag="sudo apt-get -y upgrade "
+alias ai="sudo apt-get -y install "
+alias ar="sudo apt-get -y remove "
 
 # Git
 alias ga='git add '
