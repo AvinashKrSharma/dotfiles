@@ -397,6 +397,9 @@ if has("autocmd")
         " set indent style and nowrap for html files
         autocmd FileType html setlocal shiftwidth=2 tabstop=2 nowrap
 
+        " set nowrap for jade files
+        autocmd FileType jade setlocal nowrap
+
         " for airline
         autocmd VimEnter * call AirLineInit()
 
