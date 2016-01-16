@@ -18,8 +18,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 
 DEFAULT_USER="avinash"
 
-ZSH_TMUX_AUTOSTART=true
-
 # source in the oh-my-zsh awesomeness
 source $ZSH/oh-my-zsh.sh
 
@@ -38,3 +36,10 @@ export NVM_DIR="/home/avinash/.nvm"
 export PATH=${PATH}:/home/avinash/arcanist/bin/
 
 source ~/arcanist/resources/shell/bash-completion
+
+# Open tmux session
+tmux attach &> /dev/null
+
+if [[ ! $TERM =~ screen  ]]; then
+    exec tmux -2q
+fi
