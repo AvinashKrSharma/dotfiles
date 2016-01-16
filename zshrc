@@ -27,7 +27,7 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # source in the aliases
-# source $HOME/.aliases
+source $HOME/.aliases
 
 #source keybindings
 source $HOME/dotfiles/keybindings
