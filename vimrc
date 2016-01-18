@@ -64,7 +64,7 @@ Plug 'xolox/vim-colorscheme-switcher'
 Plug 'msanders/snipmate.vim'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'gregsexton/MatchTag', {'for': 'html'}
-Plug 'docunext/closetag.vim', {'for': 'html'}
+Plug 'docunext/closetag.vim'
 
 "css related
 Plug 'gorodinskiy/vim-coloresque'
@@ -356,7 +356,6 @@ if has("autocmd")
         autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
         autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType markdown      set textwidth=0
 
         " Auto reload vim after its changed
         au BufWritePost *.vim  source $MYVIMRC | AirlineRefresh
@@ -397,8 +396,9 @@ if has("autocmd")
         " set indent style and nowrap for html files
         autocmd FileType html setlocal shiftwidth=2 tabstop=2 nowrap
 
-        " set nowrap for jade files
+        " set nowrap and textwidth for jade files
         autocmd FileType jade setlocal nowrap
+        autocmd FileType jade,markdown      set textwidth=0
 
         " for airline
         autocmd VimEnter * call AirLineInit()
@@ -421,6 +421,10 @@ endif
 
 
 " ####### Plugin specific settings
+
+let g:vim_json_syntax_conceal = 0 " Don't hide Json syntax.
+
+let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
 
 " ----for javascript libraries syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
