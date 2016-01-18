@@ -41,5 +41,5 @@ source ~/arcanist/resources/shell/bash-completion
 tmux attach &> /dev/null
 
 if [[ ! $TERM =~ screen  ]]; then
-    exec tmux -2q
+    exec tmux -2uq
 fi
