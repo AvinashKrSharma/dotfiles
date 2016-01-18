@@ -5,9 +5,13 @@ alias ag="sudo apt-get -y upgrade "
 alias ai="sudo apt-get -y install "
 alias ar="sudo apt-get -y remove "
 
+alias c="clear"
+
 # Some handy goto directories
 alias d="cd ~/dotfiles"
 alias dv="cd ~/dotfiles && vim"
+
+alias e="exit"
 
 # Git
 alias ga='git add '
