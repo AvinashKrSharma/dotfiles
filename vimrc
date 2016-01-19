@@ -296,6 +296,7 @@ nnoremap <leader>a  ggVG
 nnoremap <leader>b  :buffers<CR>:buffer<Space>
 map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
+nnoremap <leader>e  :%bd<CR>
 " nnoremap <leader>e  :SyntasticToggleMode<CR>
 nnoremap <leader>e  :Neomake<CR>
 nnoremap <leader>f  :Autoformat<CR>:update<CR>
