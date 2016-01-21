@@ -44,6 +44,3 @@ alias t='tmux -2u'
 
 # Vim
 alias v='vim'
-
-#Common 
-alias x="exit"

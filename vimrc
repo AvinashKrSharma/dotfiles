@@ -298,7 +298,7 @@ map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
 nnoremap <leader>e  :%bd<CR>
 " nnoremap <leader>e  :SyntasticToggleMode<CR>
-nnoremap <leader>e  :Neomake<CR>
+" nnoremap <leader>e  :Neomake<CR>
 nnoremap <leader>f  :Autoformat<CR>:update<CR>
 
 " specific to git fugitive
