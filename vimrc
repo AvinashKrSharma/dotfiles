@@ -179,7 +179,7 @@ set diffopt=vertical
 
 " ----reading and writing files
 set backup
-set backupdir=~/.vim/tmp
+set backupdir=$HOME/.vim/tmp
 set autowrite
 set autoread
 
@@ -194,7 +194,7 @@ set wildmode=list:longest,full      " pressing tab takes to next command
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
 set wildmenu        " show available option in command mode
 set undofile
-set undodir=~/.vim/tmp
+set undodir=$HOME/.vim/tmp
 
 " ----executing external commands
 set formatprg=par\ -w50
