@@ -425,8 +425,6 @@ endif
 
 let g:vim_json_syntax_conceal = 0 " Don't hide Json syntax.
 
-let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
-
 " ----for javascript libraries syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
