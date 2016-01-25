@@ -1,7 +1,7 @@
 #list of packages to be installed
 packages="curl git vim tidy zsh tmux cmake python-dev default-jdk editorconfig silversearcher-ag"
 
-npm_modules="jshint js-beautify tslint node-sass less typescript-formatter csslint"
+npm_modules="jshint js-beautify tslint node-sass less typescript-formatter csslint eslint babel-eslint eslint-plugin-react"
 
 #required beforehand(to be figured out why)
 sudo apt-get install -y build-essentials
