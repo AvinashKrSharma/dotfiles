@@ -1,4 +1,4 @@
- export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="ys"
 
@@ -33,13 +33,12 @@ source $HOME/dotfiles/keybindings
 export NVM_DIR="/home/avinash/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export PATH=${PATH}:/home/avinash/arcanist/bin/
-
-source ~/arcanist/resources/shell/bash-completion
-
 # Open tmux session
-tmux attach &> /dev/null
+tmux -2uq attach &> /dev/null
 
 if [[ ! $TERM =~ screen  ]]; then
     exec tmux -2uq
 fi
+
+# source the system specific extras file
+source $HOME/.extras
