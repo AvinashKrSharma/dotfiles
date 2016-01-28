@@ -30,12 +30,14 @@ source $HOME/.aliases
 #source keybindings
 source $HOME/dotfiles/keybindings
 
+# This loads nvm
 export NVM_DIR="/home/avinash/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 
 # Open tmux session
 tmux -2uq attach &> /dev/null
 
+# Otherwise start new tmux session
 if [[ ! $TERM =~ screen  ]]; then
     exec tmux -2uq
 fi
