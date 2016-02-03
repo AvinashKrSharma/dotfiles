@@ -292,13 +292,15 @@ vmap > >gv
 nnoremap cot :call ToggleTextWidth()<cr>
 
 " ----Leader key mappings
-nnoremap <leader>a  ggVG
+nnoremap <leader>ad :%bd<CR>
+nnoremap <leader>aq :qa<CR>
+nnoremap <leader>as ggVG
+
 nnoremap <leader>b  :buffers<CR>:buffer<Space>
 map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
-nnoremap <leader>e  :%bd<CR>
+nnoremap <leader>e  :Neomake<CR>
 " nnoremap <leader>e  :SyntasticToggleMode<CR>
-" nnoremap <leader>e  :Neomake<CR>
 nnoremap <leader>f  :Autoformat<CR>:update<CR>
 
 " specific to git fugitive
@@ -334,6 +336,8 @@ nnoremap <leader>w <c-w>w
 
 nnoremap <leader>o  :OverCommandLine<CR>
 nnoremap <leader><leader> :update<CR>
+
+nnoremap <leader>, :Ag --smart-case ""<left>
 
 
 " ####### Abbreviations for common mistyped commands
@@ -448,6 +452,7 @@ let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,require
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
 let g:CtrlSpaceSaveWorkspaceOnExit = 1
+let g:CtrlSpaceCacheDir = '$HOME/.vim/tmp'
 if executable("ag")
     let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
 endif
