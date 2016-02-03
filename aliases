@@ -14,6 +14,7 @@ alias dv="cd ~/dotfiles && vim"
 alias e="exit"
 
 # Git
+alias g='git '
 alias ga='git add '
 alias gaa='git add -A'
 alias gb='git branch '
