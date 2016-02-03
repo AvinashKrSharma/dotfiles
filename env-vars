@@ -1,0 +1,3 @@
+GIT_DEPLOY_DIR=$HOME/Projects/blog/public
+GIT_DEPLOY_BRANCH=gh-pages
+GIT_DEPLOY_REPO=https://github.com/AvinashKrSharma/blog
