@@ -30,7 +30,6 @@ Plug 'szw/vim-ctrlspace'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-" Plug 'scrooloose/syntastic'
 Plug 'benekastah/neomake'
 Plug 'tpope/vim-fugitive'
 Plug 'rking/ag.vim', {'on': 'Ag'}
@@ -231,10 +230,6 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
 
-" mappings for syntastic error navigation
-" nmap <silent>[ :lprev<cr>    " previous syntastic error
-" nmap <silent>] :lnext<cr>    " next syntastic error
-
 " mappings for neomake error navigation
 nnoremap <silent>] :lprev<cr>
 nnoremap <silent>[ :call LocationNext()<cr>
@@ -300,7 +295,6 @@ nnoremap <leader>b  :buffers<CR>:buffer<Space>
 map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
 nnoremap <leader>e  :Neomake<CR>
-" nnoremap <leader>e  :SyntasticToggleMode<CR>
 nnoremap <leader>f  :Autoformat<CR>:update<CR>
 
 " specific to git fugitive
@@ -323,9 +317,11 @@ nnoremap <leader>i  gg=G''
 nnoremap <leader>l  :IndentLinesToggle<CR>
 nnoremap <leader>m  :source $MYVIMRC<CR>
 nnoremap <leader>n  :NERDTreeToggle<CR>
+nnoremap <leader>o  :OverCommandLine<CR>
 nnoremap <leader>p  :YRShow<CR>
 nnoremap <leader>q  :q<CR>
 nnoremap <leader>r  :NERDTreeFind<CR>
+nnoremap <leader>s  :call ToggleNERDTreeQOOBehaviour()<cr>
 vnoremap <leader>t  :Tabularize/ /l0<cr>
 nnoremap <leader>tr :TernRefs<CR>
 nnoremap <leader>tn :TernRename<CR>
@@ -334,9 +330,7 @@ nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 nnoremap <leader>w <c-w>w
 
-nnoremap <leader>o  :OverCommandLine<CR>
 nnoremap <leader><leader> :update<CR>
-
 nnoremap <leader>, :Ag --smart-case ""<left>
 
 
@@ -432,22 +426,6 @@ let g:vim_json_syntax_conceal = 0 " Don't hide Json syntax.
 " ----for javascript libraries syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
-" ----for syntastic
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_enable_signs=1
-" let g:syntastic_auto_jump=1
-" let g:syntastic_enable_highlighting=1
-" let g:syntastic_echo_current_error=1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_quiet_messages = { "type": "style" }
-" let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
-" let g:syntastic_filetype_map = { "json": "javascript", }
-" let g:syntastic_javascript_checkers = ["jshint", "jscs"]
-" let g:syntastic_error_symbol = '✗'
-" let g:syntastic_warning_symbol = '!'
-
 " ----for ctrlspace
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
@@ -479,12 +457,12 @@ let g:ag_working_path_mode="r"
 
 " ----for Nerdtree
 let g:nerdtree_tabs_open_on_gui_startup=0
-let NERDTreeQuitOnOpen=1
-let NERDTreeMinimalUI=1
-let NERDTreeMouseMode=2
-let NERDTreeShowHidden=1
-let NERDTreeKeepTreeInNewTab=1
-let NERDTreeIgnore=['.git$[[dir]]', '\.js.map$[[file]]']
+let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeMouseMode=2
+let g:NERDTreeShowHidden=1
+let g:NERDTreeKeepTreeInNewTab=1
+let g:NERDTreeIgnore=['.git$[[dir]]', '\.js.map$[[file]]']
 
 " shamelessly copied from mhartington's nvimrc
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -658,4 +636,13 @@ function! s:expand_html_tab()
     endif
     " return a regular tab character
     return "\<tab>"
+endfunction
+
+" for toggling nerdtree's quit on open behaviour
+function! ToggleNERDTreeQOOBehaviour()
+    if (g:NERDTreeQuitOnOpen == 1)
+        let g:NERDTreeQuitOnOpen=0
+    else 
+        let g:NERDTreeQuitOnOpen=1
+    endif
 endfunction
