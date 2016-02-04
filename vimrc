@@ -231,8 +231,8 @@ map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
 
 " mappings for neomake error navigation
-nnoremap <silent>] :lprev<cr>
-nnoremap <silent>[ :call LocationNext()<cr>
+nnoremap <silent>[ :lprev<cr>
+nnoremap <silent>] :call LocationNext()<cr>
 
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
