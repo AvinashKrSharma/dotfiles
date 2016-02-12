@@ -18,7 +18,7 @@ setw -g mode-mouse on
 set -g mouse-select-pane on
 
 # decrease command delay (increases vim responsiveness)
-set -sg escape-time 1
+set -sg escape-time 0
 
 # increase repeat time for repeatable commands
 set -g repeat-time 1000
@@ -41,6 +41,13 @@ set-window-option -g mode-keys vi
 bind-key -t vi-copy 'v' begin-selection
 bind-key -t vi-copy 'y' copy-selection
 
+# auto window rename
+set-window-option -g automatic-rename
+
+# Allows us to use C-a a <command> to send commands to a TMUX session inside 
+# another TMUX session
+bind-key a send-prefix
+
 # reload config
 bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
 
@@ -53,35 +60,50 @@ bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
 set -g status-utf8 on
 
 # set refresh interval for status bar
-set -g status-interval 30
+set -g status-interval 1
 
 # center the status bar
-set -g status-justify left
+set -g status-justify centre
 
 # show session, window, pane in left status bar
 set -g status-left-length 40
-set -g status-left '#[fg=green]#S#[fg=blue] #I:#P #[default]'
+set -g status-left '#[fg=green]#H #[fg=black]• #[fg=green,bright]#(uname -r | cut -c 1-6)#[default]'
+set -g status-right '#[fg=green,bg=default,bright]#(tmux-mem-cpu-load) #[fg=red,dim,bg=default]#(uptime | cut -f 4-5 -d " " | cut -f 1 -d ",") #[fg=white,bg=default]%a %l:%M:%S %p#[default] #[fg=blue]%Y-%m-%d'
 
-# show hostname, date, time, and battery in right status bar
-set-option -g status-right '#[fg=green]#H#[default] %m/%d/%y'
 
 ###########################
 # Colors
 ###########################
 
 # color status bar
-set -g status-bg colour235
-set -g status-fg white
+set-option -g status-bg colour235 #base02
+set-option -g status-fg colour136 #yellow
+set-option -g status-attr default
 
 # highlight current window
-set-window-option -g window-status-current-fg black
-set-window-option -g window-status-current-bg green
+set-window-option -g window-status-current-fg colour166 #orange
+set-window-option -g window-status-current-bg default
+#
+# default window title colors
+set-window-option -g window-status-fg colour244 #base0
+set-window-option -g window-status-bg default
+#set-window-option -g window-status-attr dim
 
 # set color of active pane
-set -g pane-border-fg colour235
-set -g pane-border-bg black
-set -g pane-active-border-fg green
-set -g pane-active-border-bg black
+set-option -g pane-border-fg colour235 #base02
+set-option -g pane-active-border-fg colour240 #base01
+set-option -g pane-active-border-bg black
+#
+# pane number display
+set-option -g display-panes-active-colour colour33 #blue
+set-option -g display-panes-colour colour166 #orange
+#
+# clock
+set-window-option -g clock-mode-colour green #green
+
+# message text
+set-option -g message-bg colour235 #base02
+set-option -g message-fg colour166 #orange
 
 
 ###########################
@@ -90,11 +112,16 @@ set -g pane-active-border-bg black
 
 # tmux prefix
 unbind C-b
-set -g prefix C-z
+set -g prefix C-a
 
 # for splits
 bind-key v split-window -h
-bind-key s split-window
+bind-key h split-window
+
+# set to main-horizontal, 60% height for main pane
+bind m set-window-option main-pane-height 60\; select-layout main-horizontal
+
+bind-key C command-prompt -p "Name of new window: " "new-window -n '%%'"
 
 ###########################
 # Plugins
@@ -109,3 +136,19 @@ if "test ! -d ~/.tmux/plugins/tpm" \
 
 # Initialize TMUX plugin manager 
 run '~/.tmux/plugins/tpm/tpm'
+
+# Some stuff I don't really understand
+
+# from powerline
+run-shell "tmux set-environment -g TMUX_VERSION_MAJOR $(tmux -V | cut -d' ' -f2 | cut -d'.' -f1 | sed 's/[^0-9]*//g')"
+run-shell "tmux set-environment -g TMUX_VERSION_MINOR $(tmux -V | cut -d' ' -f2 | cut -d'.' -f2 | sed 's/[^0-9]*//g')"
+
+# rm mouse mode fail
+if-shell '\( #{$TMUX_VERSION_MAJOR} -eq 2 -a #{$TMUX_VERSION_MINOR} -ge 1\) -o #{$TMUX_VERSION_MAJOR} -gt 2' 'set -g mouse off'
+if-shell '\( #{$TMUX_VERSION_MAJOR} -eq 2 -a #{$TMUX_VERSION_MINOR} -lt 1\) -o #{$TMUX_VERSION_MAJOR} -le 1' 'set -g mode-mouse off'
+
+# fix pane_current_path on new window and splits
+if-shell "#{$TMUX_VERSION_MAJOR} -gt 1 -o \( #{$TMUX_VERSION_MAJOR} -eq 1 -a #{$TMUX_VERSION_MINOR} -ge 8 \)" 'unbind c; bind c new-window -c "#{pane_current_path}"'
+if-shell "#{$TMUX_VERSION_MAJOR} -gt 1 -o \( #{$TMUX_VERSION_MAJOR} -eq 1 -a #{$TMUX_VERSION_MINOR} -ge 8 \)" "unbind '\"'; bind '\"' split-window -v -c '#{pane_current_path}'"
+if-shell "#{$TMUX_VERSION_MAJOR} -gt 1 -o \( #{$TMUX_VERSION_MAJOR} -eq 1 -a #{$TMUX_VERSION_MINOR} -ge 8 \)" 'unbind v; bind v split-window -h -c "#{pane_current_path}"'
+if-shell "#{$TMUX_VERSION_MAJOR} -gt 1 -o \( #{$TMUX_VERSION_MAJOR} -eq 1 -a #{$TMUX_VERSION_MINOR} -ge 8 \)" 'unbind %; bind % split-window -h -c "#{pane_current_path}"'
