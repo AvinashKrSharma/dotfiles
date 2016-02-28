@@ -64,6 +64,7 @@ Plug 'msanders/snipmate.vim'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'gregsexton/MatchTag', {'for': 'html'}
 Plug 'docunext/closetag.vim'
+Plug 'bendavis78/vim-polymer'
 
 "css related
 Plug 'gorodinskiy/vim-coloresque'
@@ -256,10 +257,10 @@ nnoremap zr zR
 nnoremap zs zr
 
 " mappings for page up/down, half/full
-nnoremap <C-h> <C-u>
-nnoremap <C-j> <C-d>
-nnoremap <C-k> <C-b>
-nnoremap <C-l> <C-f>
+nnoremap <C-h> <C-b>
+nnoremap <C-k> <C-f>
+nnoremap <C-k> <C-u>
+nnoremap <C-l> <C-d>
 
 " mappings for switching buffers
 nnoremap gb :bn<cr>
