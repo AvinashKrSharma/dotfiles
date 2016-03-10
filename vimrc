@@ -284,6 +284,9 @@ inoremap <c-f> <c-x><c-f>
 vmap < <gv
 vmap > >gv
 
+" Search with number of matches
+nnoremap / <esc>:%s///gn<left><left><left><left>
+
 " toggle textwidth
 nnoremap cot :call ToggleTextWidth()<cr>
 
@@ -326,7 +329,7 @@ nnoremap <leader>s  :call ToggleNERDTreeQOOBehaviour()<cr>
 vnoremap <leader>t  :Tabularize/ /l0<cr>
 nnoremap <leader>tr :TernRefs<CR>
 nnoremap <leader>tn :TernRename<CR>
-nnoremap <leader>tw :%s/\s\+$//e<CR>
+nnoremap <leader>tw :%s/\s\+$//e<CR> "Remove unwanted spaces
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 nnoremap <leader>w <c-w>w
