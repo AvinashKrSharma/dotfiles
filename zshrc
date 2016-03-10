@@ -28,19 +28,21 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 
 #source keybindings
-source $HOME/dotfiles/keybindings
+#source $HOME/dotfiles/keybindings
 
 # This loads nvm
 export NVM_DIR="/home/avinash/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 
 # Open tmux session
-tmux -2uq attach &> /dev/null
+#tmux -2uq attach &> /dev/null
 
 # Otherwise start new tmux session
-if [[ ! $TERM =~ screen  ]]; then
-    exec tmux -2uq
-fi
+#if [[ ! $TERM =~ screen  ]]; then
+#    exec tmux -2uq
+#fi
 
 # source the system specific extras file
 source $HOME/.extras
+
+export PATH=$PATH:$HOME/depot_tools
