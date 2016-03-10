@@ -284,9 +284,6 @@ inoremap <c-f> <c-x><c-f>
 vmap < <gv
 vmap > >gv
 
-" Search with number of matches
-nnoremap / <esc>:%s///gn<left><left><left><left>
-
 " toggle textwidth
 nnoremap cot :call ToggleTextWidth()<cr>
 
@@ -336,6 +333,7 @@ nnoremap <leader>w <c-w>w
 
 nnoremap <leader><leader> :update<CR>
 nnoremap <leader>, :Ag --smart-case ""<left>
+nnoremap <leader>/ <esc>:%s///gn<left><left><left><left>
 
 
 " ####### Abbreviations for common mistyped commands
