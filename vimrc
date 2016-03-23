@@ -109,6 +109,7 @@ set linebreak
 set showbreak=...
 set scrolloff=3
 set sidescrolloff=10
+set fcs+=vert:│
 set fillchars+=stl:\ ,stlnc:\
 set nolist
 set listchars=tab:>-,trail:·,eol:$
@@ -238,6 +239,12 @@ nnoremap <silent>] :call LocationNext()<cr>
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
 
+" to resize splits
+nnoremap <C-left> :vertical resize -2<cr>
+nnoremap <C-down> :resize -2<cr>
+nnoremap <C-up> :resize +2<cr>
+nnoremap <C-right> :vertical resize +2<cr>
+
 " Navigate between display lines
 noremap  <silent> <Up>   gk
 noremap  <silent> <Down> gj
@@ -283,6 +290,9 @@ inoremap <c-f> <c-x><c-f>
 " Align blocks of text and keep them selected
 vmap < <gv
 vmap > >gv
+
+" useful for opening quickfix window
+nnoremap ]o :copen<cr>
 
 " toggle textwidth
 nnoremap cot :call ToggleTextWidth()<cr>
