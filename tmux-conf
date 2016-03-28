@@ -133,14 +133,23 @@ set-option -g message-fg colour166 #orange
 unbind C-b
 set -g prefix C-a
 
-# for splits
-bind-key v split-window -h
-bind-key h split-window
-
 # set to main-horizontal, 60% height for main pane
 bind m set-window-option main-pane-height 60\; select-layout main-horizontal
 
 bind-key C command-prompt -p "Name of new window: " "new-window -n '%%'"
+
+# switch panes
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# create splits
+bind -n M-h split-window -h
+bind -n M-v split-window -v
+
+# create window
+bind -n M-c create-window
 
 ###########################
 # Plugins
