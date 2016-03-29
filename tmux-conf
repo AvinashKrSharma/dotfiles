@@ -145,11 +145,11 @@ bind -n M-Up select-pane -U
 bind -n M-Down select-pane -D
 
 # create splits
-bind -n M-h split-window -h
-bind -n M-v split-window -v
+bind -n C-M-h split-window -h
+bind -n C-M-v split-window -v
 
 # create window
-bind -n M-c create-window
+bind -n C-M-c new-window
 
 ###########################
 # Plugins
