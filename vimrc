@@ -381,6 +381,9 @@ if has("autocmd")
         " disable syntax highlighting on laaarge files
         au BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
 
+        " disable syntax highlighting for jade files to speed things up
+        autocmd FileType jade    setlocal syntax=off
+
         " Disable vertical line at max string length in NERDTree
         autocmd FileType *        setlocal colorcolumn=+1
         autocmd FileType nerdtree setlocal colorcolumn=""
@@ -463,6 +466,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 let g:airline#extensions#wordcount#enabled = 1
+let g:airline_theme = 'term'
+
 
 " ----for ag
 let g:ag_working_path_mode="r"
