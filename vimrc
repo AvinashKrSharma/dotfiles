@@ -25,7 +25,8 @@ call plug#begin('~/.vim/bundle')
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'benmills/vimux'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'szw/vim-ctrlspace'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-surround'
@@ -45,7 +46,7 @@ Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-unimpaired'
 Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
-Plug 'Shougo/FastFold'
+Plug 'Konfekt/FastFold'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-scripts/YankRing.vim'
@@ -152,6 +153,8 @@ set noshowmode
 set ruler
 
 " ----editing text
+set undofile
+set undodir=$HOME/.vim/tmp
 set modifiable
 set textwidth=120
 set backspace=indent,eol,start
@@ -194,8 +197,6 @@ set wildcharm=<TAB>
 set wildmode=list:longest,full      " pressing tab takes to next command
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
 set wildmenu        " show available option in command mode
-set undofile
-set undodir=$HOME/.vim/tmp
 
 " ----executing external commands
 set formatprg=par\ -w50
