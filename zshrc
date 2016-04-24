@@ -41,8 +41,3 @@ export NVM_DIR="/home/avinash/.nvm"
 #if [[ ! $TERM =~ screen  ]]; then
 #    exec tmux -2uq
 #fi
-
-# source the system specific extras file
-source $HOME/.extras
-
-export PATH=$PATH:$HOME/depot_tools
