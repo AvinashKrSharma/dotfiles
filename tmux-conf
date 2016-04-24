@@ -12,7 +12,8 @@ set -g history-limit 5000
 setw -g mode-keys vi
 
 # enable mouse
-set -g mouse on
+setw -g mouse on
+set-option -g -q mouse on
 
 # decrease command delay (increases vim responsiveness)
 set -sg escape-time 0
@@ -126,6 +127,18 @@ set-option -g message-fg colour166 #orange
 # tmux prefix
 unbind C-b
 set -g prefix C-a
+
+
+# more settings to make copy-mode more vim-like
+unbind [
+bind Escape copy-mode
+unbind p
+bind p paste-buffer
+bind -t vi-copy 'v' begin-selection
+bind -t vi-copy 'y' copy-selection
+
+# synchronize all panes in a window
+bind y setw synchronize-panes
 
 # set to main-horizontal, 60% height for main pane
 bind m set-window-option main-pane-height 60\; select-layout main-horizontal
