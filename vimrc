@@ -107,7 +107,7 @@ set tags=./tags;/
 
 " ----displaying text ----
 set linebreak
-set showbreak=...
+set showbreak=↪
 set scrolloff=3
 set sidescrolloff=10
 set fcs+=vert:│
