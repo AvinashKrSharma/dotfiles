@@ -24,11 +24,8 @@ mkdir $HOME/.vim/tmp
 #install the awesome oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-#make zsh default shell
-chsh -s $(which zsh)
-
 #backup default .zshrc file created by oh-my-zsh
-cp ~/.zshrc ~/.zshrc.backup
+mv  ~/.zshrc ~/.zshrc.backup
 
 #build vim from source
 apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev ruby-dev
@@ -57,3 +54,6 @@ ln -s ~/.vim ~/.config/nvim
 ln -s dotfiles/vimrc ~/.config/nvim/init.vim
 
 echo "NOTE: zsh as default shell will be reflected after the next login"
+
+#make zsh default shell
+chsh -s $(which zsh)
