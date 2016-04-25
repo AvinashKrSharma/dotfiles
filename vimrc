@@ -108,7 +108,7 @@ set tags=./tags;/
 " ----displaying text ----
 set linebreak
 set showbreak=↪
-set scrolloff=3
+set scrolloff=2
 set sidescrolloff=10
 set fcs+=vert:│
 set fillchars+=stl:\ ,stlnc:\
@@ -202,7 +202,7 @@ set wildmenu        " show available option in command mode
 set formatprg=par\ -w50
 
 " ----language specific
-set iskeyword+=-
+" set iskeyword+=-
 
 " ----multi-byte characters
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
@@ -289,8 +289,8 @@ nnoremap ; :<c-u>call SkyBison("")<cr>
 inoremap <c-f> <c-x><c-f>
 
 " Align blocks of text and keep them selected
-vmap < <gv
-vmap > >gv
+" vmap < <gv
+" vmap > >gv
 
 " useful for opening quickfix window
 nnoremap ]o :copen<cr>
