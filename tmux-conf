@@ -130,7 +130,6 @@ set -g prefix C-a
 
 
 # more settings to make copy-mode more vim-like
-unbind [
 bind Escape copy-mode
 unbind p
 bind p paste-buffer
