@@ -61,7 +61,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'xolox/vim-colorscheme-switcher'
 
 "html related
-Plug 'msanders/snipmate.vim'
+Plug 'garbas/snipmate.vim'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'gregsexton/MatchTag', {'for': 'html'}
 Plug 'docunext/closetag.vim'
@@ -175,6 +175,7 @@ set autoindent
 set smartindent
 
 " ----folding
+set foldlevel=99
 set foldtext=MyFoldText()
 set foldmethod=indent
 
@@ -285,7 +286,7 @@ imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<C
 " mapping for skybison's command mode
 nnoremap ; :<c-u>call SkyBison("")<cr>
 
-" make filepath autocomplete mapping let painful
+" make filepath autocomplete mapping less painful
 inoremap <c-f> <c-x><c-f>
 
 " Align blocks of text and keep them selected
