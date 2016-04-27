@@ -47,5 +47,3 @@ alias t='tmux -2u'
 
 # Vim
 alias v='vim'
-alias vi='vim -u NONE'
-alias vim='vim -u NONE'
