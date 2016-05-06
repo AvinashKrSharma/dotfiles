@@ -32,7 +32,6 @@ syntax enable
 set hlsearch
 set cursorcolumn
 set cursorline
-set colorcolumn=+1
 " set spell
 
 " ----multiple windows
@@ -84,8 +83,7 @@ set smartindent
 
 " ----folding
 set foldlevel=99
-set foldtext=MyFoldText()
-set foldmethod=indent
+set foldmethod=syntax
 
 " ----diff mode
 set diffopt=vertical
@@ -114,7 +112,6 @@ set formatprg=par\ -w50
 " set iskeyword+=-
 
 " ----multi-byte characters
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
 set encoding=utf-8
 set fileencoding=utf-8
 
@@ -124,7 +121,6 @@ set gdefault
 " ----others
 let mapleader = "\<Space>"
 set t_Co=256
-colorscheme tir_black
 filetype plugin indent on
 
 " ----highlight spell errors
@@ -134,3 +130,7 @@ hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
 hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
 
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+
