@@ -108,6 +108,14 @@ nnoremap <silent>] :call LocationNext()<cr>
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
 
+" make search results appear at the center of the screen
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
 " to resize splits
 nnoremap <C-left> :vertical resize -2<cr>
 nnoremap <C-down> :resize -2<cr>
