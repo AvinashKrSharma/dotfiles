@@ -141,6 +141,9 @@ bind -t vi-copy 'y' copy-selection
 # synchronize all panes in a window
 bind y setw synchronize-panes
 
+# make all panes vertically equally sized
+bind = select-layout even-horizontal
+
 # set to main-horizontal, 60% height for main pane
 bind m set-window-option main-pane-height 60\; select-layout main-horizontal
 
