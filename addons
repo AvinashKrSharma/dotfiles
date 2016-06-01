@@ -102,11 +102,15 @@ map <F7> :setlocal spell! spell?<CR>
 nnoremap \ :echo &mod<CR>
 
 " mappings for neomake error navigation
-nnoremap <silent>[ :lprev<cr>
-nnoremap <silent>] :call LocationNext()<cr>
+" nnoremap <silent>[ :lprev<cr>
+" nnoremap <silent>] :call LocationNext()<cr>
 
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
+
+" for HIGH & LOW screen position navaigation
+nnoremap <silent>[ H
+nnoremap <silent>] L
 
 " make search results appear at the center of the screen
 nnoremap n nzz
