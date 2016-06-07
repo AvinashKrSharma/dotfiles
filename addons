@@ -24,6 +24,7 @@ call plug#begin('~/.vim/bundle')
 " Plug 'ryanoasis/nerd-fonts', {'do': './install.sh'}
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'benmills/vimux'
+Plug 'thinca/vim-quickrun'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
@@ -206,8 +207,10 @@ nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i  gg=G''
+nnoremap <leader>i  :!./%.o<cr>
+nnoremap <leader>k  :!gcc % -o %.o<cr>
 nnoremap <leader>l  :IndentLinesToggle<CR>
-nnoremap <leader>m  :source $MYVIMRC<CR>
+nnoremap <leader>m  :QuickRun<cr>
 nnoremap <leader>n  :NERDTreeToggle<CR>
 nnoremap <leader>o  :OverCommandLine<CR>
 nnoremap <leader>p  :YRShow<CR>

@@ -106,6 +106,7 @@ set wildmenu        " show available option in command mode
 
 " ----executing external commands
 set formatprg=par\ -w50
+set makeprg=make\ -C\ ./\ -j9
 
 " ----language specific
 " set iskeyword+=-
@@ -115,10 +116,13 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " ----various
+set exrc
+set secure
 set gdefault
 
 " ----others
 let mapleader = "\<Space>"
+let &path.="src/include,/usr/include/AL,"
 set t_Co=256
 filetype plugin indent on
 
