@@ -207,8 +207,7 @@ nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i  gg=G''
-nnoremap <leader>i  :!./%.o<cr>
-nnoremap <leader>k  :!gcc % -o %.o<cr>
+nnoremap <leader>k  :!gcc % -o %.o<cr><cr> :!./%.o<cr>
 nnoremap <leader>l  :IndentLinesToggle<CR>
 nnoremap <leader>m  :QuickRun<cr>
 nnoremap <leader>n  :NERDTreeToggle<CR>
