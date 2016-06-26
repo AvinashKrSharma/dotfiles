@@ -13,6 +13,8 @@ alias dv="cd ~/dotfiles && vim"
 
 alias e="exit"
 
+#gitundo function
+gitundo() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}};  };
 # Git
 alias g='git '
 alias ga='git add '
@@ -41,6 +43,7 @@ alias gpso='git push origin '
 alias gs='git status '
 alias gsh='git show '
 alias gst='git stash'
+alias gu=gitundo
 
 # Serve current folder
 alias p="python -m SimpleHTTPServer "
