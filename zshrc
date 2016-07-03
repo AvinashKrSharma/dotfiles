@@ -10,7 +10,7 @@ COMPLETION_WAITING_DOTS="true"
 
 HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(bower command-not-found coffee common-aliases dircycle docker encode64 git meteor node npm pip python sudo tmux web-search)
+plugins=(bower command-not-found coffee common-aliases dircycle debian docker encode64 extract git node npm pip python sudo tmux web-search)
 
 # User configuration
 
@@ -26,6 +26,9 @@ source $ZSH/oh-my-zsh.sh
 
 # source in the aliases
 source $HOME/.aliases
+
+# source z
+source $HOME/z/z.sh
 
 #source keybindings
 #source $HOME/dotfiles/keybindings
