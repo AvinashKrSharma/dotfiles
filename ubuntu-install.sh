@@ -24,6 +24,9 @@ mkdir $HOME/.vim/tmp
 #install the awesome oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+# clone z
+git clone https://github.com/rupa/z.git ~
+
 #backup default .zshrc file created by oh-my-zsh
 mv  ~/.zshrc ~/.zshrc.backup
 
