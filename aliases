@@ -1,4 +1,5 @@
 # Some handy goto directories
+alias c=clear
 alias d="cd ~/dotfiles"
 alias dv="cd ~/dotfiles && vim"
 
@@ -20,7 +21,7 @@ alias gcn='git clean '
 alias gco='git commit --ours '
 alias gcp='git cherry-pick '
 alias gct='git commit --theirs '
-alias gd='git diff --word-diff --histogram'
+alias gd='git diff --histogram'
 alias gdc='git diff --cached'
 alias gds='git diff --staged'
 alias gl="git log --pretty='%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %C(cyan)[%an]%Creset' --graph"
