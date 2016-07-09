@@ -221,7 +221,7 @@ nnoremap <leader>tr :TernRefs<CR>
 nnoremap <leader>tn :TernRename<CR>
 nnoremap <leader>tw :%s/\s\+$//e<CR> "Remove unwanted spaces
 nnoremap <leader>u :GundoToggle<CR>
-nnoremap <leader>v :tabedit $MYVIMRC<CR>
+nnoremap <leader>v :tabedit ~/dotfiles/addons<CR>
 nnoremap <leader>w <c-w>w
 
 nnoremap <leader><leader> :update<CR>
