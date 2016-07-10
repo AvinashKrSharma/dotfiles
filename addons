@@ -271,7 +271,8 @@ if has("autocmd")
         autocmd FileType nerdtree setlocal colorcolumn=""
 
         " Run neomake on buffer write
-        autocmd! BufWritePost * Neomake
+        autocmd FileType javascript :call ResolveESLint()
+        autocmd! BufWritePost,BufReadPost * Neomake
 
         " When editing a file, always jump to the last known cursor position.
         " Don't do it for commit messages, when the position is invalid, or when
@@ -449,6 +450,17 @@ let g:yankring_window_use_right = 0
 let g:yankring_replace_n_pkey = ''
 let g:yankring_replace_n_nkey = ''
 
+" ----neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_warning_sign = {
+    \ 'text': 'W',
+    \ 'texthl': 'WarningMsg',
+    \ }
+let g:neomake_error_sign = {
+    \ 'text': 'E',
+    \ 'texthl': 'ErrorMsg',
+    \ }
+let g:neomake_open_list = 2
 
 " ####### Function definitions
 set foldtext=MyFoldText()
@@ -543,4 +555,16 @@ function! ToggleNERDTreeQOOBehaviour()
     else 
         let g:NERDTreeQuitOnOpen=1
     endif
+endfunction
+
+function! ResolveESLint()
+    let l:npm_bin = ''
+    let l:eslint = 'eslint'
+    if executable('npm')
+      let l:npm_bin = split(system('npm bin'), '\n')[0]
+    endif
+    if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
+      let l:eslint = l:npm_bin . '/eslint'
+    endif
+    let b:neomake_javascript_eslint_exe = l:eslint
 endfunction
