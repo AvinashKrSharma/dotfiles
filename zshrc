@@ -21,14 +21,16 @@ DEFAULT_USER="avinash"
 # source in the oh-my-zsh awesomeness
 source $ZSH/oh-my-zsh.sh
 
+#antigen
+source ~/antigen.zsh
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # source in the aliases
 source $HOME/.aliases
-
-# source z
-source $HOME/z/z.sh
 
 #source keybindings
 #source $HOME/dotfiles/keybindings
@@ -44,3 +46,9 @@ export NVM_DIR="/home/avinash/.nvm"
 #if [[ ! $TERM =~ screen  ]]; then
 #    exec tmux -2uq
 #fi
+
+# source the system specific extras file
+source $HOME/.extras
+
+export PATH=$PATH:$HOME/depot_tools
+export PATH=$PATH:/usr/local/go/bin
