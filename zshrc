@@ -12,7 +12,7 @@ COMPLETION_WAITING_DOTS="true"
 
 HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(command-not-found common-aliases dircycle debian docker encode64 extract git node npm pip python sudo tmux web-search)
+plugins=(command-not-found common-aliases debian docker extract git node npm pip python sudo tmux web-search)
 
 # User configuration
 
