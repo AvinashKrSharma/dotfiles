@@ -24,7 +24,7 @@ call plug#begin('~/.vim/bundle')
 " Plug 'ryanoasis/nerd-fonts', {'do': './install.sh'}
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'benmills/vimux'
-Plug 'thinca/vim-quickrun'
+" Plug 'thinca/vim-quickrun'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
@@ -69,7 +69,7 @@ Plug 'docunext/closetag.vim'
 Plug 'bendavis78/vim-polymer'
 
 "css related
-Plug 'gorodinskiy/vim-coloresque'
+Plug 'gorodinskiy/vim-coloresque', {'for': 'css'}
 Plug 'vim-scripts/prefixer.vim', {'for': 'css'}
 
 "js related
