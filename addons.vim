@@ -1,7 +1,5 @@
 " ####### Plugins
 
-" set rtp+="~/.vim/bundle"
-
 " Turn off filetype plugins before bundles init, to make every work sane
 filetype off
 
@@ -21,58 +19,45 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " core plugins
-" Plug 'ryanoasis/nerd-fonts', {'do': './install.sh'}
-" Plug 'ryanoasis/vim-devicons'
-" Plug 'benmills/vimux'
-" Plug 'thinca/vim-quickrun'
-function! DoRemote(arg)
-      UpdateRemotePlugins
-  endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote')  }
+Plug 'thinca/vim-quickrun'
+Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim', {'on': 'Ag'}
+Plug 'benekastah/neomake'
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
-Plug 'szw/vim-ctrlspace'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'benekastah/neomake'
-Plug 'tpope/vim-fugitive'
-Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
-Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-Plug 'godlygeek/tabular', {'on': 'Tabularize'}
-Plug 'paradigm/SkyBison'
-Plug 'ervandew/supertab'
+Plug 'szw/vim-ctrlspace'
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
-Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
-Plug 'Raimondi/delimitMate'
-Plug 'tpope/vim-unimpaired'
-Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
-Plug 'Konfekt/FastFold'
+Plug 'vim-scripts/YankRing.vim'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'vim-scripts/YankRing.vim'
-Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
-Plug 'sickill/vim-pasta'
 Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
+Plug 'flazz/vim-colorschemes'
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'ervandew/supertab'
+Plug 'sheerun/vim-polyglot'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-surround'
+Plug 'Konfekt/FastFold'
+Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
+Plug 'godlygeek/tabular', {'on': 'Tabularize'}
+Plug 'paradigm/SkyBison'
+Plug 'tpope/vim-unimpaired'
+Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
+Plug 'aquach/vim-http-client'
+Plug 'sickill/vim-pasta'
+Plug 'sgeb/vim-diff-fold'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'xolox/vim-misc'
-Plug 'flazz/vim-colorschemes'
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'aquach/vim-http-client'
-Plug 'Shougo/deoplete.nvim'
-Plug 'morhetz/gruvbox'
-Plug 'fweep/vim-tabber'
-Plug 'jceb/vim-orgmode'
-Plug 'sgeb/vim-diff-fold'
 
 "html related
-" Plug 'garbas/vim-snipmate'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'gregsexton/MatchTag', {'for': 'html'}
 Plug 'docunext/closetag.vim'
@@ -80,18 +65,12 @@ Plug 'bendavis78/vim-polymer'
 
 "css related
 Plug 'gorodinskiy/vim-coloresque', {'for': ['css', 'scss']}
-Plug 'vim-scripts/prefixer.vim', {'for': 'css'}
+Plug 'vim-scripts/prefixer.vim', {'for': 'css', 'on': ['Prefixer', 'Prefixer1', 'Prefixer2']}
 
 "js related
 Plug 'moll/vim-node', {'for': 'javascript'}
-Plug 'burnettk/vim-angular', {'for': 'javascript'}
 Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
-
-" Typescript
-" Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
 
 call plug#end()
 
@@ -339,11 +318,6 @@ let g:CtrlSpaceCacheDir = '$HOME/.vim/tmp'
 if executable("ag")
     let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
 endif
-
-" ----for ycm
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 
 " ----for polyglot
 let g:polyglot_disabled = ['arduino', 'blade', 'c++11', 'clojure', 'cucumber', 'dart', 'elm', 'elixir', 'emblem', 'erlang', 'glsl', 'go', 'groovy', 'haskell', 'haxe', 'jinja', 'julia', 'kotlin', 'latex', 'liquid', 'objc', 'ocaml', 'octave', 'opencl', 'perl', 'puppet', 'qml', 'ragel', 'r-lang', 'rspec', 'ruby', 'rust', 'sbt', 'scala', 'slim', 'solidity', 'swift', 'systemd', 'textile', 'thrift', 'tomdoc', 'toml', 'twig', 'vala', 'vbnet', 'vcl', 'vm', 'yard']
