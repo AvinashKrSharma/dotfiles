@@ -1,7 +1,7 @@
 # Some handy goto directories
 alias c=clear
 alias d="cd ~/dotfiles"
-alias dv="cd ~/dotfiles && vim"
+alias dv="cd ~/dotfiles && nvim"
 
 alias e="exit"
 
@@ -45,4 +45,4 @@ alias pp="python -m SimpleHTTPServer"
 alias t='tmux -2u'
 
 # Vim
-alias v='vim'
+alias v='nvim'
