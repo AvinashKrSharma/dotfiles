@@ -89,18 +89,13 @@ source ~/dotfiles/vimrc
 
 " ----general mappings
 map <F7> :setlocal spell! spell?<CR>
-nnoremap \ :echo &mod<CR>
 
 " mappings for neomake error navigation
-" nnoremap <silent>[ :lprev<cr>
-" nnoremap <silent>] :call LocationNext()<cr>
+nnoremap <silent>[ :lprev<cr>
+nnoremap <silent>] :call LocationNext()<cr>
 
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
-
-" for HIGH & LOW screen position navaigation
-nnoremap <silent>[ H
-nnoremap <silent>] L
 
 " make search results appear at the center of the screen
 nnoremap n nzz
@@ -158,10 +153,6 @@ nnoremap ; :<c-u>call SkyBison("")<cr>
 " make filepath autocomplete mapping less painful
 inoremap <c-f> <c-x><c-f>
 
-" Align blocks of text and keep them selected
-" vmap < <gv
-" vmap > >gv
-
 " useful for opening quickfix window
 nnoremap ]o :copen<cr>
 
@@ -187,8 +178,6 @@ nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gg :diffget
 nnoremap <leader>gi :Git add -p %<CR>
 nnoremap <leader>gl :Glog<CR>
-nnoremap <leader>gn ]c
-nnoremap <leader>gp [c
 nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gt :GitGutterToggle<CR>
@@ -200,7 +189,6 @@ nnoremap <leader>k  :!gcc % -o %.o<cr><cr> :!./%.o<cr>
 nnoremap <leader>l  :IndentLinesToggle<CR>
 nnoremap <leader>m  :QuickRun<cr>
 nnoremap <leader>n  :NERDTreeToggle<CR>
-nnoremap <leader>o  :OverCommandLine<CR>
 nnoremap <leader>p  :YRShow<CR>
 nnoremap <leader>q  :q<CR>
 nnoremap <leader>r  :NERDTreeFind<CR>
@@ -215,7 +203,7 @@ nnoremap <leader>w <c-w>w
 
 nnoremap <leader><leader> :update<CR>
 nnoremap <leader>, :Ag --smart-case ""<left>
-nnoremap <leader>/ <esc>:%s///gn<left><left><left><left>
+nnoremap <leader>/ <esc>:OverCommandLine<CR>:%s/
 
 
 " ####### Abbreviations for common mistyped commands
@@ -236,7 +224,7 @@ if has("autocmd")
         " Delete any previously defined autocommands
         au!
         " Enable omni completion.
-        autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType css,scss,less setlocal omnifunc=csscomplete#CompleteCSS
         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
         autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
 
@@ -246,8 +234,8 @@ if has("autocmd")
         au BufWritePost vimrc  source $MYVIMRC | AirlineRefresh
 
         " Set filetypes aliases
-        au FileType scss       set ft=scss.css
-        au FileType less       set ft=less.css
+        au FileType           scss   set ft=scss.css
+        au FileType           less   set ft=less.css
         au BufRead,BufNewFile *.json set ft=json
 
         " disable syntax highlighting on laaarge files
@@ -320,7 +308,7 @@ if executable("ag")
 endif
 
 " ----for polyglot
-let g:polyglot_disabled = ['arduino', 'blade', 'c++11', 'clojure', 'cucumber', 'dart', 'elm', 'elixir', 'emblem', 'erlang', 'glsl', 'go', 'groovy', 'haskell', 'haxe', 'jinja', 'julia', 'kotlin', 'latex', 'liquid', 'objc', 'ocaml', 'octave', 'opencl', 'perl', 'puppet', 'qml', 'ragel', 'r-lang', 'rspec', 'ruby', 'rust', 'sbt', 'scala', 'slim', 'solidity', 'swift', 'systemd', 'textile', 'thrift', 'tomdoc', 'toml', 'twig', 'vala', 'vbnet', 'vcl', 'vm', 'yard']
+let g:polyglot_disabled = ['arduino', 'blade', 'c++11', 'clojure', 'cucumber', 'dart', 'elm', 'elixir', 'emblem', 'erlang', 'glsl', 'groovy', 'haskell', 'haxe', 'jinja', 'julia', 'kotlin', 'latex', 'liquid', 'objc', 'ocaml', 'octave', 'opencl', 'perl', 'puppet', 'qml', 'ragel', 'r-lang', 'rspec', 'ruby', 'rust', 'sbt', 'scala', 'slim', 'solidity', 'swift', 'systemd', 'textile', 'thrift', 'tomdoc', 'toml', 'twig', 'vala', 'vbnet', 'vcl', 'vm', 'yard']
 
 " ----for airline
 if !exists('g:airline_symbols')
@@ -355,6 +343,7 @@ let g:airline_section_z = airline#section#create_right(['%l/%L'])
 " ----for ag
 let g:ag_working_path_mode="r"
 
+" ----for deoplete
 let g:deoplete#enable_at_startup = 1
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
@@ -442,7 +431,7 @@ let g:yankring_replace_n_nkey = ''
 "fix for yankring and neovim
 let g:yankring_clipboard_monitor=0"
 
-" ----neomake
+" ----for neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_warning_sign = {
     \ 'text': 'W',

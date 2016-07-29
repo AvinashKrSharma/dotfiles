@@ -112,7 +112,9 @@ set makeprg=make\ -C\ ./\ -j9
 " set iskeyword+=-
 
 " ----multi-byte characters
-set encoding=utf-8
+if !has('nvim')
+    set encoding=utf-8
+endif
 set fileencoding=utf-8
 
 " ----various
