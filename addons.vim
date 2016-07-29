@@ -25,6 +25,10 @@ call plug#begin('~/.vim/bundle')
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'benmills/vimux'
 " Plug 'thinca/vim-quickrun'
+function! DoRemote(arg)
+      UpdateRemotePlugins
+  endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote')  }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
@@ -38,7 +42,7 @@ Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'paradigm/SkyBison'
 Plug 'ervandew/supertab'
@@ -81,7 +85,7 @@ Plug 'vim-scripts/prefixer.vim', {'for': 'css'}
 "js related
 Plug 'moll/vim-node', {'for': 'javascript'}
 Plug 'burnettk/vim-angular', {'for': 'javascript'}
-Plug 'marijnh/tern_for_vim', {'build' : {'unix' : 'npm install'}}
+Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'matthewsimo/angular-vim-snippets', {'for': 'javascript'}
 
@@ -376,6 +380,12 @@ let g:airline_section_z = airline#section#create_right(['%l/%L'])
 
 " ----for ag
 let g:ag_working_path_mode="r"
+
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " ----for Nerdtree
 let g:nerdtree_tabs_open_on_gui_startup=0
