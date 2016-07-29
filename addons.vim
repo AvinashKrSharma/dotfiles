@@ -28,7 +28,6 @@ Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'X
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
-Plug 'szw/vim-ctrlspace'
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'vim-scripts/YankRing.vim'
 Plug 'gorkunov/smartpairs.vim'
@@ -287,6 +286,10 @@ if has("autocmd")
         autocmd FileType html imap <buffer><expr><tab> <sid>expand_html_tab()
         autocmd FileType html,css,ejs EmmetInstall
 
+        " Adding automatons for when entering or leaving Vim
+        au VimEnter * nested :call LoadSession()
+        au VimLeave * :call MakeSession()))
+
     augroup END
 endif
 
@@ -297,15 +300,6 @@ let g:vim_json_syntax_conceal = 0 " Don't hide Json syntax.
 
 " ----for javascript libraries syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
-
-" ----for ctrlspace
-let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-let g:CtrlSpaceSaveWorkspaceOnExit = 1
-let g:CtrlSpaceCacheDir = '$HOME/.vim/tmp'
-if executable("ag")
-    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-endif
 
 " ----for polyglot
 let g:polyglot_disabled = ['arduino', 'blade', 'c++11', 'clojure', 'cucumber', 'dart', 'elm', 'elixir', 'emblem', 'erlang', 'glsl', 'groovy', 'haskell', 'haxe', 'jinja', 'julia', 'kotlin', 'latex', 'liquid', 'objc', 'ocaml', 'octave', 'opencl', 'perl', 'puppet', 'qml', 'ragel', 'r-lang', 'rspec', 'ruby', 'rust', 'sbt', 'scala', 'slim', 'solidity', 'swift', 'systemd', 'textile', 'thrift', 'tomdoc', 'toml', 'twig', 'vala', 'vbnet', 'vcl', 'vm', 'yard']
@@ -548,3 +542,24 @@ function! ResolveESLint()
     endif
     let b:neomake_javascript_eslint_exe = l:eslint
 endfunction
+
+function! MakeSession()
+    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+    if (filewritable(b:sessiondir) != 2)
+        exe 'silent !mkdir -p ' b:sessiondir
+        redraw!
+    endif
+    let b:filename = b:sessiondir . '/session.vim'
+    exe "mksession! " . b:filename
+endfunction
+
+function! LoadSession()
+    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+    let b:sessionfile = b:sessiondir . "/session.vim"
+    if (filereadable(b:sessionfile))
+        exe 'source ' b:sessionfile
+    else
+        echo "No session loaded."
+    endif
+endfunction
+
