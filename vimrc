@@ -11,7 +11,7 @@ set ignorecase
 set smartcase
 
 " ----tags
-" set tags=./tags;/
+set tags=./tags;/
 
 " ----displaying text ----
 set linebreak
@@ -44,8 +44,13 @@ set ttyfast
 set title
 
 " ----using the mouse
-set mouse=a
-set ttymouse=xterm2
+if has('mouse')
+    set mouse=a
+endif
+
+if !has('nvim')
+    set ttymouse=xterm2
+endif
 
 " ----messages and info
 set shortmess=I

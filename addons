@@ -60,6 +60,12 @@ Plug 'tomtom/tlib_vim'
 Plug 'xolox/vim-misc'
 Plug 'flazz/vim-colorschemes'
 Plug 'xolox/vim-colorscheme-switcher'
+Plug 'aquach/vim-http-client'
+Plug 'Shougo/deoplete.nvim'
+Plug 'morhetz/gruvbox'
+Plug 'fweep/vim-tabber'
+Plug 'jceb/vim-orgmode'
+Plug 'sgeb/vim-diff-fold'
 
 "html related
 " Plug 'garbas/vim-snipmate'
@@ -69,7 +75,7 @@ Plug 'docunext/closetag.vim'
 Plug 'bendavis78/vim-polymer'
 
 "css related
-Plug 'gorodinskiy/vim-coloresque', {'for': 'css'}
+Plug 'gorodinskiy/vim-coloresque', {'for': ['css', 'scss']}
 Plug 'vim-scripts/prefixer.vim', {'for': 'css'}
 
 "js related
@@ -449,6 +455,8 @@ let g:yankring_window_use_right = 0
 " disable cycling through yanks
 let g:yankring_replace_n_pkey = ''
 let g:yankring_replace_n_nkey = ''
+"fix for yankring and neovim
+let g:yankring_clipboard_monitor=0"
 
 " ----neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
