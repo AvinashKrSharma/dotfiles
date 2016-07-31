@@ -303,7 +303,6 @@ nnoremap <leader>b  :buffers<CR>:buffer<Space>
 map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
 nnoremap <leader>e  :Neomake<CR>
-nnoremap <leader>f  :Autoformat<CR>:update<CR>
 
 " specific to git fugitive
 nnoremap <leader>gb :Gblame<CR>
@@ -329,11 +328,9 @@ nnoremap <leader>q  :q<CR>
 nnoremap <leader>r  :NERDTreeFind<CR>
 nnoremap <leader>s  :call ToggleNERDTreeQOOBehaviour()<cr>
 vnoremap <leader>t  :Tabularize/ /l0<cr>
-nnoremap <leader>tr :TernRefs<CR>
-nnoremap <leader>tn :TernRename<CR>
 nnoremap <leader>tw :%s/\s\+$//e<CR> "Remove unwanted spaces
 nnoremap <leader>u :GundoToggle<CR>
-nnoremap <leader>v :tabedit ~/dotfiles/addons.vim<CR>
+nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
 nnoremap <leader>w <c-w>w
 
 nnoremap <leader><leader> :update<CR>
@@ -422,6 +419,9 @@ if has("autocmd")
         autocmd FileType html imap <buffer><expr><tab> <sid>expand_html_tab()
         autocmd FileType html,css,ejs EmmetInstall
 
+        "for deoplete
+        autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
         " Adding automatons for when entering or leaving Vim
         au VimEnter * nested :call LoadSession()
         au VimLeave * :call MakeSession()))
@@ -431,8 +431,6 @@ endif
 
 
 " ####### Plugin specific settings
-
-let g:vim_json_syntax_conceal = 0 " Don't hide Json syntax.
 
 " ----for javascript libraries syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
@@ -478,7 +476,6 @@ let g:deoplete#enable_at_startup = 1
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " ----for Nerdtree
 let g:nerdtree_tabs_open_on_gui_startup=0
@@ -510,10 +507,6 @@ call NERDTreeHighlightFile('ds_store', 'Gray', 'NONE', '#686868', 'NONE')
 call NERDTreeHighlightFile('gitconfig', 'Gray', 'NONE', '#7F7F7F', 'NONE')
 call NERDTreeHighlightFile('gitignore', 'Gray', 'NONE', '#7F7F7F', 'NONE')
 
-" ----for snipmate
-let g:snips_trigger_key = '<c-tab>'
-let g:snips_trigger_key_backwards = '<c-s-tab>'
-
 " ----for emmet
 " Enable Emmet in all modes
 let g:user_emmet_mode='a'
@@ -528,6 +521,7 @@ let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:25'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|tmp|log|.bower-cache|.bower-registry|.bower-tmp)|(\.(swp|ico|png|jpg|git|svn))$'
+
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 
