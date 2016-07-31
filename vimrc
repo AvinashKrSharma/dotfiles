@@ -31,6 +31,7 @@ Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'vim-scripts/YankRing.vim'
 Plug 'gorkunov/smartpairs.vim'
+Plug 'tpope/vim-unimpaired'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
 Plug 'flazz/vim-colorschemes'
@@ -44,18 +45,12 @@ Plug 'tpope/vim-repeat'
 Plug 'Konfekt/FastFold'
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter', {'on': 'GitGutterToggle'}
+Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'paradigm/SkyBison'
-Plug 'tpope/vim-unimpaired'
 Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
 Plug 'aquach/vim-http-client'
-Plug 'sickill/vim-pasta'
-Plug 'sgeb/vim-diff-fold'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'xolox/vim-misc'
+Plug 'xolox/vim-misc' "Used by colorscheme-switcher
 
 "html related
 Plug 'mattn/emmet-vim', {'for': 'html'}
@@ -180,6 +175,7 @@ set autoread
 " ----the swap file
 set directory=$HOME/.vim/tmp
 set swapfile
+set updatetime=250
 
 " ----command line editing
 set history=1000
