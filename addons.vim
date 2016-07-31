@@ -40,6 +40,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'Konfekt/FastFold'
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'tpope/vim-fugitive'
@@ -197,7 +198,7 @@ nnoremap <leader>tr :TernRefs<CR>
 nnoremap <leader>tn :TernRename<CR>
 nnoremap <leader>tw :%s/\s\+$//e<CR> "Remove unwanted spaces
 nnoremap <leader>u :GundoToggle<CR>
-nnoremap <leader>v :tabedit ~/dotfiles/addons<CR>
+nnoremap <leader>v :tabedit ~/dotfiles/addons.vim<CR>
 nnoremap <leader>w <c-w>w
 
 nnoremap <leader><leader> :update<CR>
