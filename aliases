@@ -26,6 +26,7 @@ alias gdc='git diff --cached'
 alias gds='git diff --staged'
 alias gl="git log --pretty='%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %C(cyan)[%an]%Creset' --graph"
 alias glf='gl --follow '
+alias glp='git log -p'
 alias gls='gl --stat -G'
 alias gm='git merge '
 alias gpl='git pull '
