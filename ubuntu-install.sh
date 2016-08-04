@@ -1,5 +1,5 @@
 #list of packages to be installed
-packages="git curl tidy zsh tmux cmake python-dev default-jdk editorconfig silversearcher-ag checkinstall"
+packages="git curl vim tidy zsh tmux cmake python-dev default-jdk editorconfig silversearcher-ag checkinstall"
 
 npm_modules="jshint js-beautify tslint node-sass less typescript-formatter csslint eslint babel-eslint eslint-plugin-react"
 
@@ -33,15 +33,14 @@ mv  ~/.zshrc ~/.zshrc.backup
 #antigen for zsh
 curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > ~/antigen.zsh
 
-#build vim from source
-apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev ruby-dev
-apt-get remove vim vim-runtime gvim vim-tiny vim-common vim-gui-common
-git clone https://github.com/vim/vim.git ~
-./vim/configure --with-features=huge --enable-multibyte --enable-rubyinterp --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config --enable-perlinterp
-            --enable-luainterp \ --enable-gui=gtk2 --enable-cscope --prefix=/usr
-make VIMRUNTIMEDIR=/usr/share/vim/vim74
-(cd vim && make install && checkinstall)
-#phew!!
+#installing neovim
+sudo apt-get install software-properties-common python-dev python-pip python3-dev python3-pip
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt-get update
+sudo apt-get install neovim
+pip2 install --upgrade neovim
+pip3 install --upgrade neovim
+
 
 #setting vim as default editor
 update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
