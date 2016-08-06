@@ -1,5 +1,5 @@
 #list of packages to be installed
-packages="git curl vim tidy zsh tmux cmake default-jdk editorconfig silversearcher-ag checkinstall"
+packages="git curl vim tidy zsh tmux cmake xclip default-jdk editorconfig silversearcher-ag checkinstall"
 
 for_neovim="software-properties-common python-dev python-pip python3-dev python3-pip neovim"
 
@@ -19,6 +19,7 @@ apt-get install -y $packages $for_neovim
 
 #installing/upgrading neovim(required for deoplete)
 pip3 install neovim
+pip3 install --upgrade neovim
 
 #for nodejs
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
@@ -48,7 +49,7 @@ ln -s dotfiles/tmux-conf ~/.tmux.conf
 ln -s dotfiles/vimrc ~/.vimrc
 ln -s dotfiles/zshrc ~/.zshrc
 ln -s ~/.vim ~/.config/nvim
-ln -s ~/dotfiles/vimrc ~/.config/nvim/init.vim
+ln -s ~/dotfiles/vimrc ~/.vim/init.vim
 
 echo "NOTE: zsh as default shell will be reflected after the next login"
 
