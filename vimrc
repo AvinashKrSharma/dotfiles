@@ -52,6 +52,7 @@ Plug 'paradigm/SkyBison'
 Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
 Plug 'aquach/vim-http-client'
 Plug 'xolox/vim-misc' "Used by colorscheme-switcher
+Plug 'dhruvasagar/vim-table-mode'
 
 "html related
 Plug 'mattn/emmet-vim', {'for': 'html'}
