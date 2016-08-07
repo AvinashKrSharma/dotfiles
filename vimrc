@@ -295,15 +295,18 @@ nnoremap ]o :copen<cr>
 " toggle textwidth
 nnoremap cot :call ToggleTextWidth()<cr>
 
+" for ctrlpbuffer
+nnoremap <c-b> :CtrlPBuffer<CR>
+
 " ----Leader key mappings
 nnoremap <leader>ad :%bd<CR>
 nnoremap <leader>aq :qa<CR>
 nnoremap <leader>as ggVG
+nnoremap <leader>b  :call ToggleNERDTreeQOOBehaviour()<cr>
 
-nnoremap <leader>b  :buffers<CR>:buffer<Space>
 map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
-nnoremap <leader>e  :Neomake<CR>
+nnoremap <leader>f  :NERDTreeFind<CR>
 
 " specific to git fugitive
 nnoremap <leader>gb :Gblame<CR>
@@ -319,24 +322,22 @@ nnoremap <leader>gt :GitGutterToggle<CR>
 nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
-nnoremap <leader>i  gg=G''
-nnoremap <leader>k  :!gcc % -o %.o<cr><cr> :!./%.o<cr>
-nnoremap <leader>l  :IndentLinesToggle<CR>
-nnoremap <leader>m  :QuickRun<cr>
-nnoremap <leader>n  :NERDTreeToggle<CR>
-nnoremap <leader>p  :YRShow<CR>
-nnoremap <leader>q  :q<CR>
-nnoremap <leader>r  :NERDTreeFind<CR>
-nnoremap <leader>s  :call ToggleNERDTreeQOOBehaviour()<cr>
-vnoremap <leader>t  :Tabularize/ /l0<cr>
-nnoremap <leader>tw :%s/\s\+$//e<CR> "Remove unwanted spaces
+nnoremap <leader>i :IndentLinesToggle<CR>
+nnoremap <leader>k :!gcc % -o %.o<cr><cr> :!./%.o<cr>
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>p :YRShow<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>r :QuickRun<cr>
+vnoremap <leader>t :Tabularize/ /l0<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
 nnoremap <leader>w <c-w>w
 
 nnoremap <leader><leader> :update<CR>
+nnoremap <leader> :%s/\s\+$//e<CR> "Remove unwanted spaces
 nnoremap <leader>, :Ag --smart-case ""<left>
 nnoremap <leader>/ <esc>:OverCommandLine<CR>:%s/
+nnoremap <leader>= gg=G''
 
 
 " ####### Abbreviations for common mistyped commands
@@ -373,6 +374,9 @@ if has("autocmd")
 
         " disable syntax highlighting on laaarge files
         au BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
+
+        " for gitgutter
+        autocmd User GitGutter AirlineRefresh
 
         " disable syntax highlighting for jade files to speed things up
         autocmd FileType jade    setlocal syntax=off
@@ -462,9 +466,9 @@ let g:airline_right_sep = ' '
 let g:airline_left_sep = ' '
 let g:airline_powerline_fonts = 1
 let g:airline_section_a = airline#section#create(['mode'])
-let g:airline_section_b = airline#section#create(['branch'])
-let g:airline_section_c = airline#section#create(['%f'])
-let g:airline_section_x = airline#section#create(['type:', 'filetype'])
+let g:airline_section_b = airline#section#create(['%f'])
+let g:airline_section_c = airline#section#create(['branch', '  ', 'hunks'])
+let g:airline_section_x = airline#section#create(['filetype'])
 let g:airline_section_y = airline#section#create(['%c'])
 let g:airline_section_z = airline#section#create_right(['%l/%L'])
 
@@ -536,7 +540,7 @@ endif
 
 " ----for gitgutter
 let g:gitgutter_max_signs = 200
-let g:gitgutter_highlight_lines = 1
+let g:gitgutter_highlight_lines = 0
 let g:gitgutter_enabled = 1
 
 " ----for indentguides
