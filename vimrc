@@ -44,7 +44,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'Konfekt/FastFold'
-Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
+Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
@@ -331,7 +331,7 @@ nnoremap <leader>p :YRShow<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>r :QuickRun<cr>
 vnoremap <leader>t :Tabularize/ /l0<cr>
-nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
 nnoremap <leader>w <c-w>w
 
@@ -477,10 +477,6 @@ let g:airline_section_z = airline#section#create_right(['%l/%L'])
 
 " ----for ag
 let g:ag_working_path_mode="r"
-
-" ----for undotree
-let g:undotree_SetFocusWhenToggle=1
-let g:undotree_WindowLayout = 2
 
 " ----for deoplete
 let g:deoplete#enable_at_startup = 1
