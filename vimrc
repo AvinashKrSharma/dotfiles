@@ -46,6 +46,7 @@ Plug 'tpope/vim-repeat'
 Plug 'Konfekt/FastFold'
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
 Plug 'tpope/vim-fugitive'
+Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'paradigm/SkyBison'
@@ -316,7 +317,7 @@ nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gg :diffget
 nnoremap <leader>gi :Git add -p %<CR>
-nnoremap <leader>gl :Glog<CR>
+nnoremap <leader>gl :Gitv<CR>
 nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gt :GitGutterToggle<CR>
