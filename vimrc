@@ -30,6 +30,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'editorconfig/editorconfig-vim'
+Plug 'chrisbra/NrrwRgn'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-unimpaired'
@@ -50,7 +51,7 @@ Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'paradigm/SkyBison'
-Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
+Plug 'Yggdroot/indentLine'
 Plug 'aquach/vim-http-client'
 Plug 'xolox/vim-misc' "Used by colorscheme-switcher
 Plug 'dhruvasagar/vim-table-mode'
@@ -572,6 +573,9 @@ let g:neomake_error_sign = {
     \ 'text': 'E',
     \ 'texthl': 'ErrorMsg',
     \ }
+
+"for indentLine
+let g:indentLine_char = '┊'
 
 " ####### Function definitions
 set foldtext=MyFoldText()
