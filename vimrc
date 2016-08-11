@@ -331,13 +331,13 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>p :YRShow<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>r :QuickRun<cr>
+nnoremap <leader>s :%s/\s\+$//e<CR> "Remove unwanted spaces
 vnoremap <leader>t :Tabularize/ /l0<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
 nnoremap <leader>w <c-w>w
 
 nnoremap <leader><leader> :update<CR>
-nnoremap <leader> :%s/\s\+$//e<CR> "Remove unwanted spaces
 nnoremap <leader>, :Ag --smart-case ""<left>
 nnoremap <leader>/ <esc>:OverCommandLine<CR>:%s/
 nnoremap <leader>= gg=G''
@@ -636,13 +636,13 @@ function! MyFoldText()
     return sub . info
 endfunction
 
-function! LocationNext()                                                                  
-    try                                                                                     
-        lnext                                                                                 
-    catch                                                                                   
-        try | lfirst | catch | endtry                                                         
-    endtry                                                                                  
-endfunction                                                                               
+function! LocationNext()
+    try
+        lnext
+    catch
+        try | lfirst | catch | endtry
+    endtry
+endfunction
 
 " for better tab response for emmet
 function! s:expand_html_tab()
@@ -667,7 +667,7 @@ endfunction
 function! ToggleNERDTreeQOOBehaviour()
     if (g:NERDTreeQuitOnOpen == 1)
         let g:NERDTreeQuitOnOpen=0
-    else 
+    else
         let g:NERDTreeQuitOnOpen=1
     endif
 endfunction
