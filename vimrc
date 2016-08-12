@@ -5,8 +5,7 @@ filetype off
 
 " Download vim-plug if already not present
 if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     let g:doPlugInstall = "set"
 endif
 
@@ -531,14 +530,12 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:25'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|tmp|log|.bower-cache|.bower-registry|.bower-tmp)|(\.(swp|ico|png|jpg|git|svn))$'
 
 if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
+    set grepprg=ag --nogroup --nocolor
 
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 else
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-    let g:ctrlp_prompt_mappings = {
-                \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-                \ }
+    let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'] }
 endif
 
 " ----for gitgutter
@@ -565,14 +562,8 @@ let g:yankring_clipboard_monitor=0"
 
 " ----for neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_warning_sign = {
-    \ 'text': 'W',
-    \ 'texthl': 'WarningMsg',
-    \ }
-let g:neomake_error_sign = {
-    \ 'text': 'E',
-    \ 'texthl': 'ErrorMsg',
-    \ }
+let g:neomake_warning_sign = { 'text': 'W', 'texthl': 'WarningMsg' }
+let g:neomake_error_sign = { 'text': 'E', 'texthl': 'ErrorMsg' }
 
 "for indentLine
 let g:indentLine_char = '┊'
