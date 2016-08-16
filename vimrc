@@ -530,7 +530,7 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:25'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|tmp|log|.bower-cache|.bower-registry|.bower-tmp)|(\.(swp|ico|png|jpg|git|svn))$'
 
 if executable('ag')
-    set grepprg=ag --nogroup --nocolor
+    set grepprg=ag
 
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 else
