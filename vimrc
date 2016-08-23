@@ -19,6 +19,7 @@ call plug#begin('~/.vim/bundle')
 
 " core plugins
 Plug 'thinca/vim-quickrun'
+Plug 'mhinz/vim-startify'
 Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim', {'on': 'Ag'}
@@ -97,7 +98,7 @@ set tags=./tags;/
 
 " ----displaying text ----
 set linebreak
-set showbreak=↪
+" set showbreak=↪
 set sidescrolloff=10
 set fcs+=vert:│
 set fillchars+=stl:\ ,stlnc:\
@@ -429,15 +430,17 @@ if has("autocmd")
         "for deoplete
         autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-        " Adding automatons for when entering or leaving Vim
-        au VimEnter * nested :call LoadSession()
-        au VimLeave * :call MakeSession()))
-
     augroup END
 endif
 
 
 " ####### Plugin specific settings
+
+" ----for vim-startify
+
+let g:startify_session_autoload = 1
+let g:startify_session_dir = '~/.vim/session'
+let g:startify_list_order = ['sessions', 'files', 'dir', 'bookmarks', 'commands']
 
 " ----for javascript libraries syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
@@ -673,25 +676,5 @@ function! ResolveESLint()
       let l:eslint = l:npm_bin . '/eslint'
     endif
     let b:neomake_javascript_eslint_exe = l:eslint
-endfunction
-
-function! MakeSession()
-    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
-    if (filewritable(b:sessiondir) != 2)
-        exe 'silent !mkdir -p ' b:sessiondir
-        redraw!
-    endif
-    let b:filename = b:sessiondir . '/session.vim'
-    exe "mksession! " . b:filename
-endfunction
-
-function! LoadSession()
-    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
-    let b:sessionfile = b:sessiondir . "/session.vim"
-    if (filereadable(b:sessionfile))
-        exe 'source ' b:sessionfile
-    else
-        echo "No session loaded."
-    endif
 endfunction
 
