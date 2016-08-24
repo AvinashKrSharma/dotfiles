@@ -439,7 +439,9 @@ endif
 " ----for vim-startify
 
 let g:startify_session_autoload = 1
+let g:startify_enable_special = 0
 let g:startify_session_dir = '~/.vim/session'
+let g:startify_session_persistence = 1
 let g:startify_list_order = ['sessions', 'files', 'dir', 'bookmarks', 'commands']
 
 " ----for javascript libraries syntax
