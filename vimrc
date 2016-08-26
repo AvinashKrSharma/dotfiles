@@ -35,6 +35,8 @@ Plug 'vim-scripts/YankRing.vim'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'kshenoy/vim-signature'
+Plug 'wincent/terminus'
 Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
 Plug 'flazz/vim-colorschemes'
 Plug 'xolox/vim-colorscheme-switcher'
@@ -79,7 +81,7 @@ if exists('doPlugInstall')
 endif
 
 " set colorscheme after loading colorschemes
-colorscheme tir_black
+colorscheme Tomorrow-Night-Bright
 
 " ####### Vim settings
 
