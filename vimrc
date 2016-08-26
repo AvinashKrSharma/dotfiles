@@ -230,8 +230,8 @@ call matchadd('ColorColumn', '\%81v', 100)
 map <F7> :setlocal spell! spell?<CR>
 
 " mappings for neomake error navigation
-nnoremap <silent>[ :lprev<cr>
-nnoremap <silent>] :call LocationNext()<cr>
+nnoremap <silent><c-[> :lprev<cr>
+nnoremap <silent><c-]> :call LocationNext()<cr>
 
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
@@ -253,16 +253,6 @@ nnoremap <C-right> :vertical resize +2<cr>
 " Navigate between display lines
 noremap  <silent> <Up>   gk
 noremap  <silent> <Down> gj
-noremap  <silent> k gk
-noremap  <silent> j gj
-noremap  <silent> <Home> g<Home>
-noremap  <silent> <End>  g<End>
-inoremap <silent> <Home> <C-o>g<Home>
-inoremap <silent> <End>  <C-o>g<End>
-
-" to create new line without entering insert mode
-nmap oo o<Esc>k
-nmap OO O<Esc>j
 
 " folding related mappings
 nnoremap zr zR
@@ -298,14 +288,15 @@ nnoremap ; :<c-u>call SkyBison("")<cr>
 " make filepath autocomplete mapping less painful
 inoremap <c-f> <c-x><c-f>
 
-" useful for opening quickfix window
-nnoremap ]o :copen<cr>
-
 " toggle textwidth
 nnoremap cot :call ToggleTextWidth()<cr>
 
 " for ctrlpbuffer
 nnoremap <c-b> :CtrlPBuffer<CR>
+
+" for high and low
+nnoremap [ H
+nnoremap ] L
 
 " ----Leader key mappings
 nnoremap <leader>ad :%bd<CR>
