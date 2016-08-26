@@ -268,6 +268,12 @@ nmap OO O<Esc>j
 nnoremap zr zR
 nnoremap zs zr
 
+" mapping jk,kj to esc
+nnoremap jk <Esc>
+nnoremap kj <Esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
+
 " mappings for page up/down, half/full
 nnoremap <C-h> <C-b>
 nnoremap <C-j> <C-f>
