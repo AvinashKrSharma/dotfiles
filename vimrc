@@ -228,6 +228,12 @@ call matchadd('ColorColumn', '\%81v', 100)
 
 " ####### Mappings
 
+" Yes this looks insane :D
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 " ----general mappings
 map <F7> :setlocal spell! spell?<CR>
 
@@ -284,9 +290,6 @@ nmap \s :set ts=4 sts=4 sw=4 et<cr>
 map  <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
 
-" mapping for skybison's command mode
-nnoremap ; :<c-u>call SkyBison("")<cr>
-
 " make filepath autocomplete mapping less painful
 inoremap <c-f> <c-x><c-f>
 
@@ -297,8 +300,14 @@ nnoremap cot :call ToggleTextWidth()<cr>
 nnoremap <c-b> :CtrlPBuffer<CR>
 
 " for high and low
-nnoremap [ H
-nnoremap ] L
+nnoremap h H
+nnoremap l L
+
+" mapping for skybison's command mode
+nnoremap : :<c-u>call SkyBison("")<cr>
+
+" for compiling c programs
+nnoremap <c-g> :!gcc % -o %.o<cr><cr> :!./%.o<cr>
 
 " ----Leader key mappings
 nnoremap <leader>ad :%bd<CR>
@@ -311,6 +320,7 @@ nnoremap <leader>d  :bd<CR>
 nnoremap <leader>f  :NERDTreeFind<CR>
 
 " specific to git fugitive
+nnoremap <leader>g  :Git
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gd :Gdiff<CR>
@@ -325,7 +335,6 @@ nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i :IndentLinesToggle<CR>
-nnoremap <leader>k :!gcc % -o %.o<cr><cr> :!./%.o<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>p :YRShow<CR>
 nnoremap <leader>q :q<CR>
