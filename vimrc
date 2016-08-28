@@ -30,13 +30,11 @@ Plug 'vim-airline/vim-airline'
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'editorconfig/editorconfig-vim'
-Plug 'chrisbra/NrrwRgn'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'kshenoy/vim-signature'
-Plug 'wincent/terminus'
 Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
 Plug 'flazz/vim-colorschemes'
 Plug 'xolox/vim-colorscheme-switcher'
@@ -52,7 +50,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
-Plug 'paradigm/SkyBison'
 Plug 'Yggdroot/indentLine'
 Plug 'aquach/vim-http-client'
 Plug 'xolox/vim-misc' "Used by colorscheme-switcher
@@ -167,6 +164,7 @@ set smartindent
 
 " ----folding
 set foldmethod=syntax
+set foldtext=MyFoldText()
 set foldlevel=99
 
 " ----diff mode
@@ -228,12 +226,6 @@ call matchadd('ColorColumn', '\%81v', 100)
 
 " ####### Mappings
 
-" Yes this looks insane :D
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-
 " ----general mappings
 map <F7> :setlocal spell! spell?<CR>
 
@@ -243,6 +235,12 @@ nnoremap <silent><c-]> :call LocationNext()<cr>
 
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
+
+" Yes this looks insane :D, but it's time to level up
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 
 " make search results appear at the center of the screen
 nnoremap n nzz
@@ -259,8 +257,8 @@ nnoremap <C-up> :resize +2<cr>
 nnoremap <C-right> :vertical resize +2<cr>
 
 " Navigate between display lines
-noremap  <silent> <Up>   gk
-noremap  <silent> <Down> gj
+noremap  <silent> k gk
+noremap  <silent> j gj
 
 " folding related mappings
 nnoremap zr zR
@@ -296,12 +294,6 @@ nnoremap <c-b> :CtrlPBuffer<CR>
 " for high and low
 nnoremap h H
 nnoremap l L
-
-" mapping for skybison's command mode
-nnoremap : :<c-u>call SkyBison("")<cr>
-
-" for compiling c programs
-nnoremap <c-g> :!gcc % -o %.o<cr><cr> :!./%.o<cr>
 
 " ----Leader key mappings
 nnoremap <leader>ad :%bd<CR>
@@ -439,8 +431,6 @@ endif
 " ####### Plugin specific settings
 
 " ----for vim-startify
-
-let g:startify_session_autoload = 1
 let g:startify_enable_special = 0
 let g:startify_session_dir = '~/.vim/session'
 let g:startify_session_persistence = 1
@@ -480,7 +470,6 @@ let g:airline_section_c = airline#section#create(['branch', '  ', 'hunks'])
 let g:airline_section_x = airline#section#create(['filetype'])
 let g:airline_section_y = airline#section#create(['%c'])
 let g:airline_section_z = airline#section#create_right(['%l/%L'])
-
 
 " ----for ag
 let g:ag_working_path_mode="r"
@@ -535,10 +524,8 @@ let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:25'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|tmp|log|.bower-cache|.bower-registry|.bower-tmp)|(\.(swp|ico|png|jpg|git|svn))$'
-
 if executable('ag')
     set grepprg=ag
-
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 else
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
@@ -576,8 +563,6 @@ let g:neomake_error_sign = { 'text': 'E', 'texthl': 'ErrorMsg' }
 let g:indentLine_char = '┊'
 
 " ####### Function definitions
-set foldtext=MyFoldText()
-
 function! ToggleTextWidth()
     if (&textwidth == 120)
         set textwidth=0
