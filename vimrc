@@ -166,8 +166,8 @@ set autoindent
 set smartindent
 
 " ----folding
-set foldlevel=99
 set foldmethod=syntax
+set foldlevel=99
 
 " ----diff mode
 set diffopt=vertical
