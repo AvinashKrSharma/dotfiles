@@ -19,7 +19,6 @@ call plug#begin('~/.vim/bundle')
 
 " core plugins
 Plug 'thinca/vim-quickrun'
-Plug 'mhinz/vim-startify'
 Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim', {'on': 'Ag'}
@@ -237,10 +236,10 @@ nnoremap <silent><c-]> :call LocationNext()<cr>
 inoremap <c-d> <esc>ddi
 
 " Yes this looks insane :D, but it's time to level up
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
 
 " make search results appear at the center of the screen
 nnoremap n nzz
@@ -288,8 +287,8 @@ inoremap <c-f> <c-x><c-f>
 " toggle textwidth
 nnoremap cot :call ToggleTextWidth()<cr>
 
-" for ctrlpbuffer
-nnoremap <c-b> :CtrlPBuffer<CR>
+" toggle nerdtree behaviour
+nnoremap <c-b> :call ToggleNERDTreeQOOBehaviour()<cr>
 
 " for high and low
 nnoremap h H
@@ -299,7 +298,7 @@ nnoremap l L
 nnoremap <leader>ad :%bd<CR>
 nnoremap <leader>aq :qa<CR>
 nnoremap <leader>as ggVG
-nnoremap <leader>b  :call ToggleNERDTreeQOOBehaviour()<cr>
+nnoremap <leader>b  :CtrlPBuffer<CR>
 
 map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
@@ -321,8 +320,8 @@ nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i :IndentLinesToggle<CR>
+nnoremap <leader>m :CtrlPMRUFiles<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>p :YRShow<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>r :QuickRun<cr>
 nnoremap <leader>s :%s/\s\+$//e<CR> "Remove unwanted spaces
@@ -330,6 +329,7 @@ vnoremap <leader>t :Tabularize/ /l0<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
 nnoremap <leader>w <c-w>w
+nnoremap <leader>y :YRShow<CR>
 
 nnoremap <leader><leader> :update<CR>
 nnoremap <leader>, :Ag --smart-case ""<left>
@@ -429,12 +429,6 @@ endif
 
 
 " ####### Plugin specific settings
-
-" ----for vim-startify
-let g:startify_enable_special = 0
-let g:startify_session_dir = '~/.vim/session'
-let g:startify_session_persistence = 1
-let g:startify_list_order = ['sessions', 'files', 'dir', 'bookmarks', 'commands']
 
 " ----for javascript libraries syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
