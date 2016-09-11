@@ -162,7 +162,7 @@ set autoindent
 set smartindent
 
 " ----folding
-set foldmethod=syntax
+set foldmethod=indent
 set foldtext=MyFoldText()
 set foldlevel=99
 
