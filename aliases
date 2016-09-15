@@ -42,6 +42,9 @@ alias gu=gitundo
 alias p="python -m SimpleHTTPServer "
 alias pp="python -m SimpleHTTPServer"
 
+#Nvim
+alias sv='sudo nvim'
+
 # Tmux
 alias t='tmux -2u'
 
