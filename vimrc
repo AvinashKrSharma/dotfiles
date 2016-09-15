@@ -322,6 +322,7 @@ nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>i :IndentLinesToggle<CR>
 nnoremap <leader>m :CtrlPMRUFiles<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
+" leader p mapped to ctrl-p
 nnoremap <leader>q :q<CR>
 nnoremap <leader>r :QuickRun<cr>
 nnoremap <leader>s :%s/\s\+$//e<CR> "Remove unwanted spaces
@@ -511,6 +512,8 @@ let g:use_emmet_complete_tag = 1
 let g:user_emmet_install_global = 0
 
 " ----for ctrlp
+let g:ctrlp_map = '<leader>p'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_show_hidden = 1
