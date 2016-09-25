@@ -62,6 +62,7 @@
     column-enforce-mode
     anzu
     command-log-mode
+    hackernews
     skewer-mode
     js2-refactor)
 )
@@ -359,6 +360,8 @@
 ;;; Set up relative line numbering to mimic `:set number relativenumber`.
 (add-hook 'linum-before-numbering-hook 'my-linum-get-format-string)
 
+(require 'hackernews)
+
 ;;;EVIL
 
 (evil-mode t)
@@ -372,7 +375,6 @@
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
-  "a" 'ace-jump-mode
   "b" 'ido-switch-buffer
   "d" 'kill-buffer
   "f" 'fiplr-find-file
@@ -380,6 +382,7 @@
   "gl" 'magit-log
   "gs" 'magit-status
   "hs" 'split-window-below
+  "j" 'ace-jump-mode
   "n" 'neotree-toggle
   "r" 'neotree-find
   "s" 'projectile-ag
@@ -404,7 +407,7 @@
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
 (require 'evil-magit)
-(setq evil-magit-state 'normal)
+;; (setq evil-magit-state 'normal)
 
 ;; Make HJKL keys work in special buffers
 (evil-add-hjkl-bindings magit-branch-manager-mode-map 'emacs
@@ -459,10 +462,12 @@
 (setq key-chord-two-keys-delay 0.075)
 (key-chord-mode 1)
 
-(define-key evil-normal-state-map "gh" 'windmove-left)
-(define-key evil-normal-state-map "gj" 'windmove-down)
-(define-key evil-normal-state-map "gk" 'windmove-up)
-(define-key evil-normal-state-map "gl" 'windmove-right)
+(define-key evil-normal-state-map " h" 'windmove-left)
+(define-key evil-normal-state-map " j" 'windmove-down)
+(define-key evil-normal-state-map " k" 'windmove-up)
+(define-key evil-normal-state-map " l" 'windmove-right)
+(define-key evil-normal-state-map " d" (kbd ":%bd"))
+(define-key evil-normal-state-map " w" (kbd "<c-w>w"))
 
 (provide 'init)
 ;;; init.el ends here
