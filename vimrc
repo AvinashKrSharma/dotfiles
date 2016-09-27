@@ -232,6 +232,13 @@ map <F7> :setlocal spell! spell?<CR>
 nnoremap <silent><c-[> :lprev<cr>
 nnoremap <silent><c-]> :call LocationNext()<cr>
 
+" reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" force saving files that require root permission
+cmap w!! %!sudo tee > /dev/null %
+
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
 
@@ -385,6 +392,9 @@ if has("autocmd")
         " Run neomake on buffer write
         autocmd FileType javascript :call ResolveESLint()
         autocmd! BufWritePost,BufReadPost * Neomake
+
+        "show git diff in window split when commiting
+        autocmd FileType gitcommit DiffGitCached | wincmd p
 
         " When editing a file, always jump to the last known cursor position.
         " Don't do it for commit messages, when the position is invalid, or when
