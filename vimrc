@@ -26,6 +26,7 @@ Plug 'benekastah/neomake'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
+Plug 'terryma/vim-expand-region'
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'editorconfig/editorconfig-vim'
