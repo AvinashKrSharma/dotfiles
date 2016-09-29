@@ -47,6 +47,7 @@ Plug 'tpope/vim-repeat'
 Plug 'Konfekt/FastFold'
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'tpope/vim-fugitive'
+Plug 'jreybert/vimagit'
 Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
@@ -306,7 +307,7 @@ nnoremap <leader>d  :bd<CR>
 nnoremap <leader>f  :NERDTreeFind<CR>
 
 " specific to git fugitive
-nnoremap <leader>g  :Git
+nnoremap <leader>g  :Magit<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gd :Gdiff<CR>
