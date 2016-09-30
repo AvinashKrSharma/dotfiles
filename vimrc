@@ -26,6 +26,10 @@ Plug 'benekastah/neomake'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'itchyny/vim-cursorword'
+Plug 'terryma/vim-expand-region'
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'editorconfig/editorconfig-vim'
@@ -46,6 +50,7 @@ Plug 'tpope/vim-repeat'
 Plug 'Konfekt/FastFold'
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'tpope/vim-fugitive'
+Plug 'jreybert/vimagit'
 Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
@@ -294,6 +299,23 @@ inoremap <c-f> <c-x><c-f>
 " toggle textwidth
 nnoremap cot :call ToggleTextWidth()<cr>
 
+" for incremental search
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
+map zg/ <Plug>(incsearch-fuzzy-stay)
+
+" :h g:incsearch#auto_nohlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
 " toggle nerdtree behaviour
 nnoremap <c-b> :call ToggleNERDTreeQOOBehaviour()<cr>
 
@@ -312,7 +334,7 @@ nnoremap <leader>d  :bd<CR>
 nnoremap <leader>f  :NERDTreeFind<CR>
 
 " specific to git fugitive
-nnoremap <leader>g  :Git
+nnoremap <leader>g  :Magit<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gd :Gdiff<CR>
@@ -514,6 +536,9 @@ call NERDTreeHighlightFile('ts', 'Blue', 'NONE', '#6699cc', 'NONE')
 call NERDTreeHighlightFile('ds_store', 'Gray', 'NONE', '#686868', 'NONE')
 call NERDTreeHighlightFile('gitconfig', 'Gray', 'NONE', '#7F7F7F', 'NONE')
 call NERDTreeHighlightFile('gitignore', 'Gray', 'NONE', '#7F7F7F', 'NONE')
+
+" ---for easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 " ----for emmet
 " Enable Emmet in all modes
