@@ -26,12 +26,24 @@ Plug 'benekastah/neomake'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
+
+" git related plugins
+Plug 'tpope/vim-fugitive'
+Plug 'jreybert/vimagit'
+Plug 'gregsexton/gitv'
+Plug 'airblade/vim-gitgutter'
+
+" search/text related plugins
+Plug 'bronson/vim-visual-star-search'
+Plug 'osyo-manga/vim-anzu'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'itchyny/vim-cursorword'
 Plug 'terryma/vim-expand-region'
-Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
+
+" others
+Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'gorkunov/smartpairs.vim'
@@ -49,10 +61,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'Konfekt/FastFold'
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
-Plug 'tpope/vim-fugitive'
-Plug 'jreybert/vimagit'
-Plug 'gregsexton/gitv'
-Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
 Plug 'aquach/vim-http-client'
@@ -309,15 +317,15 @@ map zg/ <Plug>(incsearch-fuzzy-stay)
 
 " :h g:incsearch#auto_nohlsearch
 let g:incsearch#auto_nohlsearch = 1
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
 
 " toggle nerdtree behaviour
 nnoremap <c-b> :call ToggleNERDTreeQOOBehaviour()<cr>
+
+" mapping
+nmap n <Plug>(anzu-n-with-echo)
+nmap N <Plug>(anzu-N-with-echo)
+nmap * <Plug>(anzu-star-with-echo)
+nmap # <Plug>(anzu-sharp-with-echo)
 
 " for high and low
 nnoremap h H
