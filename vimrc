@@ -555,7 +555,7 @@ let g:use_emmet_complete_tag = 1
 let g:user_emmet_install_global = 0
 
 " ----for ctrlp
-let g:ctrlp_map = '<leader>x'
+let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_clear_cache_on_exit = 0
