@@ -1,8 +1,5 @@
 " ####### Plugins
 
-" Turn off filetype plugins before bundles init, to make every work sane
-filetype off
-
 " Download vim-plug if already not present
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -46,6 +43,8 @@ Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-scripts/YankRing.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'kien/rainbow_parentheses.vim'
@@ -594,6 +593,9 @@ let g:yankring_replace_n_nkey = ''
 "fix for yankring and neovim
 let g:yankring_clipboard_monitor=0"
 
+" ---for ultisnips
+let g:UltiSnipsExpandTrigger="<c-tab>"
+
 " ----for neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_warning_sign = { 'text': 'W', 'texthl': 'WarningMsg' }
@@ -601,6 +603,14 @@ let g:neomake_error_sign = { 'text': 'E', 'texthl': 'ErrorMsg' }
 
 "for indentLine
 let g:indentLine_char = '┊'
+
+"for closetag
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.jsx"
+
+"for delimitmate
+let delimitMate_matchpairs = "(:),[:],{:}"
+au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+
 
 " ####### Function definitions
 function! ToggleTextWidth()
