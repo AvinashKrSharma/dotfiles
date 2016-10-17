@@ -40,26 +40,28 @@ Plug 'terryma/vim-expand-region'
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 
 " others
-Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
-Plug 'editorconfig/editorconfig-vim'
-Plug 'vim-scripts/YankRing.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'tpope/vim-surround'
+Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
+Plug 'Raimondi/delimitMate'
+Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
+Plug 'kien/rainbow_parentheses.vim'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-unimpaired'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'kshenoy/vim-signature'
-Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
+Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
+Plug 'Konfekt/FastFold'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'vim-scripts/YankRing.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'ervandew/supertab'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'Raimondi/delimitMate'
-Plug 'tpope/vim-surround'
+
+" misc
 Plug 'tpope/vim-repeat'
-Plug 'Konfekt/FastFold'
-Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
+Plug 'kshenoy/vim-signature'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
 Plug 'aquach/vim-http-client'
