@@ -8,34 +8,7 @@ alias e="exit"
 #gitundo function
 gitundo() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}};  };
 # Git
-alias g='git '
-alias ga='git add '
-alias gaa='git add -A'
-alias gb='git branch '
-alias gc='git commit -m '
-alias gca='git commit --amend'
-alias gcc='git commit'
-alias gch='git checkout '
-alias gcl='git clone '
-alias gcn='git clean '
-alias gco='git commit --ours '
-alias gcp='git cherry-pick '
-alias gct='git commit --theirs '
-alias gd='git diff --histogram'
-alias gdc='git diff --cached'
-alias gds='git diff --staged'
-alias gl="git log --pretty='%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %C(cyan)[%an]%Creset' --graph"
-alias glf='gl --follow '
-alias glp='git log -p'
-alias gls='gl --stat -G'
-alias gm='git merge '
-alias gpl='git pull '
-alias gplo='git pull origin '
-alias gps='git push '
-alias gpso='git push origin '
 alias gs='git status '
-alias gsh='git show '
-alias gst='git stash'
 alias gu=gitundo
 
 # Serve current folder
