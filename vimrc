@@ -21,6 +21,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'benekastah/neomake'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 
@@ -114,6 +115,7 @@ set linebreak
 set sidescrolloff=10
 set fcs+=vert:│
 set fillchars+=stl:\ ,stlnc:\
+set lazyredraw
 set nolist
 set listchars=tab:>-,trail:·,eol:$
 set number
@@ -152,6 +154,7 @@ set shortmess=I
 set showcmd
 set noshowmode
 set ruler
+set confirm
 
 " ----editing text
 set undofile
@@ -525,26 +528,10 @@ let g:NERDTreeShowHidden=1
 let g:NERDTreeKeepTreeInNewTab=1
 let g:NERDTreeIgnore=['.git$[[dir]]', '\.js.map$[[file]]']
 
-" shamelessly copied from mhartington's nvimrc
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-    exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-    exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-call NERDTreeHighlightFile('jade', 'green', 'NONE', 'green', 'NONE')
-call NERDTreeHighlightFile('md', 'blue', 'NONE', '#6699CC', 'NONE')
-call NERDTreeHighlightFile('conf', 'yellow', 'NONE', '#d8a235', 'NONE')
-call NERDTreeHighlightFile('json', 'green', 'NONE', '#d8a235', 'NONE')
-call NERDTreeHighlightFile('html', 'yellow', 'NONE', '#d8a235', 'NONE')
-call NERDTreeHighlightFile('css', 'cyan', 'NONE', '#5486C0', 'NONE')
-call NERDTreeHighlightFile('less', 'cyan', 'NONE', '#5486C0', 'NONE')
-call NERDTreeHighlightFile('scss', 'cyan', 'NONE', '#5486C0', 'NONE')
-call NERDTreeHighlightFile('coffee', 'Red', 'NONE', 'red', 'NONE')
-call NERDTreeHighlightFile('js', 'Red', 'NONE', '#ffa500', 'NONE')
-call NERDTreeHighlightFile('ts', 'Blue', 'NONE', '#6699cc', 'NONE')
-call NERDTreeHighlightFile('ds_store', 'Gray', 'NONE', '#686868', 'NONE')
-call NERDTreeHighlightFile('gitconfig', 'Gray', 'NONE', '#7F7F7F', 'NONE')
-call NERDTreeHighlightFile('gitignore', 'Gray', 'NONE', '#7F7F7F', 'NONE')
+" ----for vim-nerdtree-syntax-highlight
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
 
 " ---for easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
