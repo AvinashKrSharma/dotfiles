@@ -12,8 +12,7 @@ set -g history-limit 50000
 setw -g mode-keys vi
 
 # enable mouse
-setw -g mouse on
-set-option -g -q mouse on
+set-window-option -g mode-mouse on  
 
 # decrease command delay (increases vim responsiveness)
 set -sg escape-time 0
