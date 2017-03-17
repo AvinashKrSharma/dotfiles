@@ -12,7 +12,7 @@ COMPLETION_WAITING_DOTS="true"
 
 HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(command-not-found common-aliases debian docker extract git node npm pip python sudo tmux web-search)
+plugins=(command-not-found common-aliases debian docker extract git node npm pip python tmux vi-mode web-search)
 
 # User configuration
 
@@ -45,7 +45,7 @@ export NVM_DIR="/home/avinash/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 
 # Open tmux session
-tmux -2uq attach &> /dev/null
+#tmux -2uq attach &> /dev/null
 
 # Otherwise start new tmux session
 if [[ ! $TERM =~ screen  ]]; then
