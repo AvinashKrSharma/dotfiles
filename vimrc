@@ -15,6 +15,8 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " core plugins
+Plug 'mhinz/vim-startify' 
+Plug 'junegunn/goyo.vim'
 Plug 'thinca/vim-quickrun'
 Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
 Plug 'ctrlpvim/ctrlp.vim'
@@ -22,8 +24,9 @@ Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'benekastah/neomake'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
+Plug 'morhetz/gruvbox'
 
 " git related plugins
 Plug 'tpope/vim-fugitive'
@@ -54,19 +57,23 @@ Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'Konfekt/FastFold'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-scripts/YankRing.vim'
-Plug 'flazz/vim-colorschemes'
-Plug 'xolox/vim-colorscheme-switcher'
+" Plug 'flazz/vim-colorschemes'
+" Plug 'xolox/vim-colorscheme-switcher'
 Plug 'ervandew/supertab'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
 
 " misc
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-repeat'
 Plug 'kshenoy/vim-signature'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
 Plug 'aquach/vim-http-client'
-Plug 'xolox/vim-misc' "Used by colorscheme-switcher
+" Plug 'xolox/vim-misc' "Used by colorscheme-switcher
 Plug 'dhruvasagar/vim-table-mode'
 
 "html related
@@ -92,13 +99,23 @@ if exists('doPlugInstall')
 endif
 
 " set colorscheme after loading colorschemes
-colorscheme tir_black
+" colorscheme tir_black
+
+let g:gruvbox_italic=1
+let g:gruvbox_italicize_comments=1
+let g:gruvbox_improved_strings=0
+let g:gruvbox_improved_warnings=1
+let g:gruvbox_invert_selection=0
+let g:gruvbox_contrast_dark='medium'
+colorscheme gruvbox
 
 " ####### Vim settings
 
 " ----important
 set nocompatible
-runtime macros/matchit.vim      " to make % switch b/w opening & closing brackets
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
 
 " ----moving around,searching and patterns
 set path=$PWD/**
@@ -126,7 +143,7 @@ set background=dark
 filetype on
 syntax enable
 set hlsearch
-set cursorcolumn
+" set cursorcolumn
 set cursorline
 " set spell
 
@@ -144,13 +161,14 @@ set title
 if has('mouse')
     set mouse=a
 endif
+set mousemodel=extend
 
 if !has('nvim')
     set ttymouse=xterm2
 endif
 
 " ----messages and info
-set shortmess=I
+set shortmess=aIt
 set showcmd
 set noshowmode
 set ruler
@@ -225,7 +243,10 @@ set gdefault
 " ----others
 let mapleader = "\<Space>"
 let &path.="src/include,/usr/include/AL,"
-set t_Co=256
+" Allow color schemes to do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
+  set t_Co=16
+endif
 filetype plugin indent on
 
 " ----highlight spell errors
@@ -241,6 +262,12 @@ call matchadd('ColorColumn', '\%81v', 100)
 
 
 " ####### Mappings
+
+" disable the fuckin arrow keys
+noremap <Left> :echo "h"<CR>
+noremap <Right> :echo "l"<CR>
+noremap <Up> :echo "k"<CR>
+noremap <Down> :echo "j"<CR>
 
 " ----general mappings
 map <F7> :setlocal spell! spell?<CR>
@@ -259,20 +286,6 @@ cmap w!! %!sudo tee > /dev/null %
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
 
-" Yes this looks insane :D, but it's time to level up
-" noremap <Up> <NOP>
-" noremap <Down> <NOP>
-" noremap <Left> <NOP>
-" noremap <Right> <NOP>
-
-" make search results appear at the center of the screen
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
-
 " to resize splits
 nnoremap <C-left> :vertical resize -2<cr>
 nnoremap <C-down> :resize -2<cr>
@@ -282,10 +295,6 @@ nnoremap <C-right> :vertical resize +2<cr>
 " Navigate between display lines
 noremap  <silent> k gk
 noremap  <silent> j gj
-
-" folding related mappings
-nnoremap zr zR
-nnoremap zs zr
 
 " mappings for page up/down, half/full
 nnoremap <C-k> <C-b>
@@ -331,10 +340,6 @@ nmap N <Plug>(anzu-N-with-echo)
 nmap * <Plug>(anzu-star-with-echo)
 nmap # <Plug>(anzu-sharp-with-echo)
 
-" for high and low
-nnoremap h H
-nnoremap l L
-
 " ----Leader key mappings
 nnoremap <leader>ad :%bd<CR>
 nnoremap <leader>aq :qa<CR>
@@ -363,9 +368,10 @@ nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>i :IndentLinesToggle<CR>
 nnoremap <leader>m :CtrlPMRUFiles<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>o :Goyo<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>r :QuickRun<cr>
-nnoremap <leader>s :%s/\s\+$//e<CR> "Remove unwanted spaces
+nnoremap <leader>s :%s/\s\+$//e<CR>'' "Remove unwanted spaces
 vnoremap <leader>t :Tabularize/ /l0<cr>
 nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
@@ -475,6 +481,12 @@ endif
 
 " ####### Plugin specific settings
 
+" ----for vim-startify
+let g:startify_enable_special = 0
+let g:startify_session_dir = '~/.vim/session'
+let g:startify_session_persistence = 1
+let g:startify_list_order = ['sessions', 'files', 'dir', 'bookmarks', 'commands']
+
 " ----for javascript libraries syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
@@ -492,7 +504,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 let g:airline#extensions#wordcount#enabled = 1
-let g:airline_theme = 'term'
+" let g:airline_theme = 'term'
 let g:airline_exclude_preview = 1
 let g:airline_detect_paste=1
 let g:airline_detect_modified=1
@@ -552,6 +564,7 @@ let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:25'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|tmp|log|.bower-cache|.bower-registry|.bower-tmp)|(\.(swp|ico|png|jpg|git|svn))$'
+let g:ctrlp_mruf_exclude = '\v\.git/(COMMIT_EDITMSG|index)'
 if executable('ag')
     set grepprg=ag
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
