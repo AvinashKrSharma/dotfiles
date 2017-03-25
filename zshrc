@@ -12,7 +12,7 @@ COMPLETION_WAITING_DOTS="true"
 
 HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(command-not-found common-aliases debian docker extract git node npm pip python tmux vi-mode web-search)
+plugins=(command-not-found common-aliases debian docker extract git node npm pip python sudo tmux web-search)
 
 # User configuration
 
@@ -40,12 +40,8 @@ source $HOME/.aliases
 #source keybindings
 #source $HOME/dotfiles/keybindings
 
-# This loads nvm
-export NVM_DIR="/home/avinash/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
-
 # Open tmux session
-#tmux -2uq attach &> /dev/null
+tmux -2uq attach &> /dev/null
 
 # Otherwise start new tmux session
 if [[ ! $TERM =~ screen  ]]; then
@@ -54,7 +50,3 @@ fi
 
 # source the system specific extras file
 source $HOME/.extras
-
-export PATH=$PATH:$HOME/depot_tools
-export PATH=$PATH:/usr/local/go/bin
-
