@@ -16,14 +16,16 @@ call plug#begin('~/.vim/bundle')
 
 " core plugins
 Plug 'mhinz/vim-startify' 
-Plug 'junegunn/goyo.vim'
+if !has('nvim')
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+else
+    Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
+endif
 Plug 'thinca/vim-quickrun'
-Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'benekastah/neomake'
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
@@ -35,15 +37,16 @@ Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
 
 " search/text related plugins
+Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'bronson/vim-visual-star-search'
 Plug 'osyo-manga/vim-anzu'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
-Plug 'itchyny/vim-cursorword'
 Plug 'terryma/vim-expand-region'
-Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
+Plug 'itchyny/vim-cursorword'
 
 " others
+Plug 'junegunn/goyo.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
@@ -57,11 +60,11 @@ Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'Konfekt/FastFold'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-scripts/YankRing.vim'
-" Plug 'flazz/vim-colorschemes'
-" Plug 'xolox/vim-colorscheme-switcher'
 Plug 'ervandew/supertab'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
+" Plug 'flazz/vim-colorschemes'
+" Plug 'xolox/vim-colorscheme-switcher'
 
 " misc
 Plug 'tpope/vim-git'
@@ -166,6 +169,9 @@ set mousemodel=extend
 if !has('nvim')
     set ttymouse=xterm2
 endif
+
+" ---gui
+set guioptions=agit
 
 " ----messages and info
 set shortmess=aIt
@@ -327,9 +333,12 @@ map g/ <Plug>(incsearch-stay)
 map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
 map zg/ <Plug>(incsearch-fuzzy-stay)
-
-" :h g:incsearch#auto_nohlsearch
-let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
 
 " toggle nerdtree behaviour
 nnoremap <c-b> :call ToggleNERDTreeQOOBehaviour()<cr>
@@ -473,7 +482,9 @@ if has("autocmd")
         autocmd FileType html,css,ejs EmmetInstall
 
         "for deoplete
-        autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+        if has('nvim')
+            autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+        endif
 
     augroup END
 endif
@@ -525,10 +536,19 @@ let g:airline_section_z = airline#section#create_right(['%l/%L'])
 " ----for ag
 let g:ag_working_path_mode="r"
 
+" ----for ycm
+if !has('nvim')
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+endif
+
 " ----for deoplete
-let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
+if has('nvim')
+    let g:deoplete#enable_at_startup = 1
+    if !exists('g:deoplete#omni#input_patterns')
+        let g:deoplete#omni#input_patterns = {}
+    endif
 endif
 
 " ----for Nerdtree
