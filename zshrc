@@ -38,7 +38,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 source $HOME/.aliases
 
 #source keybindings
-#source $HOME/dotfiles/keybindings
+source $HOME/dotfiles/keybindings
 
 # Open tmux session
 tmux -2uq attach &> /dev/null
@@ -47,6 +47,9 @@ tmux -2uq attach &> /dev/null
 if [[ ! $TERM =~ screen  ]]; then
    exec tmux -2uq
 fi
+
+# source the ultimate fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # source the system specific extras file
 source $HOME/.extras

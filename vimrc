@@ -15,6 +15,8 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " core plugins
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-startify' 
 if !has('nvim')
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
