@@ -61,11 +61,12 @@ Plug 'tpope/vim-unimpaired'
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'Konfekt/FastFold'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'junegunn/limelight.vim'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'ervandew/supertab'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
-" Plug 'flazz/vim-colorschemes'
+Plug 'flazz/vim-colorschemes'
 " Plug 'xolox/vim-colorscheme-switcher'
 
 " misc
@@ -377,6 +378,7 @@ nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i :IndentLinesToggle<CR>
+nnoremap <leader>l :Limelight<CR>
 nnoremap <leader>m :CtrlPMRUFiles<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>o :Goyo<CR>
