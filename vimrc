@@ -258,6 +258,9 @@ if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
 endif
 filetype plugin indent on
 
+" ----make background transparent
+hi Normal guibg=NONE ctermbg=NONE
+
 " ----highlight spell errors
 hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
 
@@ -742,4 +745,3 @@ function! ResolveESLint()
     endif
     let b:neomake_javascript_eslint_exe = l:eslint
 endfunction
-
