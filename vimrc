@@ -30,7 +30,6 @@ Plug 'benekastah/neomake'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
-Plug 'morhetz/gruvbox'
 
 " git related plugins
 Plug 'tpope/vim-fugitive'
@@ -66,7 +65,9 @@ Plug 'vim-scripts/YankRing.vim'
 Plug 'ervandew/supertab'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'flazz/vim-colorschemes'
+Plug 'mhinz/vim-janah'
+" Plug 'morhetz/gruvbox'
+" Plug 'flazz/vim-colorschemes'
 " Plug 'xolox/vim-colorscheme-switcher'
 
 " misc
@@ -107,13 +108,14 @@ endif
 " set colorscheme after loading colorschemes
 " colorscheme tir_black
 
-let g:gruvbox_italic=1
-let g:gruvbox_italicize_comments=1
-let g:gruvbox_improved_strings=0
-let g:gruvbox_improved_warnings=1
-let g:gruvbox_invert_selection=0
-let g:gruvbox_contrast_dark='medium'
-colorscheme gruvbox
+" let g:gruvbox_italic=1
+" let g:gruvbox_italicize_comments=1
+" let g:gruvbox_improved_strings=0
+" let g:gruvbox_improved_warnings=1
+" let g:gruvbox_invert_selection=0
+" let g:gruvbox_contrast_dark='medium'
+" colorscheme gruvbox
+colorscheme janah
 
 " ####### Vim settings
 
