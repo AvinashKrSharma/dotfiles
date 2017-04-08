@@ -37,9 +37,6 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # source in the aliases
 source $HOME/.aliases
 
-#source keybindings
-source $HOME/dotfiles/keybindings
-
 # Open tmux session
 tmux -2uq attach &> /dev/null
 
