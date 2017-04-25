@@ -15,6 +15,7 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " core plugins
+Plug 'junegunn/goyo.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-startify' 
@@ -59,8 +60,8 @@ Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'Konfekt/FastFold'
+Plug 'BufOnly.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'junegunn/limelight.vim'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'ervandew/supertab'
 Plug 'sheerun/vim-polyglot'
@@ -383,7 +384,7 @@ nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
 
 nnoremap <leader>i :IndentLinesToggle<CR>
-nnoremap <leader>l :Limelight<CR>
+nnoremap <leader>l :Goyo<CR>
 nnoremap <leader>m :CtrlPMRUFiles<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>o :Goyo<CR>
@@ -501,11 +502,27 @@ endif
 
 " ####### Plugin specific settings
 
+let g:goyo_width = 200
+let g:goyo_height = 200
+let g:goyo_linenr = 1
+
+
 " ----for vim-startify
 let g:startify_enable_special = 0
 let g:startify_session_dir = '~/.vim/session'
 let g:startify_session_persistence = 1
-let g:startify_list_order = ['sessions', 'files', 'dir', 'bookmarks', 'commands']
+let g:startify_list_order = [
+            \ ['Recent files in current directory:'],
+            \ 'dir',
+            \ ['Recent files'],
+            \ 'files',
+            \ ['Sessions:'],
+            \ 'sessions',
+            \ ['Bookmarks:'],
+            \ 'bookmarks',
+            \ ['Commands:'],
+            \ 'commands',
+            \ ]
 
 " ----for javascript libraries syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
@@ -528,19 +545,13 @@ let g:airline#extensions#wordcount#enabled = 1
 let g:airline_exclude_preview = 1
 let g:airline_detect_paste=1
 let g:airline_detect_modified=1
-let g:airline_symbols.branch = '⎇ '
+let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_left_sep=' '
 let g:airline_right_sep=' '
 let g:airline_right_sep = ' '
 let g:airline_left_sep = ' '
 let g:airline_powerline_fonts = 1
-let g:airline_section_a = airline#section#create(['mode'])
-let g:airline_section_b = airline#section#create(['%f'])
-let g:airline_section_c = airline#section#create(['branch', '  ', 'hunks'])
-let g:airline_section_x = airline#section#create(['filetype'])
-let g:airline_section_y = airline#section#create(['%c'])
-let g:airline_section_z = airline#section#create_right(['%l/%L'])
 
 " ----for ag
 let g:ag_working_path_mode="r"
