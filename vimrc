@@ -439,6 +439,8 @@ if has("autocmd")
         " disable syntax highlighting on laaarge files
         au BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
 
+        autocmd BufRead * if @% == '[quickrun output]' | setlocal noconfirm | endif
+
         " for gitgutter
         autocmd User GitGutter AirlineRefresh
 
@@ -504,7 +506,7 @@ endif
 
 let g:goyo_width = 200
 let g:goyo_height = 200
-let g:goyo_linenr = 1
+" let g:goyo_linenr = 1
 
 
 " ----for vim-startify
