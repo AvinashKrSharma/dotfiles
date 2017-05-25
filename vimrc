@@ -167,10 +167,10 @@ set ttyfast
 set title
 
 " ----using the mouse
-if has('mouse')
-    set mouse=a
-endif
-set mousemodel=extend
+" if has('mouse')
+"     set mouse=a
+" endif
+" set mousemodel=extend
 
 if !has('nvim')
     set ttymouse=xterm2
