@@ -388,7 +388,7 @@ nnoremap <leader>l :Goyo<CR>
 nnoremap <leader>m :CtrlPMRUFiles<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>o :Goyo<CR>
-nnoremap <leader>q :q<CR>
+nnoremap <leader>q :qa<CR>
 nnoremap <leader>r :QuickRun<cr>
 nnoremap <leader>s :%s/\s\+$//e<CR>'' "Remove unwanted spaces
 vnoremap <leader>t :Tabularize/ /l0<cr>
@@ -453,9 +453,6 @@ if has("autocmd")
         " Run neomake on buffer write
         autocmd FileType javascript :call ResolveESLint()
         autocmd! BufWritePost,BufReadPost * Neomake
-
-        "show git diff in window split when commiting
-        autocmd FileType gitcommit DiffGitCached | wincmd p
 
         " When editing a file, always jump to the last known cursor position.
         " Don't do it for commit messages, when the position is invalid, or when
