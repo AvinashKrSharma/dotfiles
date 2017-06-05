@@ -332,6 +332,9 @@ imap <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<C
 " make filepath autocomplete mapping less painful
 inoremap <c-f> <c-x><c-f>
 
+" for doing away with removal of indentation of # comments in python
+inoremap # X<BS>#
+
 " toggle textwidth
 nnoremap cot :call ToggleTextWidth()<cr>
 
