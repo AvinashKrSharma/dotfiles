@@ -444,6 +444,9 @@ if has("autocmd")
 
         autocmd BufRead * if @% == '[quickrun output]' | setlocal noconfirm | endif
 
+        autocmd! User GoyoEnter nested call <SID>goyo_enter()
+        autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
         " for gitgutter
         autocmd User GitGutter AirlineRefresh
 
@@ -470,8 +473,10 @@ if has("autocmd")
         autocmd FileType           less   set omnifunc=csscomplete#CompleteCSS
 
         " toggle relativenumber according to mode
-        autocmd InsertEnter * set relativenumber!
-        autocmd InsertLeave * set relativenumber
+        autocmd InsertEnter,InsertLeave *
+                    \ if !g:goyo_enabled |
+                    \   set relativenumber! |
+                    \ endif
 
         " set indent style and nowrap for html files
         autocmd FileType html setlocal shiftwidth=2 tabstop=2 nowrap
@@ -504,9 +509,10 @@ endif
 
 " ####### Plugin specific settings
 
+" ----for goyo
 let g:goyo_width = 200
 let g:goyo_height = 200
-" let g:goyo_linenr = 1
+let g:goyo_enabled = 0
 
 
 " ----for vim-startify
@@ -759,4 +765,21 @@ function! ResolveESLint()
       let l:eslint = l:npm_bin . '/eslint'
     endif
     let b:neomake_javascript_eslint_exe = l:eslint
+endfunction
+
+function! s:goyo_enter()
+    let g:goyo_enabled = 1
+    set noshowmode
+    set noshowcmd
+    set norelativenumber
+    set nonumber
+endfunction
+
+function! s:goyo_leave()
+    let g:goyo_enabled = 0
+    set showmode
+    set showcmd
+    set relativenumber
+    set number
+    " ...
 endfunction
