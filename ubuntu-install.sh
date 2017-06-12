@@ -6,7 +6,7 @@ for_neovim="software-properties-common python-dev python-pip python3-dev python3
 npm_modules="js-beautify node-sass less csslint eslint"
 
 #required beforehand(to be figured out why)
-apt-get install -y build-essentials
+apt-get install -y build-essential
 
 #adding PPA for neovim
 add-apt-repository ppa:neovim-ppa/unstable
