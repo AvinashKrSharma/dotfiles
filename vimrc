@@ -28,9 +28,10 @@ Plug 'thinca/vim-quickrun'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'benekastah/neomake'
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
+Plug 'easymotion/vim-easymotion'
 
 " git related plugins
 Plug 'tpope/vim-fugitive'
@@ -98,6 +99,7 @@ Plug 'vim-scripts/prefixer.vim', {'for': 'css', 'on': ['Prefixer', 'Prefixer1', 
 Plug 'moll/vim-node', {'for': 'javascript'}
 Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
 Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
+Plug 'johngrib/vim-game-code-break'
 
 call plug#end()
 
@@ -136,6 +138,7 @@ set smartcase
 set tags=./tags;/
 
 " ----displaying text ----
+set nowrap
 set linebreak
 " set showbreak=↪
 set sidescrolloff=10
@@ -152,7 +155,7 @@ set background=dark
 filetype on
 syntax enable
 set hlsearch
-" set cursorcolumn
+set cursorcolumn
 set cursorline
 " set spell
 
@@ -167,10 +170,10 @@ set ttyfast
 set title
 
 " ----using the mouse
-" if has('mouse')
-"     set mouse=a
-" endif
-" set mousemodel=extend
+if has('mouse')
+    set mouse=a
+endif
+set mousemodel=extend
 
 if !has('nvim')
     set ttymouse=xterm2
@@ -277,12 +280,6 @@ call matchadd('ColorColumn', '\%81v', 100)
 
 
 " ####### Mappings
-
-" disable the fuckin arrow keys
-noremap <Left> :echo "h"<CR>
-noremap <Right> :echo "l"<CR>
-noremap <Up> :echo "k"<CR>
-noremap <Down> :echo "j"<CR>
 
 " ----general mappings
 map <F7> :setlocal spell! spell?<CR>
@@ -440,12 +437,16 @@ if has("autocmd")
         au BufRead,BufNewFile *.json set ft=json
 
         " disable syntax highlighting on laaarge files
-        au BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
+        au BufWinEnter * if line2byte(line("$") + 1) > 500000 | syntax clear | endif
 
         autocmd BufRead * if @% == '[quickrun output]' | setlocal noconfirm | endif
 
         autocmd! User GoyoEnter nested call <SID>goyo_enter()
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+        " open nerdtree by default to make file reveal work sanely
+        autocmd StdinReadPre * let s:std_in=1
+        autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | NERDTree | wincmd p | endif
 
         " for gitgutter
         autocmd User GitGutter AirlineRefresh
@@ -457,8 +458,8 @@ if has("autocmd")
         autocmd FileType nerdtree setlocal colorcolumn=""
 
         " Run neomake on buffer write
-        autocmd FileType javascript :call ResolveESLint()
-        autocmd! BufWritePost,BufReadPost * Neomake
+        " autocmd FileType javascript :call ResolveESLint()
+        " autocmd! BufWritePost,BufReadPost * Neomake
 
         " When editing a file, always jump to the last known cursor position.
         " Don't do it for commit messages, when the position is invalid, or when
@@ -580,7 +581,7 @@ if has('nvim')
 endif
 
 " ----for Nerdtree
-let g:nerdtree_tabs_open_on_gui_startup=0
+let g:nerdtree_tabs_open_on_gui_startup=1
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeMouseMode=2
@@ -622,7 +623,7 @@ else
 endif
 
 " ----for gitgutter
-let g:gitgutter_max_signs = 200
+let g:gitgutter_max_signs = 500
 let g:gitgutter_highlight_lines = 0
 let g:gitgutter_enabled = 1
 
