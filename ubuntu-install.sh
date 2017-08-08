@@ -5,8 +5,8 @@ for_neovim="software-properties-common python-dev python-pip python3-dev python3
 
 npm_modules="js-beautify node-sass less csslint eslint"
 
-#required beforehand(to be figured out why)
-apt-get install -y build-essential
+#required by nvm
+apt-get install -y build-essential libssl-dev
 
 #adding PPA for neovim
 add-apt-repository ppa:neovim-ppa/unstable
@@ -21,8 +21,10 @@ apt-get install -y $packages $for_neovim
 pip3 install neovim
 pip3 install --upgrade neovim
 
-#for nodejs
-curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+#install nvm and install latest node version
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+nvm install node
+nvm use node
 
 #install npm modules
 npm install -g $npm_modules
