@@ -446,7 +446,7 @@ if has("autocmd")
 
         " open nerdtree by default to make file reveal work sanely
         autocmd StdinReadPre * let s:std_in=1
-        autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | NERDTree | wincmd p | endif
+        autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | NERDTree | NERDTreeToggle | wincmd p | endif
 
         " for gitgutter
         autocmd User GitGutter AirlineRefresh
@@ -648,7 +648,7 @@ let g:yankring_clipboard_monitor=0"
 let g:UltiSnipsExpandTrigger="<c-tab>"
 
 " ----for neomake
-let g:neomake_javascript_enabled_makers = ['eslint']
+" let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_warning_sign = { 'text': 'W', 'texthl': 'WarningMsg' }
 let g:neomake_error_sign = { 'text': 'E', 'texthl': 'ErrorMsg' }
 
