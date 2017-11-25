@@ -29,7 +29,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim', {'on': 'Ag'}
 Plug 'benekastah/neomake'
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'easymotion/vim-easymotion'
 
@@ -61,7 +61,7 @@ Plug 'gorkunov/smartpairs.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'Konfekt/FastFold'
-Plug 'BufOnly.vim'
+Plug 'vim-scripts/BufOnly.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'ervandew/supertab'
