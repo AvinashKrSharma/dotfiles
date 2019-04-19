@@ -15,7 +15,6 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " core plugins
-Plug 'junegunn/goyo.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-startify' 
@@ -24,82 +23,54 @@ if !has('nvim')
 else
     Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
 endif
-Plug 'thinca/vim-quickrun'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'rking/ag.vim', {'on': 'Ag'}
-Plug 'benekastah/neomake'
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
-Plug 'easymotion/vim-easymotion'
+Plug 'morhetz/gruvbox'
 
-" git related plugins
+" version control related plugins
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
-Plug 'gregsexton/gitv'
+" Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
 
-" search/text related plugins
+" search/editing/navigation related plugins
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
-Plug 'bronson/vim-visual-star-search'
 Plug 'osyo-manga/vim-anzu'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'terryma/vim-expand-region'
-Plug 'itchyny/vim-cursorword'
-
-" others
-Plug 'junegunn/goyo.vim'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
-Plug 'Raimondi/delimitMate'
-Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'gorkunov/smartpairs.vim'
-Plug 'tpope/vim-unimpaired'
-Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
-Plug 'Konfekt/FastFold'
-Plug 'vim-scripts/BufOnly.vim'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'vim-scripts/YankRing.vim'
-Plug 'ervandew/supertab'
-Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'mhinz/vim-janah'
-" Plug 'morhetz/gruvbox'
-" Plug 'flazz/vim-colorschemes'
-" Plug 'xolox/vim-colorscheme-switcher'
+Plug 'gorkunov/smartpairs.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-abolish'
 
 " misc
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-abolish'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'tpope/vim-unimpaired'
+Plug 'mbbill/undotree'
+Plug 'Konfekt/FastFold'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'ervandew/supertab'
 Plug 'tpope/vim-characterize'
-Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-repeat'
 Plug 'kshenoy/vim-signature'
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
 Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
-Plug 'aquach/vim-http-client'
-" Plug 'xolox/vim-misc' "Used by colorscheme-switcher
-Plug 'dhruvasagar/vim-table-mode'
 
-"html related
-Plug 'mattn/emmet-vim', {'for': 'html'}
+"language related
+Plug 'w0rp/ale'
+Plug 'thinca/vim-quickrun'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'sheerun/vim-polyglot'
 Plug 'gregsexton/MatchTag', {'for': 'html'}
 Plug 'docunext/closetag.vim'
-Plug 'bendavis78/vim-polymer'
-
-"css related
 Plug 'gorodinskiy/vim-coloresque', {'for': ['css', 'scss']}
-Plug 'vim-scripts/prefixer.vim', {'for': 'css', 'on': ['Prefixer', 'Prefixer1', 'Prefixer2']}
-
-"js related
-Plug 'moll/vim-node', {'for': 'javascript'}
-Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
-Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
-Plug 'johngrib/vim-game-code-break'
 
 call plug#end()
 
@@ -108,17 +79,6 @@ if exists('doPlugInstall')
     PlugInstall | q
 endif
 
-" set colorscheme after loading colorschemes
-" colorscheme tir_black
-
-" let g:gruvbox_italic=1
-" let g:gruvbox_italicize_comments=1
-" let g:gruvbox_improved_strings=0
-" let g:gruvbox_improved_warnings=1
-" let g:gruvbox_invert_selection=0
-" let g:gruvbox_contrast_dark='medium'
-" colorscheme gruvbox
-colorscheme janah
 
 " ####### Vim settings
 
@@ -140,7 +100,7 @@ set tags=./tags;/
 " ----displaying text ----
 set nowrap
 set linebreak
-" set showbreak=↪
+set showbreak=↪
 set sidescrolloff=10
 set fcs+=vert:│
 set fillchars+=stl:\ ,stlnc:\
@@ -155,7 +115,7 @@ set background=dark
 filetype on
 syntax enable
 set hlsearch
-set cursorcolumn
+" set cursorcolumn
 set cursorline
 " set spell
 
@@ -190,8 +150,8 @@ set ruler
 set confirm
 
 " ----editing text
-set undofile
 set undodir=$HOME/.vim/tmp
+set undofile
 set modifiable
 set textwidth=120
 set backspace=indent,eol,start
@@ -284,10 +244,6 @@ call matchadd('ColorColumn', '\%81v', 100)
 " ----general mappings
 map <F7> :setlocal spell! spell?<CR>
 
-" mappings for neomake error navigation
-nnoremap <silent><c-[> :lprev<cr>
-nnoremap <silent><c-]> :call LocationNext()<cr>
-
 " reselect visual block after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
@@ -349,24 +305,23 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
-" toggle nerdtree behaviour
-nnoremap <c-b> :call ToggleNERDTreeQOOBehaviour()<cr>
-
+" ---- for vim-anzu
 " mapping
-nmap n <Plug>(anzu-n-with-echo)
-nmap N <Plug>(anzu-N-with-echo)
-nmap * <Plug>(anzu-star-with-echo)
-nmap # <Plug>(anzu-sharp-with-echo)
+map n <Plug>(incsearch-nohl)<Plug>(anzu-n-with-echo)
+map N <Plug>(incsearch-nohl)<Plug>(anzu-N-with-echo)
+map * <Plug>(incsearch-nohl)<Plug>(anzu-star-with-echo)
+map # <Plug>(incsearch-nohl)<Plug>(anzu-sharp-with-echo)
+" clear status
+nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
 
 " ----Leader key mappings
 nnoremap <leader>ad :%bd<CR>
-nnoremap <leader>aq :qa<CR>
 nnoremap <leader>as ggVG
-nnoremap <leader>b  :CtrlPBuffer<CR>
+nnoremap <leader>b  :Buffers<CR>
 
 map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
-nnoremap <leader>f  :NERDTreeFind<CR>
+nnoremap <leader>f  :GFiles<CR>
 
 " specific to git fugitive
 nnoremap <leader>g  :Magit<CR>
@@ -382,24 +337,25 @@ nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gt :GitGutterToggle<CR>
 nnoremap <leader>gv :Gvsplit<CR>
 nnoremap <leader>gw :Gwrite<CR>
+nnoremap <leader>h  :History<CR>
 
 nnoremap <leader>i :IndentLinesToggle<CR>
-nnoremap <leader>l :Goyo<CR>
-nnoremap <leader>m :CtrlPMRUFiles<cr>
+nnoremap <leader>j :ALEGoToDefinition<CR>
+nnoremap <leader>l :call ToggleNERDTreeQOOBehaviour()<cr>
+nnoremap <leader>m :History<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>o :Goyo<CR>
 nnoremap <leader>q :qa<CR>
-nnoremap <leader>r :QuickRun<cr>
-nnoremap <leader>s :%s/\s\+$//e<CR>'' "Remove unwanted spaces
+nnoremap <leader>r :NERDTreeFind<CR>
+" nnoremap <leader>s :%s/\s\+$//e<CR>'' "Remove unwanted spaces
 vnoremap <leader>t :Tabularize/ /l0<cr>
-nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
 nnoremap <leader>w <c-w>w
 " leader x mapped to ctrl-p
 nnoremap <leader>y :YRShow<CR>
 
 nnoremap <leader><leader> :update<CR>
-nnoremap <leader>, :Ag --smart-case ""<left>
+nnoremap <leader>, :Ag!<CR>
 nnoremap <leader>/ <esc>:OverCommandLine<CR>:%s/
 nnoremap <leader>= gg=G''
 
@@ -441,9 +397,6 @@ if has("autocmd")
 
         autocmd BufRead * if @% == '[quickrun output]' | setlocal noconfirm | endif
 
-        autocmd! User GoyoEnter nested call <SID>goyo_enter()
-        autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
         " open nerdtree by default to make file reveal work sanely
         autocmd StdinReadPre * let s:std_in=1
         autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | NERDTree | NERDTreeToggle | wincmd p | endif
@@ -456,10 +409,6 @@ if has("autocmd")
 
         " Disable vertical line at max string length in NERDTree
         autocmd FileType nerdtree setlocal colorcolumn=""
-
-        " Run neomake on buffer write
-        " autocmd FileType javascript :call ResolveESLint()
-        " autocmd! BufWritePost,BufReadPost * Neomake
 
         " When editing a file, always jump to the last known cursor position.
         " Don't do it for commit messages, when the position is invalid, or when
@@ -474,10 +423,7 @@ if has("autocmd")
         autocmd FileType           less   set omnifunc=csscomplete#CompleteCSS
 
         " toggle relativenumber according to mode
-        autocmd InsertEnter,InsertLeave *
-                    \ if !g:goyo_enabled |
-                    \   set relativenumber! |
-                    \ endif
+        autocmd InsertEnter,InsertLeave * set relativenumber!
 
         " set indent style and nowrap for html files
         autocmd FileType html setlocal shiftwidth=2 tabstop=2 nowrap
@@ -510,11 +456,16 @@ endif
 
 " ####### Plugin specific settings
 
-" ----for goyo
-let g:goyo_width = 200
-let g:goyo_height = 200
-let g:goyo_enabled = 0
+" ----for gruvbox
+let g:gruvbox_italic=1
+let g:gruvbox_underline=1
+let g:gruvbox_italicize_comments=1
+let g:gruvbox_improved_warnings=1
+let g:gruvbox_sign_column='bg0'
+let g:gruvbox_number_column='bg0'
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+colorscheme gruvbox
 
 " ----for vim-startify
 let g:startify_enable_special = 0
@@ -562,8 +513,19 @@ let g:airline_right_sep = ' '
 let g:airline_left_sep = ' '
 let g:airline_powerline_fonts = 1
 
-" ----for ag
-let g:ag_working_path_mode="r"
+" ----for ale
+let g:ale_completion_enabled = 1
+let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier', 'eslint'],
+\}
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
+let g:airline#extensions#ale#enabled = 1
+
+
 
 " ----for ycm
 if !has('nvim')
@@ -578,6 +540,7 @@ if has('nvim')
     if !exists('g:deoplete#omni#input_patterns')
         let g:deoplete#omni#input_patterns = {}
     endif
+    let g:deoplete#num_processes = 1
 endif
 
 " ----for Nerdtree
@@ -603,25 +566,6 @@ let g:user_emmet_mode='a'
 let g:use_emmet_complete_tag = 1
 let g:user_emmet_install_global = 0
 
-" ----for ctrlp
-let g:ctrlp_map = '<C-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_follow_symlinks = 1
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:25'
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|tmp|log|.bower-cache|.bower-registry|.bower-tmp)|(\.(swp|ico|png|jpg|git|svn))$'
-let g:ctrlp_mruf_exclude = '\v\.git/(COMMIT_EDITMSG|index)'
-if executable('ag')
-    set grepprg=ag
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-    let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'] }
-endif
-
 " ----for gitgutter
 let g:gitgutter_max_signs = 500
 let g:gitgutter_highlight_lines = 0
@@ -635,22 +579,8 @@ let g:indent_guides_guide_size = 1
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 
-" ----for yankring
-" make yanklist to appear at the bottom
-let g:yankring_window_use_right = 0
-" disable cycling through yanks
-let g:yankring_replace_n_pkey = ''
-let g:yankring_replace_n_nkey = ''
-"fix for yankring and neovim
-let g:yankring_clipboard_monitor=0"
-
 " ---for ultisnips
 let g:UltiSnipsExpandTrigger="<c-tab>"
-
-" ----for neomake
-" let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_warning_sign = { 'text': 'W', 'texthl': 'WarningMsg' }
-let g:neomake_error_sign = { 'text': 'E', 'texthl': 'ErrorMsg' }
 
 "for indentLine
 let g:indentLine_char = '┊'
@@ -728,6 +658,14 @@ function! LocationNext()
     endtry
 endfunction
 
+" for fzf
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(
+  \   '',
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
 " for better tab response for emmet
 function! s:expand_html_tab()
     " try to determine if we're within quotes or tags.
@@ -754,33 +692,4 @@ function! ToggleNERDTreeQOOBehaviour()
     else
         let g:NERDTreeQuitOnOpen=1
     endif
-endfunction
-
-function! ResolveESLint()
-    let l:npm_bin = ''
-    let l:eslint = 'eslint'
-    if executable('npm')
-      let l:npm_bin = split(system('npm bin'), '\n')[0]
-    endif
-    if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
-      let l:eslint = l:npm_bin . '/eslint'
-    endif
-    let b:neomake_javascript_eslint_exe = l:eslint
-endfunction
-
-function! s:goyo_enter()
-    let g:goyo_enabled = 1
-    set noshowmode
-    set noshowcmd
-    set norelativenumber
-    set nonumber
-endfunction
-
-function! s:goyo_leave()
-    let g:goyo_enabled = 0
-    set showmode
-    set showcmd
-    set relativenumber
-    set number
-    " ...
 endfunction
