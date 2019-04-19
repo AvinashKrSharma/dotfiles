@@ -38,6 +38,7 @@ source $HOME/.aliases
 
 # source the ultimate fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPS="--extended"
 
 # source the system specific extras file
 source $HOME/.extras
