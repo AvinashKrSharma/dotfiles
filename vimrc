@@ -27,11 +27,11 @@ Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofum
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
+Plug 'junegunn/limelight.vim'
 
 " version control related plugins
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
-" Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
 
@@ -153,6 +153,7 @@ set confirm
 set undodir=$HOME/.vim/tmp
 set undofile
 set modifiable
+set termguicolors
 set textwidth=120
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
@@ -329,16 +330,17 @@ nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gf :BCommits<CR>
 nnoremap <leader>gg :diffget
 nnoremap <leader>gi :Git add -p %<CR>
-nnoremap <leader>gl :Gitv<CR>
+nnoremap <leader>gl :Commits<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gt :GitGutterToggle<CR>
 nnoremap <leader>h  :History<CR>
 
 nnoremap <leader>i :IndentLinesToggle<CR>
 nnoremap <leader>j :ALEGoToDefinition<CR>
-nnoremap <leader>l :call ToggleNERDTreeQOOBehaviour()<cr>
+nnoremap <leader>l :Limelight<CR>
 nnoremap <leader>m :History<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>q :qa<CR>
@@ -438,6 +440,9 @@ if has("autocmd")
         "for emmet
         autocmd FileType html imap <buffer><expr><tab> <sid>expand_html_tab()
         autocmd FileType html,css,ejs EmmetInstall
+        
+        " for enabling limelight on startup
+        autocmd VimEnter * Limelight
 
         "for deoplete
         if has('nvim')
@@ -659,6 +664,9 @@ command! -bang -nargs=* Ag
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
+
+" for limelight
+let g:limelight_paragraph_span = 1
 
 " for better tab response for emmet
 function! s:expand_html_tab()
