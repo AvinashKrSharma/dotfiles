@@ -332,11 +332,8 @@ nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gg :diffget
 nnoremap <leader>gi :Git add -p %<CR>
 nnoremap <leader>gl :Gitv<CR>
-nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gt :GitGutterToggle<CR>
-nnoremap <leader>gv :Gvsplit<CR>
-nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>h  :History<CR>
 
 nnoremap <leader>i :IndentLinesToggle<CR>
@@ -345,15 +342,12 @@ nnoremap <leader>l :call ToggleNERDTreeQOOBehaviour()<cr>
 nnoremap <leader>m :History<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>q :qa<CR>
-nnoremap <leader>r :NERDTreeFind<CR>
+nnoremap <leader>r :NERDTreeToggle<CR>:NERDTreeFind<CR>
 " nnoremap <leader>s :%s/\s\+$//e<CR>'' "Remove unwanted spaces
 vnoremap <leader>t :Tabularize/ /l0<cr>
 nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
 nnoremap <leader>w <c-w>w
-" leader x mapped to ctrl-p
-nnoremap <leader>y :YRShow<CR>
-
 nnoremap <leader><leader> :update<CR>
 nnoremap <leader>, :Ag!<CR>
 nnoremap <leader>/ <esc>:OverCommandLine<CR>:%s/
@@ -398,8 +392,8 @@ if has("autocmd")
         autocmd BufRead * if @% == '[quickrun output]' | setlocal noconfirm | endif
 
         " open nerdtree by default to make file reveal work sanely
-        autocmd StdinReadPre * let s:std_in=1
-        autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | NERDTree | NERDTreeToggle | wincmd p | endif
+        " autocmd StdinReadPre * let s:std_in=1
+        " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | NERDTree | NERDTreeToggle | wincmd p | endif
 
         " for gitgutter
         autocmd User GitGutter AirlineRefresh
@@ -544,7 +538,7 @@ if has('nvim')
 endif
 
 " ----for Nerdtree
-let g:nerdtree_tabs_open_on_gui_startup=1
+let g:nerdtree_tabs_open_on_gui_startup=0
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeMouseMode=2
