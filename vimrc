@@ -340,7 +340,7 @@ nnoremap <leader>h  :History<CR>
 
 nnoremap <leader>i :IndentLinesToggle<CR>
 nnoremap <leader>j :ALEGoToDefinition<CR>
-nnoremap <leader>l :Limelight<CR>
+nnoremap <leader>l :Limelight!!<CR>
 nnoremap <leader>m :History<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>q :qa<CR>
