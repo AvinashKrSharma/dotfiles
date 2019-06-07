@@ -17,7 +17,6 @@ call plug#begin('~/.vim/bundle')
 " core plugins
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'mhinz/vim-startify' 
 if !has('nvim')
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 else
@@ -26,14 +25,14 @@ endif
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
-Plug 'morhetz/gruvbox'
-Plug 'junegunn/limelight.vim'
+Plug 'mhinz/vim-janah'
 
 " version control related plugins
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
+Plug 'gregsexton/gitv'
 
 " search/editing/navigation related plugins
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
@@ -65,7 +64,6 @@ Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
 "language related
 Plug 'w0rp/ale'
 Plug 'thinca/vim-quickrun'
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
 Plug 'gregsexton/MatchTag', {'for': 'html'}
@@ -108,16 +106,13 @@ set lazyredraw
 set nolist
 set listchars=tab:>-,trail:·,eol:$
 set number
-set relativenumber
 
 " ----syntax, highlighting and spelling
 set background=dark
 filetype on
 syntax enable
 set hlsearch
-" set cursorcolumn
 set cursorline
-" set spell
 
 " ----multiple windows
 set laststatus=2        " always show airline status bar
@@ -132,8 +127,8 @@ set title
 " ----using the mouse
 if has('mouse')
     set mouse=a
+    set mousemodel=extend
 endif
-set mousemodel=extend
 
 if !has('nvim')
     set ttymouse=xterm2
@@ -216,6 +211,8 @@ set exrc
 set secure
 set gdefault
 
+colorscheme janah
+
 " ----others
 let mapleader = "\<Space>"
 let &path.="src/include,/usr/include/AL,"
@@ -243,7 +240,6 @@ call matchadd('ColorColumn', '\%81v', 100)
 " ####### Mappings
 
 " ----general mappings
-map <F7> :setlocal spell! spell?<CR>
 
 " reselect visual block after indent/outdent
 vnoremap < <gv
@@ -265,19 +261,9 @@ nnoremap <C-right> :vertical resize +2<cr>
 noremap  <silent> k gk
 noremap  <silent> j gj
 
-" mappings for page up/down, half/full
-nnoremap <C-k> <C-b>
-nnoremap <C-l> <C-f>
-nnoremap <C-h> <C-u>
-nnoremap <C-j> <C-d>
-
 " mappings for switching buffers
 nnoremap gb :bn<cr>
 nnoremap gv :bp<cr>
-
-" helpers for dealing with other people's code
-nmap \t :set ts=4 sts=4 sw=4 noet<cr>
-nmap \s :set ts=4 sts=4 sw=4 et<cr>
 
 " toggle between terminal and vim mouse
 map  <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
@@ -329,9 +315,7 @@ nnoremap <leader>g  :Magit<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gf :BCommits<CR>
-nnoremap <leader>gg :diffget
 nnoremap <leader>gi :Git add -p %<CR>
 nnoremap <leader>gl :Commits<CR>
 nnoremap <leader>gs :Gstatus<CR>
@@ -340,12 +324,10 @@ nnoremap <leader>h  :History<CR>
 
 nnoremap <leader>i :IndentLinesToggle<CR>
 nnoremap <leader>j :ALEGoToDefinition<CR>
-nnoremap <leader>l :Limelight!!<CR>
 nnoremap <leader>m :History<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>q :qa<CR>
-nnoremap <leader>r :NERDTreeToggle<CR>:NERDTreeFind<CR>
-" nnoremap <leader>s :%s/\s\+$//e<CR>'' "Remove unwanted spaces
+nnoremap <leader>r :NERDTreeFind<CR>
 vnoremap <leader>t :Tabularize/ /l0<cr>
 nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
@@ -393,15 +375,8 @@ if has("autocmd")
 
         autocmd BufRead * if @% == '[quickrun output]' | setlocal noconfirm | endif
 
-        " open nerdtree by default to make file reveal work sanely
-        " autocmd StdinReadPre * let s:std_in=1
-        " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | NERDTree | NERDTreeToggle | wincmd p | endif
-
         " for gitgutter
         autocmd User GitGutter AirlineRefresh
-
-        " disable syntax highlighting for jade files to speed things up
-        autocmd FileType jade    setlocal syntax=off
 
         " Disable vertical line at max string length in NERDTree
         autocmd FileType nerdtree setlocal colorcolumn=""
@@ -418,11 +393,8 @@ if has("autocmd")
         autocmd BufNewFile,BufRead *.less set filetype=less
         autocmd FileType           less   set omnifunc=csscomplete#CompleteCSS
 
-        " toggle relativenumber according to mode
-        autocmd InsertEnter,InsertLeave * set relativenumber!
-
-        " set indent style and nowrap for html files
-        autocmd FileType html setlocal shiftwidth=2 tabstop=2 nowrap
+        " set nowrap for html files
+        autocmd FileType html setlocal nowrap
 
         " set nowrap and textwidth for jade files
         autocmd FileType jade setlocal nowrap
@@ -437,17 +409,15 @@ if has("autocmd")
         "save all files on focus lost, ignoring warnings about untitled buffers
         au FocusLost * silent! wa
 
-        "for emmet
-        autocmd FileType html imap <buffer><expr><tab> <sid>expand_html_tab()
-        autocmd FileType html,css,ejs EmmetInstall
         
-        " for enabling limelight on startup
-        autocmd VimEnter * Limelight
-
         "for deoplete
         if has('nvim')
             autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
         endif
+
+        " Adding automatons for when entering or leaving Vim
+        au VimEnter * nested :call LoadSession()
+        au VimLeave * :call MakeSession()))
 
     augroup END
 endif
@@ -455,39 +425,11 @@ endif
 
 " ####### Plugin specific settings
 
-" ----for gruvbox
-let g:gruvbox_italic=1
-let g:gruvbox_underline=1
-let g:gruvbox_italicize_comments=1
-let g:gruvbox_improved_warnings=1
-let g:gruvbox_sign_column='bg0'
-let g:gruvbox_number_column='bg0'
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-colorscheme gruvbox
-
-" ----for vim-startify
-let g:startify_enable_special = 0
-let g:startify_session_dir = '~/.vim/session'
-let g:startify_session_persistence = 1
-let g:startify_list_order = [
-            \ ['Recent files in current directory:'],
-            \ 'dir',
-            \ ['Recent files'],
-            \ 'files',
-            \ ['Sessions:'],
-            \ 'sessions',
-            \ ['Bookmarks:'],
-            \ 'bookmarks',
-            \ ['Commands:'],
-            \ 'commands',
-            \ ]
-
 " ----for javascript libraries syntax
 let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,requirejs'
 
 " ----for polyglot
-let g:polyglot_disabled = ['arduino', 'blade', 'c++11', 'clojure', 'cucumber', 'dart', 'elm', 'elixir', 'emblem', 'erlang', 'glsl', 'groovy', 'haskell', 'haxe', 'jinja', 'julia', 'kotlin', 'latex', 'liquid', 'objc', 'ocaml', 'octave', 'opencl', 'perl', 'puppet', 'qml', 'ragel', 'r-lang', 'rspec', 'ruby', 'rust', 'sbt', 'scala', 'slim', 'solidity', 'swift', 'systemd', 'textile', 'thrift', 'tomdoc', 'toml', 'twig', 'vala', 'vbnet', 'vcl', 'vm', 'yard']
+let g:polyglot_disabled = ['arduino', 'blade', 'c++11', 'clojure', 'cucumber', 'dart', 'elm', 'elixir', 'emblem', 'erlang', 'glsl', 'groovy', 'haskell', 'haxe', 'jinja', 'julia', 'kotlin', 'latex', 'liquid', 'objc', 'ocaml', 'octave', 'opencl', 'perl', 'puppet', 'qml', 'ragel', 'r-lang', 'rspec', 'ruby', 'rust', 'sbt', 'slim', 'solidity', 'swift', 'systemd', 'textile', 'thrift', 'tomdoc', 'toml', 'twig', 'vala', 'vbnet', 'vcl', 'vm', 'yard']
 
 " ----for airline
 if !exists('g:airline_symbols')
@@ -524,8 +466,6 @@ let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
 
-
-
 " ----for ycm
 if !has('nvim')
     let g:ycm_collect_identifiers_from_tags_files = 1
@@ -559,12 +499,6 @@ let g:NERDTreePatternMatchHighlightFullName = 1
 " ---for easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
-" ----for emmet
-" Enable Emmet in all modes
-let g:user_emmet_mode='a'
-let g:use_emmet_complete_tag = 1
-let g:user_emmet_install_global = 0
-
 " ----for gitgutter
 let g:gitgutter_max_signs = 500
 let g:gitgutter_highlight_lines = 0
@@ -578,9 +512,6 @@ let g:indent_guides_guide_size = 1
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 
-" ---for ultisnips
-let g:UltiSnipsExpandTrigger="<c-tab>"
-
 "for indentLine
 let g:indentLine_char = '┊'
 
@@ -590,6 +521,14 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.jsx"
 "for delimitmate
 let delimitMate_matchpairs = "(:),[:],{:}"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+
+" for fzf
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(
+  \   '',
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 
 " ####### Function definitions
@@ -606,10 +545,10 @@ endfunction
 function! ShowMouseMode()
     if (&mouse == 'a')
         set number
-        set relativenumber
+        GitGutterEnable
         echo "mouse-vim"
     else
-        set relativenumber!
+        :GitGutterDisable
         set nonumber
         echo "mouse-xterm"
     endif
@@ -657,41 +596,31 @@ function! LocationNext()
     endtry
 endfunction
 
-" for fzf
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(
-  \   '',
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-" for limelight
-let g:limelight_paragraph_span = 1
-
-" for better tab response for emmet
-function! s:expand_html_tab()
-    " try to determine if we're within quotes or tags.
-    " if so, assume we're in an emmet fill area.
-    let line = getline('.')
-    if col('.') < len(line)
-        let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
-        if len(line) >= 2
-            return "\<C-n>"
-        endif
-    endif
-    " expand anything emmet thinks is expandable.
-    if emmet#isExpandable()
-        return "\<C-y>,"
-    endif
-    " return a regular tab character
-    return "\<tab>"
-endfunction
-
 " for toggling nerdtree's quit on open behaviour
 function! ToggleNERDTreeQOOBehaviour()
     if (g:NERDTreeQuitOnOpen == 1)
         let g:NERDTreeQuitOnOpen=0
     else
         let g:NERDTreeQuitOnOpen=1
+    endif
+endfunction
+
+function! MakeSession()
+    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+    if (filewritable(b:sessiondir) != 2)
+        exe 'silent !mkdir -p ' b:sessiondir
+        redraw!
+    endif
+    let b:filename = b:sessiondir . '/session.vim'
+    exe "mksession! " . b:filename
+endfunction
+
+function! LoadSession()
+    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+    let b:sessionfile = b:sessiondir . "/session.vim"
+    if (filereadable(b:sessionfile))
+        exe 'source ' b:sessionfile
+    else
+        echo "No session loaded."
     endif
 endfunction
