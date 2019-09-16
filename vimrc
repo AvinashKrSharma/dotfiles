@@ -33,6 +33,7 @@ Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
 Plug 'gregsexton/gitv'
+Plug 'stormherz/tablify'
 
 " search/editing/navigation related plugins
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
@@ -326,6 +327,7 @@ nnoremap <leader>i :IndentLinesToggle<CR>
 nnoremap <leader>j :ALEGoToDefinition<CR>
 nnoremap <leader>m :History<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>p :Files<CR>
 nnoremap <leader>q :qa<CR>
 nnoremap <leader>r :NERDTreeFind<CR>
 vnoremap <leader>t :Tabularize/ /l0<cr>
@@ -375,6 +377,10 @@ if has("autocmd")
 
         autocmd BufRead * if @% == '[quickrun output]' | setlocal noconfirm | endif
 
+        " open nerdtree by default to make file reveal work sanely
+        autocmd StdinReadPre * let s:std_in=1
+        autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
+
         " for gitgutter
         autocmd User GitGutter AirlineRefresh
 
@@ -417,7 +423,7 @@ if has("autocmd")
 
         " Adding automatons for when entering or leaving Vim
         au VimEnter * nested :call LoadSession()
-        au VimLeave * :call MakeSession()))
+        au VimLeave * :call MakeSession()
 
     augroup END
 endif
@@ -483,7 +489,7 @@ if has('nvim')
 endif
 
 " ----for Nerdtree
-let g:nerdtree_tabs_open_on_gui_startup=0
+let g:nerdtree_tabs_open_on_gui_startup=1
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeMouseMode=2
@@ -606,21 +612,23 @@ function! ToggleNERDTreeQOOBehaviour()
 endfunction
 
 function! MakeSession()
-    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
-    if (filewritable(b:sessiondir) != 2)
-        exe 'silent !mkdir -p ' b:sessiondir
-        redraw!
-    endif
-    let b:filename = b:sessiondir . '/session.vim'
-    exe "mksession! " . b:filename
+  exe 'NERDTreeClose'
+  let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+  if (filewritable(b:sessiondir) != 2)
+    exe 'silent !mkdir -p ' b:sessiondir
+    redraw!
+  endif
+  let b:filename = b:sessiondir . '/session.vim'
+  exe "mksession! " . b:filename
 endfunction
 
 function! LoadSession()
-    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
-    let b:sessionfile = b:sessiondir . "/session.vim"
-    if (filereadable(b:sessionfile))
-        exe 'source ' b:sessionfile
-    else
-        echo "No session loaded."
-    endif
+  exe 'NERDTreeClose'
+  let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+  let b:sessionfile = b:sessiondir . "/session.vim"
+  if (filereadable(b:sessionfile))
+    exe 'source ' b:sessionfile
+  else
+    echo "No session loaded."
+  endif
 endfunction
