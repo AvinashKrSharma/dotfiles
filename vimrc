@@ -26,6 +26,7 @@ Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofum
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'mhinz/vim-janah'
+Plug 'arcticicestudio/nord-vim'
 
 " version control related plugins
 Plug 'tpope/vim-fugitive'
@@ -212,7 +213,8 @@ set exrc
 set secure
 set gdefault
 
-colorscheme janah
+" colorscheme janah
+colorscheme nord
 
 " ----others
 let mapleader = "\<Space>"
