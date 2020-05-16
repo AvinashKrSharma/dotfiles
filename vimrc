@@ -497,12 +497,9 @@ if has('nvim')
 endif
 
 " ----for Nerdtree
-let g:nerdtree_tabs_open_on_gui_startup=1
-let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeMinimalUI=1
-let g:NERDTreeMouseMode=2
+let g:NERDTreeMouseMode=3
 let g:NERDTreeShowHidden=1
-let g:NERDTreeKeepTreeInNewTab=1
 let g:NERDTreeIgnore=['.git$[[dir]]', '\.js.map$[[file]]']
 
 " ----for vim-nerdtree-syntax-highlight
