@@ -177,6 +177,8 @@ set foldlevel=99
 " ----diff mode
 set diffopt=vertical
 
+set clipboard=unnamedplus
+
 " ----reading and writing files
 set backup
 set backupdir=$HOME/.vim/tmp
