@@ -17,10 +17,12 @@ call plug#begin('~/.vim/bundle')
 " core plugins
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-if !has('nvim')
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-    Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'vim-airline/vim-airline-themes'
@@ -475,20 +477,9 @@ let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
 
-" ----for ycm
-if !has('nvim')
-    let g:ycm_collect_identifiers_from_tags_files = 1
-    let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
-    let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
-endif
-
 " ----for deoplete
 if has('nvim')
     let g:deoplete#enable_at_startup = 1
-    if !exists('g:deoplete#omni#input_patterns')
-        let g:deoplete#omni#input_patterns = {}
-    endif
-    let g:deoplete#num_processes = 1
 endif
 
 " ----for Nerdtree
