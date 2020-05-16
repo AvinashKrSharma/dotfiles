@@ -89,7 +89,7 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 endif
 
 " ----moving around,searching and patterns
-set path=$PWD/**
+set path+=**
 set incsearch
 set ignorecase
 set smartcase
