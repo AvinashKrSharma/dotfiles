@@ -25,18 +25,16 @@ endif
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
-Plug 'mhinz/vim-janah'
 Plug 'arcticicestudio/nord-vim'
 
 " version control related plugins
 Plug 'tpope/vim-fugitive'
-Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
 Plug 'gregsexton/gitv'
-Plug 'stormherz/tablify'
 
 " search/editing/navigation related plugins
+Plug 'stormherz/tablify'
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
 Plug 'osyo-manga/vim-anzu'
 Plug 'haya14busa/incsearch.vim'
@@ -66,7 +64,6 @@ Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
 "language related
 Plug 'w0rp/ale'
 Plug 'thinca/vim-quickrun'
-Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
 Plug 'gregsexton/MatchTag', {'for': 'html'}
 Plug 'docunext/closetag.vim'
@@ -215,7 +212,6 @@ set exrc
 set secure
 set gdefault
 
-" colorscheme janah
 colorscheme nord
 
 " ----others
@@ -422,7 +418,6 @@ if has("autocmd")
 
         "save all files on focus lost, ignoring warnings about untitled buffers
         au FocusLost * silent! wa
-
         
         "for deoplete
         if has('nvim')
@@ -597,14 +592,6 @@ function! MyFoldText()
     let fold_w = getwinvar( 0, '&foldcolumn' )
     let sub = strpart( sub, 0, winwidth(0) - strlen( info ) - num_w - fold_w - 1 )
     return sub . info
-endfunction
-
-function! LocationNext()
-    try
-        lnext
-    catch
-        try | lfirst | catch | endtry
-    endtry
 endfunction
 
 " for toggling nerdtree's quit on open behaviour
