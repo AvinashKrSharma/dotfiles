@@ -430,7 +430,7 @@ if has("autocmd")
         endif
 
         " Adding automatons for when entering or leaving Vim
-        au VimEnter * if &ft != 'gitcommit' | call LoadSession() | endif
+        au VimEnter * nested if &ft != 'gitcommit' | call LoadSession() | endif
         au VimLeave * if &ft != 'gitcommit' | call MakeSession() | endif
 
     augroup END
