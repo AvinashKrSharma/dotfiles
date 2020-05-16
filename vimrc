@@ -251,11 +251,12 @@ vnoremap < <gv
 vnoremap > >gv
 
 " force saving files that require root permission
-cmap w!! %!sudo tee > /dev/null %
+cmap w!! w !sudo tee %
 
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
-
+inoremap jk <esc>
+inoremap kj <esc>
 " to resize splits
 nnoremap <C-left> :vertical resize -2<cr>
 nnoremap <C-down> :resize -2<cr>
@@ -267,8 +268,11 @@ noremap  <silent> k gk
 noremap  <silent> j gj
 
 " mappings for switching buffers
-nnoremap gb :bn<cr>
-nnoremap gv :bp<cr>
+nnoremap <TAB> :bn<cr>
+nnoremap <S-TAB> :bp<cr>
+
+nnoremap <C-c> <Esc>
+inoremap <C-c> <Esc>
 
 " toggle between terminal and vim mouse
 map  <silent><F12> :let &mouse=(&mouse == "a"?"":"a")<CR>:call ShowMouseMode()<CR>
