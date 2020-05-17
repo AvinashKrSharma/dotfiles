@@ -384,8 +384,8 @@ if has("autocmd")
         autocmd BufRead * if @% == '[quickrun output]' | setlocal noconfirm | endif
 
         " open nerdtree by default to make file reveal work sanely
-        autocmd StdinReadPre * let s:std_in=1
-        autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
+        " autocmd StdinReadPre * let s:std_in=1
+        " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
 
         " for gitgutter
         autocmd User GitGutter AirlineRefresh
@@ -586,13 +586,13 @@ function! MyFoldText()
 endfunction
 
 " for toggling nerdtree's quit on open behaviour
-function! ToggleNERDTreeQOOBehaviour()
-    if (g:NERDTreeQuitOnOpen == 1)
-        let g:NERDTreeQuitOnOpen=0
-    else
-        let g:NERDTreeQuitOnOpen=1
-    endif
-endfunction
+" function! ToggleNERDTreeQOOBehaviour()
+"     if (g:NERDTreeQuitOnOpen == 1)
+"         let g:NERDTreeQuitOnOpen=0
+"     else
+"         let g:NERDTreeQuitOnOpen=1
+"     endif
+" endfunction
 
 function! MakeSession()
   exe 'NERDTreeClose'
