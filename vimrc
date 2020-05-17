@@ -28,6 +28,7 @@ Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofum
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'arcticicestudio/nord-vim'
+Plug 'ryanoasis/vim-devicons'
 
 " version control related plugins
 Plug 'tpope/vim-fugitive'
@@ -51,7 +52,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-abolish'
 
 " misc
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-unimpaired'
 Plug 'mbbill/undotree'
 Plug 'Konfekt/FastFold'
@@ -205,7 +206,7 @@ set makeprg=make\ -C\ ./\ -j9
 
 " ----multi-byte characters
 if !has('nvim')
-    set encoding=utf-8
+    set encoding=UTF-8
 endif
 set fileencoding=utf-8
 
@@ -412,12 +413,6 @@ if has("autocmd")
         autocmd FileType jade setlocal nowrap
         autocmd FileType jade,markdown      set textwidth=0
 
-        " Always on - rainbow paranthesis
-        au VimEnter * RainbowParenthesesToggle
-        au Syntax   * RainbowParenthesesLoadRound
-        au Syntax   * RainbowParenthesesLoadSquare
-        au Syntax   * RainbowParenthesesLoadBraces
-
         "save all files on focus lost, ignoring warnings about untitled buffers
         au FocusLost * silent! wa
         
@@ -488,6 +483,13 @@ let g:NERDTreeMouseMode=3
 let g:NERDTreeShowHidden=1
 let g:NERDTreeIgnore=['.git$[[dir]]', '\.js.map$[[file]]']
 
+" ----for rainbow paranthesis
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\    'separately': {
+\       'nerdtree': 0
+\    }
+\}
 " ----for vim-nerdtree-syntax-highlight
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
