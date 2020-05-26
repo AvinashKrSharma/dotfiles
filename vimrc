@@ -310,7 +310,7 @@ map # <Plug>(incsearch-nohl)<Plug>(anzu-sharp-with-echo)
 nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
 
 " ----Leader key mappings
-nnoremap <leader>ad :%bd<CR>
+nnoremap <leader>ad :%bd\|e#\|bd#<CR>
 nnoremap <leader>as ggVG
 nnoremap <leader>b  :Buffers<CR>
 
@@ -337,6 +337,7 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>p :Files<CR>
 nnoremap <leader>q :qa<CR>
 nnoremap <leader>r :NERDTreeFind<CR>
+nnoremap <leader>s :set syntax=
 vnoremap <leader>t :Tabularize/ /l0<cr>
 nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
@@ -481,6 +482,7 @@ endif
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeMouseMode=3
 let g:NERDTreeShowHidden=1
+let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeIgnore=['.git$[[dir]]', '\.js.map$[[file]]']
 
 " ----for rainbow paranthesis
