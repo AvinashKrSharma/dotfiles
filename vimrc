@@ -89,7 +89,7 @@ set number
 " ----syntax, highlighting and spelling
 set background=dark
 filetype on
-syntax enable
+syntax off
 set hlsearch
 set cursorline
 
@@ -281,10 +281,10 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 " ----Leader key mappings
+nnoremap <leader>ad :%bd\|e#\|bd#<CR>
 nnoremap <leader>b  :Buffers<CR>
 map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
-nnoremap <leader>dd :%bd\|e#\|bd#<CR>
 nnoremap <leader>f  :Telescope git_files<CR>
 nnoremap <leader>gb :Git blame<CR>
 nnoremap <leader>i ggVG
@@ -518,28 +518,33 @@ endfunction
 lua <<EOF
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>,', function()
-    builtin.grep_string({ search = vim.fn.input("Search > ") })
+builtin.grep_string({ search = vim.fn.input("Search > ") })
 end)
 local actions = require("telescope.actions")
-  require("telescope").load_extension("dir")
-  -- require('telescope').setup{  defaults = { file_ignore_patterns = { "node_modules" }} }
+require("telescope").load_extension("dir")
+-- require('telescope').setup{  defaults = { file_ignore_patterns = { "node_modules" }} }
 require("telescope").load_extension("recent_files")
-  require('telescope').setup{
-  -- see :help telescope.setup()
-    defaults = {
-      path_display={"smart"},
-      no_ignore={true},
-        mappings = {
-            i = {
-                ["<Esc>"] = require('telescope.actions').close
-            }
-            },
-        -- The below pattern is lua regex and not wildcard
-        file_ignore_patterns = {"node_modules","%.out"},
-        prompt_prefix = "🔍 ",
-    }
-  }
-  require("dir-telescope").setup({
-      -- hidden = true,
-      no_ignore = true,
-    })
+require'nvim-treesitter.configs'.setup {
+    highlight = {
+        enable = true,
+    },
+}
+require('telescope').setup{
+-- see :help telescope.setup()
+defaults = {
+    path_display={"smart"},
+    no_ignore={true},
+    mappings = {
+        i = {
+            ["<Esc>"] = require('telescope.actions').close
+        }
+        },
+    -- The below pattern is lua regex and not wildcard
+    file_ignore_patterns = {"node_modules","%.out"},
+    prompt_prefix = "🔍 ",
+}
+}
+require("dir-telescope").setup({
+-- hidden = true,
+no_ignore = true,
+})
