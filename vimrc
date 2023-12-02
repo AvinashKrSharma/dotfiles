@@ -15,62 +15,42 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " core plugins
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-airline/vim-airline'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+Plug 'princejoogie/dir-telescope.nvim'
+Plug 'smartpde/telescope-recent-files'
+
+Plug 'preservim/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'nvim-treesitter/nvim-treesitter',  {'do': ':TSUpdate'}
 Plug 'arcticicestudio/nord-vim'
-Plug 'ryanoasis/vim-devicons'
 
 " version control related plugins
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-scripts/DirDiff.vim', {'on': 'DirDiff'}
-Plug 'gregsexton/gitv'
+Plug 'dandavison/delta'
 
 " search/editing/navigation related plugins
-Plug 'stormherz/tablify'
 Plug 'osyo-manga/vim-over', {'on': 'OverCommandLine'}
-Plug 'osyo-manga/vim-anzu'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'terryma/vim-expand-region'
-Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim', {'on': 'TComment'}
-Plug 'terryma/vim-multiple-cursors'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'Raimondi/delimitMate'
-Plug 'tpope/vim-abolish'
 
 " misc
-Plug 'luochen1990/rainbow'
-Plug 'tpope/vim-unimpaired'
-Plug 'mbbill/undotree'
-Plug 'Konfekt/FastFold'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
-Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-repeat'
 Plug 'kshenoy/vim-signature'
-Plug 'godlygeek/tabular', {'on': 'Tabularize'}
-Plug 'Yggdroot/indentLine', {'on': 'IndentLinesToggle'}
 
 "language related
-Plug 'w0rp/ale'
-Plug 'thinca/vim-quickrun'
 Plug 'sheerun/vim-polyglot'
 Plug 'gregsexton/MatchTag', {'for': 'html'}
 Plug 'docunext/closetag.vim'
 Plug 'gorodinskiy/vim-coloresque', {'for': ['css', 'scss']}
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 call plug#end()
 
@@ -84,9 +64,6 @@ endif
 
 " ----important
 set nocompatible
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
 
 " ----moving around,searching and patterns
 set path+=**
@@ -216,6 +193,9 @@ set secure
 set gdefault
 
 colorscheme nord
+" if (has("termguicolors"))
+"     set termguicolors
+" endif
 
 " ----others
 let mapleader = "\<Space>"
@@ -300,50 +280,24 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
-" ---- for vim-anzu
-" mapping
-map n <Plug>(incsearch-nohl)<Plug>(anzu-n-with-echo)
-map N <Plug>(incsearch-nohl)<Plug>(anzu-N-with-echo)
-map * <Plug>(incsearch-nohl)<Plug>(anzu-star-with-echo)
-map # <Plug>(incsearch-nohl)<Plug>(anzu-sharp-with-echo)
-" clear status
-nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
-
 " ----Leader key mappings
-nnoremap <leader>ad :%bd\|e#\|bd#<CR>
-nnoremap <leader>as ggVG
 nnoremap <leader>b  :Buffers<CR>
-
 map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
-nnoremap <leader>f  :GFiles<CR>
-
-" specific to git fugitive
-nnoremap <leader>g  :Magit<CR>
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gf :BCommits<CR>
-nnoremap <leader>gi :Git add -p %<CR>
-nnoremap <leader>gl :Commits<CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gt :GitGutterToggle<CR>
-nnoremap <leader>h  :History<CR>
-
-nnoremap <leader>i :IndentLinesToggle<CR>
+nnoremap <leader>dd :%bd\|e#\|bd#<CR>
+nnoremap <leader>f  :Telescope git_files<CR>
+nnoremap <leader>gb :Git blame<CR>
+nnoremap <leader>i ggVG
 nnoremap <leader>j :ALEGoToDefinition<CR>
-nnoremap <leader>m :History<cr>
+nnoremap <leader>m :Telescope oldfiles<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>p :Files<CR>
+nnoremap <leader>p :Telescope<CR>
 nnoremap <leader>q :qa<CR>
 nnoremap <leader>r :NERDTreeFind<CR>
 nnoremap <leader>s :set syntax=
-vnoremap <leader>t :Tabularize/ /l0<cr>
-nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
 nnoremap <leader>w <c-w>w
 nnoremap <leader><leader> :update<CR>
-nnoremap <leader>, :Ag!<CR>
 nnoremap <leader>/ <esc>:OverCommandLine<CR>:%s/
 nnoremap <leader>= gg=G''
 
@@ -371,9 +325,9 @@ if has("autocmd")
         autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
 
         " Auto reload vim after its changed
-        au BufWritePost *.vim  source $MYVIMRC | AirlineRefresh
-        au BufWritePost .vimrc source $MYVIMRC | AirlineRefresh
-        au BufWritePost vimrc  source $MYVIMRC | AirlineRefresh
+        " au BufWritePost *.vim  source $MYVIMRC | AirlineRefresh
+        " au BufWritePost .vimrc source $MYVIMRC | AirlineRefresh
+        " au BufWritePost vimrc  source $MYVIMRC | AirlineRefresh
 
         " Set filetypes aliases
         au FileType           scss   set ft=scss.css
@@ -386,11 +340,11 @@ if has("autocmd")
         autocmd BufRead * if @% == '[quickrun output]' | setlocal noconfirm | endif
 
         " open nerdtree by default to make file reveal work sanely
-        " autocmd StdinReadPre * let s:std_in=1
-        " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
+        autocmd StdinReadPre * let s:std_in=1
+        autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
 
         " for gitgutter
-        autocmd User GitGutter AirlineRefresh
+        " autocmd User GitGutter AirlineRefresh
 
         " Disable vertical line at max string length in NERDTree
         autocmd FileType nerdtree setlocal colorcolumn=""
@@ -416,15 +370,17 @@ if has("autocmd")
 
         "save all files on focus lost, ignoring warnings about untitled buffers
         au FocusLost * silent! wa
-        
-        "for deoplete
-        if has('nvim')
-            autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-        endif
+
+        " "for deoplete
+        " if has('nvim')
+        "     autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+        " endif
 
         " Adding automatons for when entering or leaving Vim
         au VimEnter * nested if &ft != 'gitcommit' | call LoadSession() | endif
         au VimLeave * if &ft != 'gitcommit' | call MakeSession() | endif
+
+        au BufLeave,BufEnter * silent! call CleanNoNameEmptyBuffers()
 
     augroup END
 endif
@@ -438,83 +394,22 @@ let g:used_javascript_libs = 'jquery,angularjs,angularui,angularuirouter,require
 " ----for polyglot
 let g:polyglot_disabled = ['arduino', 'blade', 'c++11', 'clojure', 'cucumber', 'dart', 'elm', 'elixir', 'emblem', 'erlang', 'glsl', 'groovy', 'haskell', 'haxe', 'jinja', 'julia', 'kotlin', 'latex', 'liquid', 'objc', 'ocaml', 'octave', 'opencl', 'perl', 'puppet', 'qml', 'ragel', 'r-lang', 'rspec', 'ruby', 'rust', 'sbt', 'slim', 'solidity', 'swift', 'systemd', 'textile', 'thrift', 'tomdoc', 'toml', 'twig', 'vala', 'vbnet', 'vcl', 'vm', 'yard']
 
-" ----for airline
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline#extensions#bufferline#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#hunks#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-let g:airline#extensions#wordcount#enabled = 1
-" let g:airline_theme = 'term'
-let g:airline_exclude_preview = 1
-let g:airline_detect_paste=1
-let g:airline_detect_modified=1
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_left_sep=' '
-let g:airline_right_sep=' '
-let g:airline_right_sep = ' '
-let g:airline_left_sep = ' '
-let g:airline_powerline_fonts = 1
-
-" ----for ale
-let g:ale_completion_enabled = 1
-let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier', 'eslint'],
-\}
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
-let g:ale_sign_column_always = 1
-let g:airline#extensions#ale#enabled = 1
-
-" ----for deoplete
-if has('nvim')
-    let g:deoplete#enable_at_startup = 1
-endif
-
 " ----for Nerdtree
-let g:NERDTreeMinimalUI=1
+" let g:NERDTreeMinimalUI=1
 let g:NERDTreeMouseMode=3
 let g:NERDTreeShowHidden=1
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeIgnore=['.git$[[dir]]', '\.js.map$[[file]]']
 
-" ----for rainbow paranthesis
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-\    'separately': {
-\       'nerdtree': 0
-\    }
-\}
 " ----for vim-nerdtree-syntax-highlight
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
 
-" ---for easymotion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
 " ----for gitgutter
 let g:gitgutter_max_signs = 500
 let g:gitgutter_highlight_lines = 0
 let g:gitgutter_enabled = 1
-
-" ----for indentguides
-let g:indent_guides_start_level = 1
-let g:indent_guides_guide_size = 1
-
-" ----for delimitmate
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
-
-"for indentLine
-let g:indentLine_char = '┊'
 
 "for closetag
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.jsx"
@@ -522,15 +417,6 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.jsx"
 "for delimitmate
 let delimitMate_matchpairs = "(:),[:],{:}"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
-
-" for fzf
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(
-  \   '',
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
 
 " ####### Function definitions
 function! ToggleTextWidth()
@@ -590,13 +476,13 @@ function! MyFoldText()
 endfunction
 
 " for toggling nerdtree's quit on open behaviour
-" function! ToggleNERDTreeQOOBehaviour()
-"     if (g:NERDTreeQuitOnOpen == 1)
-"         let g:NERDTreeQuitOnOpen=0
-"     else
-"         let g:NERDTreeQuitOnOpen=1
-"     endif
-" endfunction
+function! ToggleNERDTreeQOOBehaviour()
+    if (g:NERDTreeQuitOnOpen == 1)
+        let g:NERDTreeQuitOnOpen=0
+    else
+        let g:NERDTreeQuitOnOpen=1
+    endif
+endfunction
 
 function! MakeSession()
   exe 'NERDTreeClose'
@@ -619,3 +505,41 @@ function! LoadSession()
     echo "No session loaded."
   endif
 endfunction
+
+function! CleanNoNameEmptyBuffers()
+    let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
+    if !empty(buffers)
+        exe 'bd '.join(buffers, ' ')
+    else
+        echo 'No buffer deleted'
+    endif
+endfunction
+
+lua <<EOF
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>,', function()
+    builtin.grep_string({ search = vim.fn.input("Search > ") })
+end)
+local actions = require("telescope.actions")
+  require("telescope").load_extension("dir")
+  -- require('telescope').setup{  defaults = { file_ignore_patterns = { "node_modules" }} }
+require("telescope").load_extension("recent_files")
+  require('telescope').setup{
+  -- see :help telescope.setup()
+    defaults = {
+      path_display={"smart"},
+      no_ignore={true},
+        mappings = {
+            i = {
+                ["<Esc>"] = require('telescope.actions').close
+            }
+            },
+        -- The below pattern is lua regex and not wildcard
+        file_ignore_patterns = {"node_modules","%.out"},
+        prompt_prefix = "🔍 ",
+    }
+  }
+  require("dir-telescope").setup({
+      -- hidden = true,
+      no_ignore = true,
+    })
