@@ -46,6 +46,7 @@ Plug 'tpope/vim-repeat'
 Plug 'kshenoy/vim-signature'
 
 "language related
+Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'gregsexton/MatchTag', {'for': 'html'}
 Plug 'docunext/closetag.vim'
@@ -193,9 +194,9 @@ set secure
 set gdefault
 
 colorscheme nord
-" if (has("termguicolors"))
-"     set termguicolors
-" endif
+if (has("termguicolors"))
+    set termguicolors
+endif
 
 " ----others
 let mapleader = "\<Space>"
@@ -324,11 +325,6 @@ if has("autocmd")
         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
         autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
 
-        " Auto reload vim after its changed
-        " au BufWritePost *.vim  source $MYVIMRC | AirlineRefresh
-        " au BufWritePost .vimrc source $MYVIMRC | AirlineRefresh
-        " au BufWritePost vimrc  source $MYVIMRC | AirlineRefresh
-
         " Set filetypes aliases
         au FileType           scss   set ft=scss.css
         au FileType           less   set ft=less.css
@@ -342,9 +338,6 @@ if has("autocmd")
         " open nerdtree by default to make file reveal work sanely
         autocmd StdinReadPre * let s:std_in=1
         autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
-
-        " for gitgutter
-        " autocmd User GitGutter AirlineRefresh
 
         " Disable vertical line at max string length in NERDTree
         autocmd FileType nerdtree setlocal colorcolumn=""
@@ -370,11 +363,6 @@ if has("autocmd")
 
         "save all files on focus lost, ignoring warnings about untitled buffers
         au FocusLost * silent! wa
-
-        " "for deoplete
-        " if has('nvim')
-        "     autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-        " endif
 
         " Adding automatons for when entering or leaving Vim
         au VimEnter * nested if &ft != 'gitcommit' | call LoadSession() | endif
