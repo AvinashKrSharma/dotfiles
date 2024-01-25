@@ -18,7 +18,6 @@ call plug#begin('~/.vim/bundle')
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 Plug 'princejoogie/dir-telescope.nvim'
-Plug 'smartpde/telescope-recent-files'
 
 Plug 'preservim/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'nvim-treesitter/nvim-treesitter',  {'do': ':TSUpdate'}
@@ -60,6 +59,9 @@ if exists('doPlugInstall')
     PlugInstall | q
 endif
 
+lua << EOF
+require("telescope").load_extension("dir")
+EOF
 
 " ####### Vim settings
 
@@ -283,7 +285,7 @@ map g# <Plug>(incsearch-nohl-g#)
 
 " ----Leader key mappings
 nnoremap <leader>ad :%bd\|e#\|bd#<CR>
-nnoremap <leader>b  :Buffers<CR>
+nnoremap <leader>b  :Telescope buffers<CR>
 map      <leader>c  :TComment<cr>
 nnoremap <leader>d  :bd<CR>
 nnoremap <leader>f  :Telescope git_files<CR>
@@ -295,10 +297,12 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>p :Telescope<CR>
 nnoremap <leader>q :qa<CR>
 nnoremap <leader>r :NERDTreeFind<CR>
-nnoremap <leader>s :set syntax=
+nnoremap <leader>s /<c-r>+
 nnoremap <leader>v :tabedit ~/dotfiles/vimrc<CR>
 nnoremap <leader>w <c-w>w
 nnoremap <leader><leader> :update<CR>
+nnoremap <leader>, :Telescope live_grep<CR>
+nnoremap <leader>. :Telescope dir live_grep<CR>
 nnoremap <leader>/ <esc>:OverCommandLine<CR>:%s/
 nnoremap <leader>= gg=G''
 
@@ -482,7 +486,7 @@ function! MakeSession()
   let b:filename = b:sessiondir . '/session.vim'
   exe "mksession! " . b:filename
 endfunction
-
+"
 function! LoadSession()
   exe 'NERDTreeClose'
   let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
@@ -503,36 +507,3 @@ function! CleanNoNameEmptyBuffers()
     endif
 endfunction
 
-lua <<EOF
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>,', function()
-builtin.grep_string({ search = vim.fn.input("Search > ") })
-end)
-local actions = require("telescope.actions")
-require("telescope").load_extension("dir")
--- require('telescope').setup{  defaults = { file_ignore_patterns = { "node_modules" }} }
-require("telescope").load_extension("recent_files")
-require'nvim-treesitter.configs'.setup {
-    highlight = {
-        enable = true,
-    },
-}
-require('telescope').setup{
--- see :help telescope.setup()
-defaults = {
-    path_display={"smart"},
-    no_ignore={true},
-    mappings = {
-        i = {
-            ["<Esc>"] = require('telescope.actions').close
-        }
-        },
-    -- The below pattern is lua regex and not wildcard
-    file_ignore_patterns = {"node_modules","%.out"},
-    prompt_prefix = "🔍 ",
-}
-}
-require("dir-telescope").setup({
--- hidden = true,
-no_ignore = true,
-})
