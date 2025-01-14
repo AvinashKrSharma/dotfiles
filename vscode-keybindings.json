@@ -1,0 +1,73 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "\\",
+        "command": "breadcrumbs.revealFocused",
+        "when": "breadcrumbsActive && breadcrumbsVisible"
+    },
+    {
+        "key": "space",
+        "command": "-breadcrumbs.revealFocused",
+        "when": "breadcrumbsActive && breadcrumbsVisible"
+    },
+    {
+        "key": "\\",
+        "command": "debug.toggleBreakpoint",
+        "when": "breakpointsFocused && !inputFocus"
+    },
+    {
+        "key": "space",
+        "command": "-debug.toggleBreakpoint",
+        "when": "breakpointsFocused && !inputFocus"
+    },
+    {
+        "key": "\\",
+        "command": "filesExplorer.openFilePreserveFocus",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsFolder && !inputFocus"
+    },
+    {
+        "key": "space",
+        "command": "-filesExplorer.openFilePreserveFocus",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsFolder && !inputFocus"
+    },
+    {
+        "key": "\\",
+        "command": "list.stickyScrolltoggleExpand",
+        "when": "treestickyScrollFocused"
+    },
+    {
+        "key": "space",
+        "command": "-list.stickyScrolltoggleExpand",
+        "when": "treestickyScrollFocused"
+    },
+    {
+        "key": "\\",
+        "command": "list.toggleExpand",
+        "when": "listFocus && !inputFocus && !treestickyScrollFocused"
+    },
+    {
+        "key": "space",
+        "command": "-list.toggleExpand",
+        "when": "listFocus && !inputFocus && !treestickyScrollFocused"
+    },
+    {
+        "key": "\\",
+        "command": "notification.toggle",
+        "when": "notificationFocus"
+    },
+    {
+        "key": "space",
+        "command": "-notification.toggle",
+        "when": "notificationFocus"
+    },
+    {
+        "key": "\\",
+        "command": "refactorPreview.toggleCheckedState",
+        "when": "listFocus && refactorPreview.enabled && !inputFocus && !treestickyScrollFocused"
+    },
+    {
+        "key": "space",
+        "command": "-refactorPreview.toggleCheckedState",
+        "when": "listFocus && refactorPreview.enabled && !inputFocus && !treestickyScrollFocused"
+    },
+]

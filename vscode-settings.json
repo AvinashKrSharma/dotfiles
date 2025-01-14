@@ -1,0 +1,98 @@
+{
+    "vim.leader": "<space>",
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "vimnight",
+    "vim.smartRelativeLine": true,
+    "vim.useSystemClipboard": true,
+    "vim.hlsearch": true,
+    "vim.highlightedyank.enable": true,
+    "vim.highlightedyank.duration": 250,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "<leader>"
+            ],
+            "commands": [
+                "workbench.action.files.save"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "commands": [
+                "workbench.action.closeActiveEditor"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "m"
+            ],
+            "commands": [
+                "workbench.action.showAllEditorsByMostRecentlyUsed"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "n"
+            ],
+            "commands": [
+                "workbench.action.toggleSidebarVisibility"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "t"
+            ],
+            "commands": [
+                "workbench.action.togglePanel"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "p",
+                "d"
+            ],
+            "commands": [
+                "editor.action.peekDefinition"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "h"
+            ],
+            "commands": [
+                "editor.action.showDefinitionPreviewHover"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "q"
+            ],
+            "commands": [
+                "editor.action.quickFix"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "t"
+            ],
+            "commands": [
+                "editor.action.goToTypeDefinition"
+            ]
+        },
+    ],
+    "vim.commandLineModeKeyBindingsNonRecursive": [],
+    "vim.commandLineModeKeyBindings": [],
+    "vim.insertModeKeyBindingsNonRecursive": [],
+    "vim.insertModeKeyBindings": [],
+}
