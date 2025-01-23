@@ -1,7 +1,7 @@
 {
     "vim.leader": "<space>",
     "editor.minimap.enabled": false,
-    "workbench.colorTheme": "vimnight",
+    "workbench.colorTheme": "Nord Deep",
     "vim.smartRelativeLine": true,
     "vim.useSystemClipboard": true,
     "vim.hlsearch": true,
@@ -20,10 +20,42 @@
         {
             "before": [
                 "<leader>",
+                "="
+            ],
+            "after": [
+                "g",
+                "g",
+                "=",
+                "G",
+                "'",
+                "'"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c"
+            ],
+            "commands": [
+                "editor.action.commentLine"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
                 "d"
             ],
             "commands": [
                 "workbench.action.closeActiveEditor"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "j"
+            ],
+            "commands": [
+                "editor.action.revealDefinition"
             ]
         },
         {
@@ -38,19 +70,10 @@
         {
             "before": [
                 "<leader>",
-                "n"
+                "r"
             ],
             "commands": [
                 "workbench.action.toggleSidebarVisibility"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "t"
-            ],
-            "commands": [
-                "workbench.action.togglePanel"
             ]
         },
         {
@@ -95,4 +118,20 @@
     "vim.commandLineModeKeyBindings": [],
     "vim.insertModeKeyBindingsNonRecursive": [],
     "vim.insertModeKeyBindings": [],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "c"
+            ],
+            "commands": [
+                "editor.action.commentLine"
+            ]
+        },
+
+    ],
+    "explorer.excludeGitIgnore": false,
+    "search.useParentIgnoreFiles": false,
+    "search.useIgnoreFiles": false,
+    "terminal.integrated.fontWeight": "normal"
 }

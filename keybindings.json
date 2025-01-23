@@ -70,4 +70,26 @@
         "command": "-refactorPreview.toggleCheckedState",
         "when": "listFocus && refactorPreview.enabled && !inputFocus && !treestickyScrollFocused"
     },
+    {
+        "key": "space m",
+        "command": "workbench.action.showAllEditorsByMostRecentlyUsed",
+        "when": "!editorFocus && !inputFocus"
+    },
+    {
+        "key": "space r",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "!editorFocus && !inputFocus"
+    },
+    {
+        "key": "cmd+r",
+        "command": "workbench.action.toggleSidebarVisibility",
+    },
+    {
+        "key": "cmd+t",
+        "command": "workbench.action.togglePanel",
+    },
+    {
+        "key": "cmd+shift+t",
+        "command": "workbench.action.toggleMaximizedPanel"
+    }
 ]
