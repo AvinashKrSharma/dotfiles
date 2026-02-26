@@ -1,4 +1,9 @@
 " ####### Plugins
+if exists('g:vscode')
+    " VSCode extension
+else
+    " ordinary Neovim
+endif
 
 " Download vim-plug if already not present
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -59,9 +64,9 @@ if exists('doPlugInstall')
     PlugInstall | q
 endif
 
-lua << EOF
-require("telescope").load_extension("dir")
-EOF
+" lua << EOF
+" require("telescope").load_extension("dir")
+" EOF
 
 " ####### Vim settings
 
