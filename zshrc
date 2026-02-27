@@ -5,67 +5,78 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-### --- General Zsh Options ---
+### --- Options ---
 HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
-HIST_STAMPS="dd/mm/yyyy"
 setopt autocd
 setopt correct
 setopt prompt_subst
 
-### --- PATH ---
-# export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+### --- History ---
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+HIST_STAMPS="dd/mm/yyyy"
+setopt share_history
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
 
-### --- Install Dependencies if Needed ---
-# Create base plugin dir
-mkdir -p "$HOME/.zsh"
-
-# 1. Powerlevel10k
-if [[ ! -d "$HOME/powerlevel10k" ]]; then
-  echo "🔧 Installing Powerlevel10k..."
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/powerlevel10k"
+### --- Plugins (zinit) ---
+if [[ ! -f "${ZDOTDIR:-$HOME}/.zinit/bin/zinit.zsh" ]]; then
+  mkdir -p "${ZDOTDIR:-$HOME}/.zinit"
+  git clone https://github.com/zdharma-continuum/zinit.git "${ZDOTDIR:-$HOME}/.zinit/bin"
 fi
+source "${ZDOTDIR:-$HOME}/.zinit/bin/zinit.zsh"
 
-# 2. zsh-autosuggestions
-if [[ ! -d "$HOME/.zsh/zsh-autosuggestions" ]]; then
-  echo "🔧 Installing zsh-autosuggestions..."
-  git clone https://github.com/zsh-users/zsh-autosuggestions "$HOME/.zsh/zsh-autosuggestions"
-fi
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-syntax-highlighting
 
-# 3. zsh-syntax-highlighting
-if [[ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]]; then
-  echo "🔧 Installing zsh-syntax-highlighting..."
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting "$HOME/.zsh/zsh-syntax-highlighting"
-fi
+autoload -Uz compinit && compinit
 
-### --- Prompt: Powerlevel10k ---
-if [[ -r "$HOME/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
-  source "$HOME/powerlevel10k/powerlevel10k.zsh-theme"
-fi
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+bindkey '^ ' autosuggest-accept
 
-### --- Git Aliases ---
+### --- Aliases ---
+alias gs='git status'
 alias gst='git status'
 alias gl='git pull'
 alias gp='git push'
 alias gco='git checkout'
 alias gaa='git add --all'
 alias gc='git commit -v'
+alias gcb='git checkout -b'
+alias gclean='git clean -fd'
 alias gcm='git commit -m'
+alias gdca='git diff --cached'
 alias glol='git log --graph --oneline --decorate --color'
 alias gb='git branch'
 alias gd='git diff'
+alias ggpull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
+alias ggpush='git push origin "$(git rev-parse --abbrev-ref HEAD)"'
 
-### --- Autocomplete + Syntax Highlighting ---
-source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-bindkey '^ ' autosuggest-accept
+alias v='nvim'
+alias vi='nvim'
+alias vim='nvim'
 
-### --- FZF ---
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPS="--extended"
+### --- PATH ---
+export PATH="$HOME/.local/bin:$PATH"
 
-### --- Custom Dotfile Sourcing ---
+### --- Tools ---
+export GIT_PAGER=less
+
+if command -v fzf &>/dev/null; then
+  eval "$(fzf --zsh)"
+fi
+export FZF_DEFAULT_OPTS="--extended"
+
+if command -v fnm &>/dev/null; then
+  eval "$(fnm env --use-on-cd)"
+fi
+
+### --- Source Local Overrides ---
 [ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
 [ -f "$HOME/.extras" ] && source "$HOME/.extras"

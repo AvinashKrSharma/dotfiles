@@ -17,10 +17,6 @@ alias pp="python -m SimpleHTTPServer"
 
 #Nvim
 alias sv='sudo nvim'
-
-# Tmux
-alias t='tmux -2u'
-
 # Vim
 alias v='nvim'
 alias vi='nvim'
