@@ -5,19 +5,30 @@ alias dv="cd ~/dotfiles && nvim"
 
 alias e="exit"
 
+# Git
+alias gs='git status'
+alias gst='git status'
+alias gl='git pull'
+alias gp='git push'
+alias gco='git checkout'
+alias gaa='git add --all'
+alias gc='git commit -v'
+alias gcb='git checkout -b'
+alias gclean='git clean -fd'
+alias gcm='git commit -m'
+alias gdca='git diff --cached'
+alias glol='git log --graph --oneline --decorate --color'
+alias gb='git branch'
+alias gd='git diff'
+alias ggpull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
+alias ggpush='git push origin "$(git rev-parse --abbrev-ref HEAD)"'
 #gitundo function
 gitundo() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}};  };
-# Git
 alias gs='git status '
+alias gst='git status '
 alias gu=gitundo
 
-# Serve current folder
-alias p="python -m SimpleHTTPServer "
-alias pp="python -m SimpleHTTPServer"
-
 #Nvim
-alias sv='sudo nvim'
-# Vim
 alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'

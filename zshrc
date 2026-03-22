@@ -35,38 +35,11 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-syntax-highlighting
 
+fpath=($HOME/.zsh/completions $fpath)
 autoload -Uz compinit && compinit
 
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 bindkey '^ ' autosuggest-accept
-
-### --- Aliases ---
-alias gs='git status'
-alias gst='git status'
-alias gl='git pull'
-alias gp='git push'
-alias gco='git checkout'
-alias gaa='git add --all'
-alias gc='git commit -v'
-alias gcb='git checkout -b'
-alias gclean='git clean -fd'
-alias gcm='git commit -m'
-alias gdca='git diff --cached'
-alias glol='git log --graph --oneline --decorate --color'
-alias gb='git branch'
-alias gd='git diff'
-alias ggpull='git pull origin "$(git rev-parse --abbrev-ref HEAD)"'
-alias ggpush='git push origin "$(git rev-parse --abbrev-ref HEAD)"'
-
-alias v='nvim'
-alias vi='nvim'
-alias vim='nvim'
-
-### --- PATH ---
-export PATH="$HOME/.local/bin:$PATH"
-
-### --- Tools ---
-export GIT_PAGER=less
 
 if command -v fzf &>/dev/null; then
   eval "$(fzf --zsh)"
@@ -77,6 +50,14 @@ if command -v fnm &>/dev/null; then
   eval "$(fnm env --use-on-cd)"
 fi
 
+### --- PATH ---
+export PATH="$HOME/.local/bin:$PATH"
+
+### --- Tools ---
+export GIT_PAGER=less
+
 ### --- Source Local Overrides ---
 [ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
+[ -f "$HOME/.claude-commands" ] && source "$HOME/.claude-commands"
 [ -f "$HOME/.extras" ] && source "$HOME/.extras"
+

@@ -10,10 +10,10 @@ call plug#begin('~/.vim/bundle')
 
 " core
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'princejoogie/dir-telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'arcticicestudio/nord-vim'
+Plug 'EdenEast/nightfox.nvim'
 
 " file explorer
 Plug 'nvim-tree/nvim-tree.lua'
@@ -28,6 +28,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'numToStr/Comment.nvim'
 Plug 'windwp/nvim-autopairs'
+
+" markdown
+Plug 'OXY2DEV/markview.nvim'
 
 " language
 Plug 'dense-analysis/ale'
@@ -48,6 +51,11 @@ set termguicolors
 let g:loaded_python3_provider = 0
 
 lua << EOF
+vim.api.nvim_create_autocmd('FileType', {
+    callback = function()
+        pcall(vim.treesitter.start)
+    end,
+})
 require('gitsigns').setup()
 require('ts_context_commentstring').setup({ enable_autocmd = false })
 require('Comment').setup({
@@ -88,7 +96,6 @@ set listchars=tab:>-,trail:·,eol:$
 set number
 
 set background=dark
-syntax off
 set cursorline
 
 set hidden
@@ -140,7 +147,7 @@ set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jp
 set fileencoding=utf-8
 set gdefault
 
-colorscheme nord
+colorscheme nordfox
 let mapleader = "\<Space>"
 filetype plugin indent on
 
@@ -189,7 +196,7 @@ nnoremap <leader>b  :Telescope buffers<CR>
 nmap     <leader>c  gcc
 xmap     <leader>c  gc
 nnoremap <leader>d  :bd<CR>
-nnoremap <leader>f  :Telescope git_files<CR>
+nnoremap <leader>f  :lua if vim.fn.system("git rev-parse --is-inside-work-tree 2>/dev/null"):find("true") then require("telescope.builtin").git_files() else require("telescope.builtin").find_files() end<CR>
 nnoremap <leader>gb :Gitsigns blame<CR>
 nnoremap <leader>i  ggVG
 nnoremap <leader>j  :ALEGoToDefinition<CR>

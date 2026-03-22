@@ -2,4 +2,4 @@
 
 ## Setting it up:
 
-cd ~ && chmod +x dotfiles/ubuntu-install.sh && sudo ./dotfiles/ubuntu-install.sh
+cd ~ && chmod +x dotfiles/mac-install.sh && sudo ./dotfiles/mac-install.sh

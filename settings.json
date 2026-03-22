@@ -133,5 +133,6 @@
     "explorer.excludeGitIgnore": false,
     "search.useParentIgnoreFiles": false,
     "search.useIgnoreFiles": false,
-    "terminal.integrated.fontWeight": "normal"
+    "terminal.integrated.fontWeight": "normal",
+    "claudeCode.preferredLocation": "panel"
 }

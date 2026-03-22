@@ -1,0 +1,70 @@
+### --- Claude Code helpers ---
+cc() {
+  local name="${1:-claude}"
+
+  # Start background title keeper
+  (while true; do printf '\033]0;%s\007' "$name"; sleep 0.5; done) &
+  local keeper_pid=$!
+
+  claude
+
+  # Kill title keeper when claude exits
+  kill $keeper_pid 2>/dev/null
+}
+
+# Resolve a custom session title to its session ID
+_ccr_resolve_id() {
+  local title="$1"
+  local cwd_encoded="${PWD//\//-}"
+  cwd_encoded="${cwd_encoded#-}"
+  local project_dir="$HOME/.claude/projects/-${cwd_encoded}"
+
+  [[ ! -d "$project_dir" ]] && return
+  for f in "$project_dir"/*.jsonl; do
+    custom=$(grep -oh '"customTitle":"[^"]*"' "$f" 2>/dev/null | sed 's/"customTitle":"//;s/"//' | tail -1)
+    if [[ "$custom" == "$title" ]]; then
+      basename "$f" .jsonl
+      return
+    fi
+  done
+}
+
+ccr() {
+  local name="$1"
+
+  # If no argument and fzf is available, show interactive picker
+  if [[ -z "$name" ]] && command -v fzf &>/dev/null; then
+    local cwd_encoded="${PWD//\//-}"
+    cwd_encoded="${cwd_encoded#-}"
+    local project_dir="$HOME/.claude/projects/-${cwd_encoded}"
+
+    if [[ -d "$project_dir" ]]; then
+      name=$(for f in "$project_dir"/*.jsonl; do
+        custom=$(grep -oh '"customTitle":"[^"]*"' "$f" 2>/dev/null | sed 's/"customTitle":"//;s/"//' | tail -1)
+        [[ -n "$custom" ]] && echo "$custom"
+      done | sort -u | fzf --prompt="Resume session: " --height=40% --reverse)
+
+      [[ -z "$name" ]] && claude --resume && return
+    else
+      claude --resume
+      return
+    fi
+  fi
+
+  if [[ -n "$name" ]]; then
+    local sid
+    sid=$(_ccr_resolve_id "$name")
+
+    # Start background title keeper
+    (while true; do printf '\033]0;%s\007' "$name"; sleep 0.5; done) &
+    local keeper_pid=$!
+
+    claude --resume "${sid:-$name}"
+
+    # Kill title keeper when claude exits
+    kill $keeper_pid 2>/dev/null
+  else
+    claude --resume
+  fi
+}
+

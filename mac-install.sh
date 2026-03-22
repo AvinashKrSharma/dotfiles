@@ -12,15 +12,24 @@ DOTFILES="$HOME/dotfiles"
 if ! command -v brew &>/dev/null; then
   echo "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Always ensure brew is in PATH (needed even if brew was already installed)
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Fix Homebrew directory permissions if not writable
+if [ -d /opt/homebrew ] && [ ! -w /opt/homebrew ]; then
+  echo "Fixing Homebrew permissions..."
+  sudo chown -R "$(whoami)" /opt/homebrew
 fi
 
 # -----------------------------------------------------------------------------
 # Core tools (brew skips already-installed formulae)
 # -----------------------------------------------------------------------------
 echo "Installing core tools..."
-brew install git neovim ripgrep fzf fnm ghostty
+brew install git neovim ripgrep fzf fnm ghostty glow
 brew install --cask font-meslo-lg-nerd-font 2>/dev/null || true
+brew install caddy
 
 # -----------------------------------------------------------------------------
 # Node via fnm
@@ -77,4 +86,4 @@ nvim --headless +PlugInstall +qall 2>/dev/null
 # Done
 # -----------------------------------------------------------------------------
 echo ""
-echo "Setup complete. Open Ghostty to start using your config."
+echo "Setup complete. Restart your terminal (or run 'exec zsh') to load aliases and PATH changes."
