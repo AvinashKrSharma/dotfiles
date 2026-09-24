@@ -47,7 +47,11 @@ fi
 export FZF_DEFAULT_OPTS="--extended"
 
 if command -v fnm &>/dev/null; then
-  eval "$(fnm env --use-on-cd)"
+  eval "$(fnm env)"
+  autoload -Uz add-zsh-hook
+  function _fnm_autoload_hook() { fnm use --silent-if-unchanged &>/dev/null; }
+  add-zsh-hook chpwd _fnm_autoload_hook
+  _fnm_autoload_hook
 fi
 
 ### --- PATH ---
@@ -58,6 +62,5 @@ export GIT_PAGER=less
 
 ### --- Source Local Overrides ---
 [ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
-[ -f "$HOME/.claude-commands" ] && source "$HOME/.claude-commands"
 [ -f "$HOME/.extras" ] && source "$HOME/.extras"
 

@@ -41,6 +41,10 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 " session
 Plug 'rmagatti/auto-session'
 
+" ai
+Plug 'stevearc/dressing.nvim'
+Plug 'MunifTanjim/nui.nvim'
+
 call plug#end()
 
 if exists('doPlugInstall')
@@ -86,7 +90,7 @@ set inccommand=split
 
 set tags=./tags;/
 
-set nowrap
+" set nowrap
 set linebreak
 set showbreak=↪
 set sidescrolloff=10
@@ -195,6 +199,7 @@ nnoremap <leader>ad :%bd\|e#\|bd#<CR>
 nnoremap <leader>b  :Telescope buffers<CR>
 nmap     <leader>c  gcc
 xmap     <leader>c  gc
+nnoremap <leader>cf :let @+ = expand("%:p")<CR>
 nnoremap <leader>d  :bd<CR>
 nnoremap <leader>f  :lua if vim.fn.system("git rev-parse --is-inside-work-tree 2>/dev/null"):find("true") then require("telescope.builtin").git_files() else require("telescope.builtin").find_files() end<CR>
 nnoremap <leader>gb :Gitsigns blame<CR>
@@ -241,8 +246,8 @@ augroup vimrc
                 \   exe "normal g`\"" |
                 \ endif
 
-    autocmd FileType html setlocal nowrap
-    autocmd FileType jade setlocal nowrap
+    " autocmd FileType html setlocal nowrap
+    " autocmd FileType jade setlocal nowrap
     autocmd FileType jade,markdown set textwidth=0
 
     au FocusLost * silent! wa

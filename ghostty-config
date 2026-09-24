@@ -46,3 +46,29 @@ desktop-notifications = true
 theme = Aura
 window-new-tab-position = end
 split-divider-color = #a277ff
+
+# Unbind keys so they pass through to herdr
+keybind = ctrl+tab=text:\x1b[9;5u
+keybind = ctrl+shift+tab=text:\x1b[9;6u
+keybind = super+t=unbind
+keybind = super+w=unbind
+keybind = super+d=unbind
+keybind = super+shift+d=unbind
+keybind = super+alt+arrow_up=unbind
+keybind = super+alt+arrow_down=unbind
+keybind = super+alt+arrow_left=unbind
+keybind = super+alt+arrow_right=unbind
+keybind = super+ctrl+arrow_up=unbind
+keybind = super+ctrl+arrow_down=unbind
+keybind = super+ctrl+arrow_left=unbind
+keybind = super+ctrl+arrow_right=unbind
+keybind = super+shift+enter=unbind
+keybind = super+1=unbind
+keybind = super+2=unbind
+keybind = super+3=unbind
+keybind = super+4=unbind
+keybind = super+5=unbind
+keybind = super+6=unbind
+keybind = super+7=unbind
+keybind = super+8=unbind
+keybind = super+9=unbind

@@ -1,0 +1,32 @@
+onboarding = false
+
+[terminal]
+new_cwd = "~/git"
+
+[keys]
+next_tab = "ctrl+tab"
+previous_tab = "ctrl+shift+tab"
+new_tab = "cmd+t"
+close_tab = "cmd+w"
+split_vertical = "cmd+d"
+split_horizontal = "cmd+shift+d"
+close_pane = "cmd+w"
+focus_pane_left = "cmd+alt+left"
+focus_pane_down = "cmd+alt+down"
+focus_pane_up = "cmd+alt+up"
+focus_pane_right = "cmd+alt+right"
+resize_pane_left = "cmd+ctrl+left"
+resize_pane_down = "cmd+ctrl+down"
+resize_pane_up = "cmd+ctrl+up"
+resize_pane_right = "cmd+ctrl+right"
+zoom = "cmd+shift+enter"
+indexed.tabs = "cmd"
+toggle_sidebar = "cmd+b"
+help = "cmd+/"
+
+[ui.sidebar.spaces]
+row_gap = 1
+rows = [
+  ["state_icon", "workspace"],
+  ["state_text"],
+]

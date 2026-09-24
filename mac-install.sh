@@ -68,6 +68,16 @@ link "aliases"         "$HOME/.aliases"
 link "settings.json"   "$HOME/Library/Application Support/Code/User/settings.json"
 link "keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json"
 link "ghostty-config"  "$HOME/.config/ghostty/config"
+link "herdr-config.toml" "$HOME/.config/herdr/config.toml"
+
+# Claude Code — ai.files (skills, agents, hooks, contexts, etc.)
+AI_FILES="$HOME/ai.files"
+if [ -d "$AI_FILES" ]; then
+  echo "Running ai.files installer..."
+  bash "$AI_FILES/install.sh"
+else
+  echo "  [skip] ~/ai.files not found — clone it to get Claude Code config"
+fi
 
 # Neovim reads from ~/.config/nvim — point it to ~/.vim
 if [ ! -L "$HOME/.config/nvim" ]; then

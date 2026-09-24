@@ -1,5 +1,6 @@
 # Some handy goto directories
-alias c=clear
+alias c='claude --dangerously-skip-permissions'
+alias cl=clear
 alias d="cd ~/dotfiles"
 alias dv="cd ~/dotfiles && nvim"
 alias e="exit"
@@ -23,6 +24,9 @@ alias gs='git status'
 alias gst='git status'
 alias gu=gitundo
 gitundo() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}};  };
+
+# Caffeinate — prevent sleep. Usage: cf 1 (1hr), cf 0.5 (30min), cf 2.5 (2.5hrs)
+cf() { printf "%.0f" "$(echo "$1 * 3600" | bc)" | xargs -I{} caffeinate -dimsu -t {}; }
 
 #Nvim
 alias v='nvim'
