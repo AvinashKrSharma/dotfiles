@@ -47,11 +47,7 @@ fi
 export FZF_DEFAULT_OPTS="--extended"
 
 if command -v fnm &>/dev/null; then
-  eval "$(fnm env)"
-  autoload -Uz add-zsh-hook
-  function _fnm_autoload_hook() { fnm use --silent-if-unchanged &>/dev/null; }
-  add-zsh-hook chpwd _fnm_autoload_hook
-  _fnm_autoload_hook
+  eval "$(fnm env --use-on-cd)" &>/dev/null
 fi
 
 ### --- PATH ---

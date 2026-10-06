@@ -1,4 +1,5 @@
 {
+    "terminal.integrated.enableImages": true,
     "vim.leader": "<space>",
     "editor.minimap.enabled": false,
     "workbench.colorTheme": "Nord Deep",

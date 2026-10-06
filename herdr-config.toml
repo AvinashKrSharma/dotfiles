@@ -4,13 +4,14 @@ onboarding = false
 new_cwd = "~/git"
 
 [keys]
+prefix = "ctrl+;"
 next_tab = "ctrl+tab"
 previous_tab = "ctrl+shift+tab"
 new_tab = "cmd+t"
 close_tab = "cmd+w"
 split_vertical = "cmd+d"
 split_horizontal = "cmd+shift+d"
-close_pane = "cmd+w"
+close_pane = "cmd+shift+w"
 focus_pane_left = "cmd+alt+left"
 focus_pane_down = "cmd+alt+down"
 focus_pane_up = "cmd+alt+up"
@@ -23,6 +24,7 @@ zoom = "cmd+shift+enter"
 indexed.tabs = "cmd"
 toggle_sidebar = "cmd+b"
 help = "cmd+/"
+rename_tab = "cmd+shift+i"
 
 [ui.sidebar.spaces]
 row_gap = 1
@@ -30,3 +32,6 @@ rows = [
   ["state_icon", "workspace"],
   ["state_text"],
 ]
+
+[experimental]
+kitty_graphics = true
